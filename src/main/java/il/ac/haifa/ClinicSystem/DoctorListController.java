@@ -5,4 +5,5 @@ public class DoctorListController {
     public void setClient(SimpleClient c) {
         this.chatClient = c;
     }
+
 }
