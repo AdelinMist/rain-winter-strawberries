@@ -17,8 +17,8 @@ public class App extends Application {
 	private static SimpleClient client;
     
     public App() {
+
 	}
-    
 
 	public void closeConnection() {
 		System.out.println("Connection closed.");
@@ -39,13 +39,11 @@ public class App extends Application {
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
 
-        if(fxml.equals("clientMenu")) {
-
+         if(fxml.equals("clientMenu")) {
             ClientMenuController controller = new ClientMenuController();
             controller.setClient(client);
-            fxmlLoader.setController(controller);
+           fxmlLoader.setController(controller);
         }
-
 
         if(fxml.equals("doctorList")) {
 
@@ -59,11 +57,13 @@ public class App extends Application {
 	        controller.setClient(client);
 	        fxmlLoader.setController(controller);
         }
+
         if(fxml.equals("clinicList")) {
         	ClinicListController controller = new ClinicListController();
 	        controller.setClient(client);
 	        fxmlLoader.setController(controller);
         }
+
         if(fxml.equals("covidServicesList")) {
             CovidServicesListController controller = new CovidServicesListController();
             controller.setClient(client);
