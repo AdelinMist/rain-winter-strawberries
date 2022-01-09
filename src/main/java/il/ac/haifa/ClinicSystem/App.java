@@ -1,6 +1,5 @@
 package il.ac.haifa.ClinicSystem;
 
-import com.mysql.cj.xdevapi.Client;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,7 +27,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("clientMenu"), 1214, 703);
+        scene = new Scene(loadFXML("ClinicVaccine"), 1214, 703);
         stage.setScene(scene);
         stage.show();
     }
@@ -39,6 +38,17 @@ public class App extends Application {
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        if(fxml.equals("ClinicVaccine")) {
+            ClinicVaccineController controller = new ClinicVaccineController();
+            controller.setClient(client);
+            fxmlLoader.setController(controller);
+        }
+        if(fxml.equals("doctorClinicList")) {
+            DoctorClinicListController controller = new DoctorClinicListController();
+            controller.setClient(client);
+            fxmlLoader.setController(controller);
+        }
+
         if(fxml.equals("doctorList")) {
             DoctorListController controller = new DoctorListController();
             controller.setClient(client);

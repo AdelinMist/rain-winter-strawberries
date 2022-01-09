@@ -1,30 +1,27 @@
 package il.ac.haifa.ClinicSystem;
 
+import il.ac.haifa.ClinicSystem.entities.*;
+import il.ac.haifa.ClinicSystem.ocsf.server.AbstractServer;
+import il.ac.haifa.ClinicSystem.ocsf.server.ConnectionToClient;
+import javafx.util.Pair;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+import org.hibernate.service.ServiceRegistry;
+
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
-import il.ac.haifa.ClinicSystem.entities.*;
-import javafx.util.Pair;
-import net.bytebuddy.asm.Advice;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-
-import il.ac.haifa.ClinicSystem.ocsf.server.AbstractServer;
-import il.ac.haifa.ClinicSystem.ocsf.server.ConnectionToClient;
 
 
 public class ClinicServer extends AbstractServer{
@@ -41,6 +38,7 @@ public class ClinicServer extends AbstractServer{
 		 configuration.addAnnotatedClass(Patient.class);
 		 configuration.addAnnotatedClass(DoctorClinic.class);
 		 configuration.addAnnotatedClass(Doctor.class);
+		 configuration.addAnnotatedClass(Appointment.class);
 		
 		 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 		 .applySettings(configuration.getProperties())

@@ -6,5 +6,6 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="doctorBTN" layoutX="198.0" layoutY="187.0" mnemonicParsing="false" onAction="#clickDoctor" text="appointment to professional doctor" />
+      <Button fx:id="vaccine" layoutX="197.0" layoutY="139.0" mnemonicParsing="false" onAction="#gotovac" prefHeight="26.0" prefWidth="205.0" text="vaccine appointment " />
    </children>
 </AnchorPane>

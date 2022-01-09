@@ -14,12 +14,19 @@ public class ClientMenuController {
 
     private SimpleClient chatClient;
 
+    @FXML
+    private Button vaccine;
+
     @FXML // fx:id="doctorBTN"
     private Button doctorBTN; // Value injected by FXMLLoader
 
     @FXML
     void clickDoctor(ActionEvent event) throws IOException {
         App.setRoot("doctorList");
+    }
+    @FXML
+    void gotovac(ActionEvent event) {
+
     }
 
     public void setClient(SimpleClient c) {
