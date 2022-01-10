@@ -14,4 +14,5 @@ public class Vaccine_Appointment extends Appointment implements Serializable {
     @Column(name="vaccine_appointment_id")
     private int id;
 
+
 }

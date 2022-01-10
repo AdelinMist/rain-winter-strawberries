@@ -10,7 +10,7 @@
 
 <BorderPane fx:id="borderPane" prefHeight="703.0" prefWidth="1214.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <top>
-        <Label fx:id="listLbl" alignment="CENTER" prefHeight="24.0" prefWidth="1214.0" text="Clinic List" textAlignment="CENTER" BorderPane.alignment="CENTER">
+        <Label fx:id="listLbl" alignment="CENTER" prefHeight="24.0" prefWidth="1214.0" text="time " textAlignment="CENTER" BorderPane.alignment="CENTER">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font></Label>
@@ -18,10 +18,7 @@
     <center>
         <TableView fx:id="clinicTable" prefHeight="640.0" prefWidth="883.0" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="name" prefWidth="330.3999450802803" text="Clinic Name" />
-                <TableColumn fx:id="place" prefWidth="325.5999450683594" text="Location" />
-                <TableColumn fx:id="day" prefWidth="277.60003662109375" text="Day" />
-            <TableColumn fx:id="week" prefWidth="356.79998779296875" text="week forwad" />
+                <TableColumn fx:id="name" prefWidth="1213.6000122070313" text="time of appointment" />
             </columns>
         </TableView>
     </center>
@@ -29,7 +26,7 @@
         <AnchorPane prefHeight="39.0" prefWidth="1214.0" BorderPane.alignment="CENTER">
             <children>
                 <Button fx:id="returnBtn" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#returnToMenu" text="Return to Menu" />
-                <Button fx:id="addBtn" layoutX="1051.0" layoutY="8.0" mnemonicParsing="false" onAction="#next_page" text="next" />
+                <Button fx:id="addBtn" layoutX="1051.0" layoutY="8.0" mnemonicParsing="false" onAction="#next_page" text="ok" />
             </children>
         </AnchorPane>
     </bottom>

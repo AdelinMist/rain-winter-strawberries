@@ -1,7 +1,6 @@
 package il.ac.haifa.ClinicSystem;
 
 import il.ac.haifa.ClinicSystem.entities.Clinic;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -44,6 +43,8 @@ public class ClinicVaccineController {
     @FXML
     private TableColumn<Clinic, String> name;
 
+    @FXML
+    private TableColumn<Clinic, ChoiceBox<String>> week;
 
     @FXML
     private Button returnBtn;
@@ -102,6 +103,19 @@ public class ClinicVaccineController {
 
     @FXML
     void next_page(ActionEvent event) throws IOException {
+        Clinic curClinic = clinicTable.getSelectionModel().getSelectedItem();
+        String chosenDay = curClinic.getDayOfWeek().getSelectionModel().getSelectedItem();
+        String chosenWeek = curClinic.getWeekofvacciene().getSelectionModel().getSelectedItem();
+        if(curClinic == null){
+            notSelectedAlert.setContentText("No Clinic Selected!");
+            notSelectedAlert.showAndWait();
+            return;
+        }
+        Stage stage = new Stage();
+        Scene scene;
+        FXMLLoader fxmlLoader = new FXMLLoader(ClinicListController.class.getResource("vaccineAppointmentList.fxml"));
+        VaccineAppointmentListController controller = new VaccineAppointmentListController();
+        controller.setPram(chosenDay,chosenWeek,curClinic,chatClient);
 
     }
 
@@ -110,6 +124,7 @@ public class ClinicVaccineController {
         name.setCellValueFactory(new PropertyValueFactory<Clinic, String>("name"));
         place.setCellValueFactory(new PropertyValueFactory<Clinic, String>("location"));
         day.setCellValueFactory(new PropertyValueFactory<Clinic, ChoiceBox<String>>("dayOfWeek"));
+        week.setCellValueFactory(new PropertyValueFactory<Clinic, ChoiceBox<String>>("weekofvacciene"));
 
 
         loadData();
@@ -132,46 +147,17 @@ public class ClinicVaccineController {
             }
         }
         clinics = chatClient.getClinicList();
-
+        List<String> weeks = Arrays.asList("0","1", "2", "3", "4", "5", "6");
         List<String> days = Arrays.asList("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
+
         for(Clinic c : clinics) {
             ObservableList<String> data = FXCollections.observableArrayList();
             data.addAll(days);
             c.setDayOfWeek(new ChoiceBox<String>(data));
-            c.getDayOfWeek().getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-                if (newSelection != null) {
-                    switch (newSelection) {
-                        case "Sunday":
-                            c.setCurOpenHour(c.getOpenHours().get(0).toString());
-                            c.setCurCloseHour(c.getCloseHours().get(0).toString());
-                            break;
-                        case "Monday":
-                            c.setCurOpenHour(c.getOpenHours().get(1).toString());
-                            c.setCurCloseHour(c.getCloseHours().get(1).toString());
-                            break;
-                        case "Tuesday":
-                            c.setCurOpenHour(c.getOpenHours().get(2).toString());
-                            c.setCurCloseHour(c.getCloseHours().get(2).toString());
-                            break;
-                        case "Wednesday":
-                            c.setCurOpenHour(c.getOpenHours().get(3).toString());
-                            c.setCurCloseHour(c.getCloseHours().get(3).toString());
-                            break;
-                        case "Thursday":
-                            c.setCurOpenHour(c.getOpenHours().get(4).toString());
-                            c.setCurCloseHour(c.getCloseHours().get(4).toString());
-                            break;
-                        case "Friday":
-                            c.setCurOpenHour(c.getOpenHours().get(5).toString());
-                            c.setCurCloseHour(c.getCloseHours().get(5).toString());
-                            break;
-                        default:
+            ObservableList<String> data1 = FXCollections.observableArrayList();
+            data1.addAll(weeks);
+            c.setWeekofvacciene(new ChoiceBox<String>(data1));
 
-                    }
-                }
-            });
-            c.setCurOpenHourProperty(new SimpleStringProperty());
-            c.setCurCloseHourProperty(new SimpleStringProperty());
         }
 
         cList.removeAll(cList);
