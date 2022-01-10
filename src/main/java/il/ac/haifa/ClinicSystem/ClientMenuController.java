@@ -25,8 +25,8 @@ public class ClientMenuController {
         App.setRoot("doctorList");
     }
     @FXML
-    void gotovac(ActionEvent event) {
-
+    void gotovac(ActionEvent event) throws IOException {
+        App.setRoot("ClinicVaccine");
     }
 
     public void setClient(SimpleClient c) {
