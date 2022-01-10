@@ -8,8 +8,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ClinicVaccineController {
+
 
     @FXML
     private Button addBtn;
@@ -21,7 +23,7 @@ public class ClinicVaccineController {
     private TableView<?> clinicTable;
 
     @FXML
-    private TableColumn<Clinic, String> date;
+    private TableColumn<Clinic, DatePicker> date;
 
     @FXML
     private Label listLbl;
@@ -34,6 +36,9 @@ public class ClinicVaccineController {
 
     @FXML
     private Button returnBtn;
+
+    private List<Clinic> clinics;
+    private SimpleClient chatClient;
 
     @FXML
     void next_page(ActionEvent event) {
@@ -48,12 +53,31 @@ public class ClinicVaccineController {
     void initialize() throws IOException, InterruptedException {
         name.setCellValueFactory(new PropertyValueFactory<Clinic, String>("name"));
         place.setCellValueFactory(new PropertyValueFactory<Clinic, String>("location"));
-        date.cellFactoryProperty(new PropertyValueFactory<Clinic,String>("date"));
+        date.setCellValueFactory(new PropertyValueFactory<Clinic,DatePicker>("date"));
+
+
+    }
+    public void loadData() throws InterruptedException {
+        chatClient.setGotList(false);
+
+        try {
+            chatClient.sendToServer("#ClinicList"); //ask from server the clinic list
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        synchronized(chatClient.getLock()) {
+            while(!chatClient.getGotList()) {
+
+                chatClient.getLock().wait();
+
+            }
+        }
+        clinics = chatClient.getClinicList();
 
 
     }
 
-    private SimpleClient chatClient;
+
     public void setClient(SimpleClient c) {
         this.chatClient = c;
     }
