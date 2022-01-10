@@ -27,13 +27,13 @@ public class VaccineAppointmentListController {
     private BorderPane borderPane;
 
     @FXML
-    private TableView<?> clinicTable;
+    private TableView<String> clinicTable;
 
     @FXML
     private Label listLbl;
 
     @FXML
-    private TableColumn<?, ?> name;
+    private TableColumn<String,String> name;
 
     @FXML
     private Button returnBtn;

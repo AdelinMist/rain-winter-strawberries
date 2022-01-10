@@ -85,7 +85,7 @@ public class ClinicVaccineController {
         }
         Stage stage = new Stage();
         Scene scene;
-        FXMLLoader fxmlLoader = new FXMLLoader(ClinicListController.class.getResource("doctorClinicList.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(DoctorClinicListController.class.getResource("doctorClinicList.fxml"));
         DoctorClinicListController controller = new DoctorClinicListController();
         controller.setClient(chatClient);
         controller.setClinic(curClinic);
@@ -102,7 +102,7 @@ public class ClinicVaccineController {
     }
 
     @FXML
-    void next_page(ActionEvent event) throws IOException {
+    void next_page(ActionEvent event) throws IOException, InterruptedException {
         Clinic curClinic = clinicTable.getSelectionModel().getSelectedItem();
         String chosenDay = curClinic.getDayOfWeek().getSelectionModel().getSelectedItem();
         String chosenWeek = curClinic.getWeekofvacciene().getSelectionModel().getSelectedItem();
@@ -113,9 +113,14 @@ public class ClinicVaccineController {
         }
         Stage stage = new Stage();
         Scene scene;
-        FXMLLoader fxmlLoader = new FXMLLoader(ClinicListController.class.getResource("vaccineAppointmentList.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(VaccineAppointmentListController.class.getResource("vaccineAppointmentList.fxml"));
         VaccineAppointmentListController controller = new VaccineAppointmentListController();
         controller.setPram(chosenDay,chosenWeek,curClinic,chatClient);
+        fxmlLoader.setController(controller);
+        scene = new Scene(fxmlLoader.load(), 1214, 419);
+        stage.setScene(scene);
+        stage.showAndWait();
+        loadData();
 
     }
 
