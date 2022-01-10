@@ -25,6 +25,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
+      <Button fx:id="appointBtn" layoutX="16.0" layoutY="28.0" onAction="#showDoctors" text="make an appointment" GridPane.rowIndex="2" />
       <Button fx:id="covidBtn" layoutX="16.0" layoutY="28.0" onAction="#showCovidServices" text="Covid Tests &amp; Vaccinations" GridPane.rowIndex="3" />
       <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exitProgram" text="Exit" GridPane.rowIndex="4">
          <font>

@@ -16,12 +16,11 @@
             </font></Label>
     </top>
     <center>
-        <TableView fx:id="clinicTable" prefHeight="640.0" prefWidth="883.0" BorderPane.alignment="CENTER">
+        <TableView fx:id="clinicTable" prefHeight="640.0" prefWidth="724.0" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="name" prefWidth="330.3999450802803" text="Clinic Name" />
-                <TableColumn fx:id="place" prefWidth="325.5999450683594" text="Location" />
-                <TableColumn fx:id="day" prefWidth="277.60003662109375" text="Day" />
-            <TableColumn fx:id="week" prefWidth="356.79998779296875" text="week forwad" />
+                <TableColumn fx:id="place" prefWidth="410.40008544921875" text="Location" />
+                <TableColumn fx:id="date" prefWidth="472.0" text="Date" />
             </columns>
         </TableView>
     </center>
