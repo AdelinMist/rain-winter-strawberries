@@ -20,7 +20,7 @@
             <columns>
                 <TableColumn fx:id="name" prefWidth="330.3999450802803" text="Clinic Name" />
                 <TableColumn fx:id="place" prefWidth="410.40008544921875" text="Location" />
-                <TableColumn fx:id="date" prefWidth="472.0" text="Date" />
+                <TableColumn fx:id="day" prefWidth="472.0" text="Date" />
             </columns>
         </TableView>
     </center>
