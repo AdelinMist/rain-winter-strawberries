@@ -104,6 +104,19 @@ public class VaccineClinicController {
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() throws IOException, InterruptedException {
+
+        name.setCellValueFactory(new PropertyValueFactory<VaccineClinic, String>("name"));
+        place.setCellValueFactory(new PropertyValueFactory<VaccineClinic, String>("place"));
+        dayPicker.setCellValueFactory(new PropertyValueFactory<VaccineClinic, DatePicker>("dayPicker"));
+        timeOptions.setCellValueFactory(new PropertyValueFactory<VaccineClinic, ChoiceBox<String>>("timeOptions"));
+
+
+
+        loadData();
+    }
+
+    public void loadData() throws InterruptedException {
+
         chatClient.setGotList(false);
 
         try {
@@ -120,19 +133,6 @@ public class VaccineClinicController {
             }
         }
         curClinic = chatClient.getClinicList();
-        name.setCellValueFactory(new PropertyValueFactory<VaccineClinic, String>("name"));
-        place.setCellValueFactory(new PropertyValueFactory<VaccineClinic, String>("place"));
-        dayPicker.setCellValueFactory(new PropertyValueFactory<VaccineClinic, DatePicker>("dayPicker"));
-        timeOptions.setCellValueFactory(new PropertyValueFactory<VaccineClinic, ChoiceBox<String>>("timeOptions"));
-
-
-
-        loadData();
-    }
-
-    public void loadData() throws InterruptedException {
-
-
         if(curClinic!= null) {
             for (int i = 0; i < curClinic.size(); i++) {
                 vaccineClinics = curClinic.get(i).getV_app();
@@ -151,29 +151,56 @@ public class VaccineClinicController {
 
                     DatePicker d = new DatePicker();
                     c.setDayPicker(d);
+                    c.setTimeOptions(new ChoiceBox<String>());
+                    c.setTimeProperty(new SimpleStringProperty());
+                    c.setDayProperty(new SimpleStringProperty());
                     EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
                         public void handle(ActionEvent e)
                         {
-
-                            List<String> hours = new ArrayList<>();
-                            for (LocalTime j = clinic.getCovidVaccOpenHours().get(0);j.isBefore(clinic.getCovidVaccCloseHours().get(0)); j = j.plusMinutes(10)) {
-                                VaccineClinic temp = new VaccineClinic(clinic,new Vaccine_Appointment(d.getValue().toString(),j.toString(),true));
-                                if(!clinic.getV_app().contains(temp)) //check if the appointment is taken
-                                    hours.add(j.toString());
+                            int index = 0;
+                            switch (d.getValue().getDayOfWeek().toString()){
+                                case "SUNDAY":
+                                    index = 0;
+                                    break;
+                                case "MONDAY":
+                                    index = 1;
+                                    break;
+                                case "TUESDAY":
+                                    index = 2;
+                                    break;
+                                case "WEDNENDAY":
+                                    index = 3;
+                                    break;
+                                case "THURSDAY":
+                                    index = 4;
+                                    break;
+                                case "FRIDAY":
+                                    index = 5;
+                                    break;
+                                default:
+                                    index = -1;
                             }
-                            ObservableList<String> data = FXCollections.observableArrayList();
-                            data.addAll(hours);
-                            c.setTimeOptions(new ChoiceBox<String>(data));
-                            c.getTimeOptions().getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-                                if (newSelection != null) {
-                                    c.setTime(newSelection);
-                                    c.setDay(d.getValue().toString());
-
+                            if(index !=-1) {
+                                List<String> hours = new ArrayList<>();
+                                for (LocalTime j = clinic.getCovidVaccOpenHours().get(index); j.isBefore(clinic.getCovidVaccCloseHours().get(index)); j = j.plusMinutes(10)) {
+                                    //check if the appointment is taken
+                                    hours.add(j.toString());
                                 }
-                            });
-                            c.setTimeProperty(new SimpleStringProperty());
-                            c.setDayProperty(new SimpleStringProperty());
+                                ObservableList<String> data = FXCollections.observableArrayList();
+                                data.addAll(hours);
+                                c.getTimeOptions().setItems(data);
+                                c.getTimeOptions().getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+                                    if (newSelection != null) {
+                                        c.setTime(newSelection);
+                                        c.setDay(d.getValue().toString());
 
+                                    }
+                                });
+
+                            }
+                            else{
+                                c.getTimeOptions().setItems(null);
+                            }
                         }
                     };
                     d.setOnAction(event);
