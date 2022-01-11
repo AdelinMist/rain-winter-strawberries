@@ -14,6 +14,7 @@ import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.util.Pair;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -40,8 +41,10 @@ public class VaccineClinic implements Serializable {
 
 
 
-    private transient StringProperty time;
+    private transient ChoiceBox<String> timeOptions;
+    private transient DatePicker dayPicker;
     private transient StringProperty day;
+    private transient StringProperty time;
     private transient StringProperty name;
     private transient StringProperty place;
 
@@ -70,17 +73,35 @@ public class VaccineClinic implements Serializable {
     public StringProperty placeProperty() { return place; }
     public void setPlaceProperty(SimpleStringProperty s){ this.place = s; }
     public String getPlace() { return place.get(); }
-    public void setPlace(String name) { place.set(name); }
+    public void setPlace(String name) {
+        place.set(name);
+    }
 
     public StringProperty timeProperty() { return time; }
     public void setTimeProperty(SimpleStringProperty s){ this.time = s; }
     public String getTime() { return time.get(); }
-    public void setTime(String name) { time.set(name); }
+    public void setTime(String name) {
+        time.set(name);
+    }
 
     public StringProperty dayProperty() { return day; }
     public void setDayProperty(SimpleStringProperty s){ this.day = s; }
     public String getDay() { return day.get(); }
-    public void setDay(String name) { day.set(name); }
+    public void setDay(String name) {
+        day.set(name);
+    }
+
+
+    public ChoiceBox<String> getTimeOptions() {
+        return timeOptions;
+    }
+
+    public void setTimeOptions(ChoiceBox<String> timeOptions) {
+        this.timeOptions = timeOptions;
+    }
+
+    public DatePicker getDayPicker() { return dayPicker; }
+    public void setDayPicker(DatePicker name) { dayPicker = name; }
 
     public int getId() {
         return id;

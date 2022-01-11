@@ -20,8 +20,9 @@
             <columns>
                 <TableColumn fx:id="name" prefWidth="300" text="Clinic Name" />
                 <TableColumn fx:id="place" prefWidth="400" text="Location" />
-                <TableColumn fx:id="day" prefWidth="150.0" text="Day" />
-                <TableColumn fx:id="hour" prefWidth="150.0" text="Hour" />
+                <TableColumn fx:id="dayPicker" prefWidth="150.0" text="dayPicker" />
+                <TableColumn fx:id="timeOptions" prefWidth="150.0" text="Hour" />
+
             </columns>
         </TableView>
     </center>

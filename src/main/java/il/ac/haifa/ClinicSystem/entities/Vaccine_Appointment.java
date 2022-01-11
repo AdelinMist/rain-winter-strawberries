@@ -1,5 +1,8 @@
 package il.ac.haifa.ClinicSystem.entities;
 
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -17,8 +20,13 @@ public class Vaccine_Appointment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="vaccine_appointment_id")
     private int id;
-    private String day;
-    private String time; // work like "12:10"
+    private transient DatePicker dayPicker;
+    private transient String day;
+    private transient String time; // work like "12:10"
+
+
+
+    private transient ChoiceBox<String> timeOptions; // work like "12:10"
     private boolean taken;
     @OneToMany(mappedBy = "vaccine")
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -26,6 +34,11 @@ public class Vaccine_Appointment implements Serializable {
 
     public Vaccine_Appointment(){
 
+
+    }
+    public Vaccine_Appointment( String time, boolean taken){
+        this.time = time;
+        this.taken = taken;
 
     }
     public Vaccine_Appointment(String day, String time, boolean taken){
@@ -41,9 +54,9 @@ public class Vaccine_Appointment implements Serializable {
         this.taken = d.isTaken();
 
     }
-    public String getDayOfWeek() {
-        return day;
-    }
+   // public String getDayOfWeek() {
+        //return day;
+   // }
 
     public int getId() {
         return id;
@@ -59,6 +72,21 @@ public class Vaccine_Appointment implements Serializable {
 
     public String getTime() {
         return time;
+    }
+    public ChoiceBox<String> getTimeOptions() {
+        return timeOptions;
+    }
+
+    public void setTimeOptions(ChoiceBox<String> timeOptions) {
+        this.timeOptions = timeOptions;
+    }
+
+    public DatePicker getDayPicker() {
+        return dayPicker;
+    }
+
+    public void setDayPicker(DatePicker dayPicker) {
+        this.dayPicker = dayPicker;
     }
 
     public void setTime(String time) {
