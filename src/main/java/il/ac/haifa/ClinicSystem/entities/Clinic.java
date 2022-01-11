@@ -1,20 +1,16 @@
 package il.ac.haifa.ClinicSystem.entities;
 
-import java.io.Serializable;
-
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-
-import javax.persistence.*;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.ChoiceBox;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "clinics")
@@ -83,6 +79,7 @@ public class Clinic implements Serializable{
 	//private transient LocalTime curOpenHour;
 	//private transient LocalTime curCloseHour;
 	private transient ChoiceBox<String> dayOfWeek;
+	private transient ChoiceBox<String> weekofvacciene; // eliron add that
 
 	public Clinic(String name, String location, List<LocalTime> openHours, List<LocalTime> closeHours,
 				  List<LocalTime> covidTestOpenHours, List<LocalTime> covidTestCloseHours, List<LocalTime> covidVaccOpenHours, List<LocalTime> covidVaccCloseHours, boolean test, boolean vac) {
@@ -300,4 +297,11 @@ public class Clinic implements Serializable{
 		 return false;
 	 }
 
+	public ChoiceBox<String> getWeekofvacciene() {
+		return weekofvacciene;
+	}
+
+	public void setWeekofvacciene(ChoiceBox<String> weekofvacciene) {
+		this.weekofvacciene = weekofvacciene;
+	}
 }

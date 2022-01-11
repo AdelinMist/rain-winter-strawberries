@@ -20,6 +20,7 @@ public class Appointment implements Serializable {
     private int id;
     private Date day;
     private String time; // work like "12:10"
+    private String week; // means week many weeks forward the appointment , 0 mean this week
 
     @ManyToOne
     private Clinic clinic; // maybe need more

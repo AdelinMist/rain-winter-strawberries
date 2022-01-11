@@ -77,4 +77,5 @@ public class Vaccine_Appointment implements Serializable {
         this.vaccineClinics = vaccineClinics;
     }
 
+
 }
