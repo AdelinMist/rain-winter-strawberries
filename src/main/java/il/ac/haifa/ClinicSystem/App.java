@@ -38,6 +38,12 @@ public class App extends Application {
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        if(fxml.equals("quiz_corona_test")) {
+            QuizController controller = new QuizController();
+            controller.setClient(client);
+            fxmlLoader.setController(controller);
+        }
+
         if(fxml.equals("ClinicVaccine")) {
             ClinicVaccineController controller = new ClinicVaccineController();
             controller.setClient(client);
