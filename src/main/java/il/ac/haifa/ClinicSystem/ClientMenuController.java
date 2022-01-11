@@ -13,12 +13,18 @@ import java.io.IOException;
 public class ClientMenuController {
 
     private SimpleClient chatClient;
-
+    @FXML
+    private Button covid_test;
     @FXML
     private Button vaccine;
 
     @FXML // fx:id="doctorBTN"
     private Button doctorBTN; // Value injected by FXMLLoader
+
+    @FXML
+    void gotoQuiz(ActionEvent event) throws IOException {
+        App.setRoot("quiz_corona_test");
+    }
 
     @FXML
     void clickDoctor(ActionEvent event) throws IOException {
