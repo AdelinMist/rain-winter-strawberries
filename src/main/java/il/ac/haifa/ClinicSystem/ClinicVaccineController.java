@@ -104,13 +104,13 @@ public class ClinicVaccineController {
     @FXML
     void next_page(ActionEvent event) throws IOException, InterruptedException {
         Clinic curClinic = clinicTable.getSelectionModel().getSelectedItem();
-        String chosenDay = curClinic.getDayOfWeek().getSelectionModel().getSelectedItem();
-        String chosenWeek = curClinic.getWeekofvacciene().getSelectionModel().getSelectedItem();
         if(curClinic == null){
             notSelectedAlert.setContentText("No Clinic Selected!");
             notSelectedAlert.showAndWait();
             return;
         }
+        String chosenDay = curClinic.getDayOfWeek().getSelectionModel().getSelectedItem();
+        String chosenWeek = curClinic.getWeekofvacciene().getSelectionModel().getSelectedItem();
         Stage stage = new Stage();
         Scene scene;
         FXMLLoader fxmlLoader = new FXMLLoader(VaccineAppointmentListController.class.getResource("vaccineAppointmentList.fxml"));
