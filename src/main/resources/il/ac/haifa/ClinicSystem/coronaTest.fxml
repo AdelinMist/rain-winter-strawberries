@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="534.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.ac.haifa.ClinicSystem.CoronaTest">
+   <children>
+      <TableView layoutX="124.0" layoutY="46.0" prefHeight="200.0" prefWidth="403.0">
+        <columns>
+          <TableColumn prefWidth="201.0" text="Clinic" />
+          <TableColumn prefWidth="201.0" text="Location" />
+        </columns>
+      </TableView>
+      <Text layoutX="301.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Clinic List" />
+      <Text layoutX="99.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <DatePicker layoutX="239.0" layoutY="286.0" />
+      <Text layoutX="292.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Date" />
+   </children>
+</AnchorPane>
