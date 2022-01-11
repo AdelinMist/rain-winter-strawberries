@@ -1,5 +1,7 @@
 package il.ac.haifa.ClinicSystem.entities;
 
+import javafx.scene.control.ChoiceBox;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -16,14 +18,27 @@ public class Appointment implements Serializable {
     @Column(name="appointment_id")
 
     private int id;
-    private Date date;
+    private Date day;
     private String time; // work like "12:10"
 
     @ManyToOne
     private Clinic clinic; // maybe need more
 
+    public Appointment(int id, Date day, String time, Clinic clinic) {
+        this.id = id;
+        this.day = day;
+        this.time = time;
+        this.clinic = clinic;
+    }
 
+    public Appointment(Appointment a) {
+        this.id = a.id;
+        this.day = a.day;
+        this.time = a.time;
+        this.clinic = a.clinic;
+    }
 
+    public Appointment() {
 
-
+    }
 }

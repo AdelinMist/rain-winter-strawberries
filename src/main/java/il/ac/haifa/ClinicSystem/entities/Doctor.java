@@ -57,6 +57,8 @@ public class Doctor extends User implements Serializable {
         this.doctorClinics = doctorClinics;
     }
 
+
+
     public int getId() {
         return this.id;
     }

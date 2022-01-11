@@ -70,6 +70,10 @@ public class Clinic implements Serializable{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<DoctorClinic> doctorClinics = null;
 
+	@OneToMany(mappedBy = "clinic")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<VaccineClinic> vaccineClinics = null;
+
 	private transient StringProperty curOpenHour;
 	private transient StringProperty curCloseHour;
 	private transient StringProperty curCovidTestOpenHour;
@@ -92,6 +96,7 @@ public class Clinic implements Serializable{
 		this.covidVaccCloseHours = covidVaccCloseHours;
 		this.hasCovidTests = test;
 		this.hasCovidVaccinations = vac;
+		this.vaccineClinics = null;
 	}
 
 	public Clinic () {
@@ -133,6 +138,11 @@ public class Clinic implements Serializable{
 		 	this.doctorClinics.add(dc);
 		 }
 
+		 this.vaccineClinics = new ArrayList<VaccineClinic>();
+		 for(VaccineClinic dc: m.getV_app()){
+			 this.vaccineClinics.add(dc);
+		 }
+
 		 this.id = m.getId();
 		 this.hasCovidVaccinations = m.getHasCovidVaccinations();
 		 this.hasCovidTests = m.getHasCovidTests();
@@ -151,8 +161,16 @@ public class Clinic implements Serializable{
 		return doctorClinics;
 	}
 
+	public List<VaccineClinic> getV_app() {
+		return vaccineClinics;
+	}
+
 	public void setDoctorClinics(List<DoctorClinic> doctorClinics) {
 		this.doctorClinics = doctorClinics;
+	}
+
+	public void setVaccineClinic(List<VaccineClinic> vaccineClinics) {
+		this.vaccineClinics = vaccineClinics;
 	}
 
 	public boolean getHasCovidTests() {

@@ -39,7 +39,7 @@ public class App extends Application {
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         if(fxml.equals("ClinicVaccine")) {
-            ClinicVaccineController controller = new ClinicVaccineController();
+            VaccineClinicController controller = new VaccineClinicController();
             controller.setClient(client);
             fxmlLoader.setController(controller);
         }
