@@ -1,56 +1,22 @@
 package il.ac.haifa.ClinicSystem;
 
-import il.ac.haifa.ClinicSystem.entities.*;
+import il.ac.haifa.ClinicSystem.entities.Clinic;
+import il.ac.haifa.ClinicSystem.entities.VaccineClinic;
+import il.ac.haifa.ClinicSystem.entities.Vaccine_Appointment;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
-import javafx.scene.control.DatePicker;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
-import javafx.scene.control.Alert.AlertType;
-import java.time.*;
-import java.time.chrono.*;
-import il.ac.haifa.ClinicSystem.entities.Clinic;
-import il.ac.haifa.ClinicSystem.entities.DoctorClinic;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.*;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.util.Arrays;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class VaccineClinicController {
@@ -99,7 +65,14 @@ public class VaccineClinicController {
 
     @FXML
     void next_page(ActionEvent event) throws IOException {
-
+        VaccineClinic vaccineClinic = vaccineClinicTable.getSelectionModel().getSelectedItem();
+        Clinic clinic = vaccineClinic.getClinic();
+        String time = vaccineClinic.getTimeOptions().getSelectionModel().getSelectedItem();
+        Date date = new Date(vaccineClinic.getDayPicker().getValue().toEpochDay());
+      //  System.out.println(time + "\n" + date + "\n" + clinic.getName());
+        Vaccine_Appointment appointment = new Vaccine_Appointment(date,time,clinic);
+        clinic.add_vaccine_appointment(appointment);
+        //maybe add hear massage like "the appointment added successfully
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -169,7 +142,7 @@ public class VaccineClinicController {
                                 case "TUESDAY":
                                     index = 2;
                                     break;
-                                case "WEDNENDAY":
+                                case "WEDNESDAY":
                                     index = 3;
                                     break;
                                 case "THURSDAY":
@@ -185,7 +158,23 @@ public class VaccineClinicController {
                                 List<String> hours = new ArrayList<>();
                                 for (LocalTime j = clinic.getCovidVaccOpenHours().get(index); j.isBefore(clinic.getCovidVaccCloseHours().get(index)); j = j.plusMinutes(10)) {
                                     //check if the appointment is taken
-                                    hours.add(j.toString());
+                                   /* String time = j.toString(); // details of the appointment
+                                    Date date = new Date(c.getDayPicker().getValue().toEpochDay());
+                                    List<Vaccine_Appointment> list = clinic.getVaccine_appointments();
+                                    boolean ok = true;
+
+                                    for (int i = 0; i < list.size(); ++i) {
+                                        Vaccine_Appointment vaccine_appointment = list.get(i);
+                                        String time_app = vaccine_appointment.getTime();
+                                        Date date_app= vaccine_appointment.getDate();
+                                        if(time_app == time && date == date_app){// the appointment is token
+                                            ok = false;
+                                            break;
+                                        }
+                                    }
+                                    if(ok) */
+                                        hours.add(j.toString());
+
                                 }
                                 data.addAll(hours);
                                 c.getTimeOptions().setItems(data);

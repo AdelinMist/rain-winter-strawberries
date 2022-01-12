@@ -1,6 +1,5 @@
 package il.ac.haifa.ClinicSystem.entities;
 
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import org.hibernate.annotations.LazyCollection;
@@ -13,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "vaccine_appointments")
-public class Vaccine_Appointment implements Serializable {
+public class Vaccine_Appointment extends Appointment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -21,8 +20,8 @@ public class Vaccine_Appointment implements Serializable {
     @Column(name="vaccine_appointment_id")
     private int id;
     private transient DatePicker dayPicker;
-    private transient String day;
-    private transient String time; // work like "12:10"
+    private  String day;
+    private  String time; // work like "12:10"
 
 
 
@@ -31,6 +30,11 @@ public class Vaccine_Appointment implements Serializable {
     @OneToMany(mappedBy = "vaccine")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<VaccineClinic> vaccineClinics = null;
+
+    public Vaccine_Appointment(Date date, String time ,Clinic clinic){
+        super(date,clinic);
+        this.time = time;
+    }
 
     public Vaccine_Appointment(){
 

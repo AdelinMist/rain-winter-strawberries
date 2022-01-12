@@ -59,6 +59,15 @@ public class Clinic implements Serializable{
 	@ElementCollection(targetClass=LocalTime.class)
 	private List<LocalTime> covidVaccCloseHours;
 
+	private List<Vaccine_Appointment> vaccine_appointments;
+
+	public void add_vaccine_appointment(Vaccine_Appointment vaccine_appointment){
+		this.vaccine_appointments.add(vaccine_appointment);
+	}
+
+
+
+
 	private boolean hasCovidTests;
 	private boolean hasCovidVaccinations;
 
@@ -303,5 +312,12 @@ public class Clinic implements Serializable{
 
 	public void setWeekofvacciene(ChoiceBox<String> weekofvacciene) {
 		this.weekofvacciene = weekofvacciene;
+	}
+
+	public void setVaccine_appointments(List<Vaccine_Appointment> vaccine_appointments) {
+		this.vaccine_appointments = vaccine_appointments;
+	}
+	public List<Vaccine_Appointment> getVaccine_appointments() {
+		return this.vaccine_appointments;
 	}
 }
