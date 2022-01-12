@@ -56,31 +56,33 @@ import java.util.List;
 public class VaccineClinicController {
 
     @FXML
-    private BorderPane borderPane;
-
-    @FXML
-    private Button changeBtn;
-
-    @FXML
     private TableView<VaccineClinic> vaccineClinicTable;
 
-    @FXML
-    private TableColumn<VaccineClinic, DatePicker> dayPicker;
 
-    @FXML
-    private Label listLbl;
+    @FXML // fx:id="AppointmentTimeChoiceBox"
+    private ChoiceBox<?> AppointmentTimeChoiceBox; // Value injected by FXMLLoader
+
+    @FXML // fx:id="addBtn"
+    private Button addBtn; // Value injected by FXMLLoader
+
+    @FXML // fx:id="borderPane"
+    private BorderPane borderPane; // Value injected by FXMLLoader
+
+    @FXML // fx:id="datePicker"
+    private DatePicker datePicker; // Value injected by FXMLLoader
+
+    @FXML // fx:id="listLbl"
+    private Label listLbl; // Value injected by FXMLLoader
 
     @FXML
     private TableColumn<VaccineClinic, String> name;
 
-    @FXML
-    private Button exitBtn;
+    @FXML // fx:id="returnBtn"
+    private Button returnBtn; // Value injected by FXMLLoader
 
     @FXML
     private TableColumn<VaccineClinic, String> place;
 
-    @FXML
-    private TableColumn<VaccineClinic, ChoiceBox<String>> timeOptions;
 
 
     private SimpleClient chatClient;
@@ -99,7 +101,14 @@ public class VaccineClinicController {
 
     @FXML
     void next_page(ActionEvent event) throws IOException {
-
+        //Date date = dayPicker;
+        String time;
+        VaccineClinic curClinic = vaccineClinicTable.getSelectionModel().getSelectedItem();
+        if(curClinic == null){
+            notSelectedAlert.setContentText("No Clinic Selected!");
+            notSelectedAlert.showAndWait();
+            return;
+        }
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -107,11 +116,6 @@ public class VaccineClinicController {
 
         name.setCellValueFactory(new PropertyValueFactory<VaccineClinic, String>("name"));
         place.setCellValueFactory(new PropertyValueFactory<VaccineClinic, String>("place"));
-        dayPicker.setCellValueFactory(new PropertyValueFactory<VaccineClinic, DatePicker>("dayPicker"));
-        timeOptions.setCellValueFactory(new PropertyValueFactory<VaccineClinic, ChoiceBox<String>>("timeOptions"));
-
-
-
         loadData();
     }
 
@@ -169,7 +173,7 @@ public class VaccineClinicController {
                                 case "TUESDAY":
                                     index = 2;
                                     break;
-                                case "WEDNENDAY":
+                                case "WEDNESDAY":
                                     index = 3;
                                     break;
                                 case "THURSDAY":
