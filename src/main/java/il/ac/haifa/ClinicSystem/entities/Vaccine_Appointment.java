@@ -58,9 +58,9 @@ public class Vaccine_Appointment extends Appointment implements Serializable {
         this.taken = d.isTaken();
 
     }
-   // public String getDayOfWeek() {
-        //return day;
-   // }
+   public String getDayOfWeek() {
+        return day;
+   }
 
     public int getId() {
         return id;
@@ -75,7 +75,7 @@ public class Vaccine_Appointment extends Appointment implements Serializable {
     }
 
     public String getTime() {
-        return time;
+        return this.time;
     }
     public ChoiceBox<String> getTimeOptions() {
         return timeOptions;

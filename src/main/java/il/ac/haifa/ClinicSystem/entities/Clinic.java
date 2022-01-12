@@ -59,10 +59,14 @@ public class Clinic implements Serializable{
 	@ElementCollection(targetClass=LocalTime.class)
 	private List<LocalTime> covidVaccCloseHours;
 
-	private List<Vaccine_Appointment> vaccine_appointments;
+	@OneToMany(mappedBy = "clinic")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Vaccine_Appointment> vaccine_appointments1;
 
 	public void add_vaccine_appointment(Vaccine_Appointment vaccine_appointment){
-		this.vaccine_appointments.add(vaccine_appointment);
+		this.vaccine_appointments1.add(vaccine_appointment);
+		System.out.println(vaccine_appointments1.toString());
+		System.out.println(vaccine_appointment.getTime());
 	}
 
 
@@ -315,9 +319,9 @@ public class Clinic implements Serializable{
 	}
 
 	public void setVaccine_appointments(List<Vaccine_Appointment> vaccine_appointments) {
-		this.vaccine_appointments = vaccine_appointments;
+		this.vaccine_appointments1 = vaccine_appointments;
 	}
 	public List<Vaccine_Appointment> getVaccine_appointments() {
-		return this.vaccine_appointments;
+		return this.vaccine_appointments1;
 	}
 }
