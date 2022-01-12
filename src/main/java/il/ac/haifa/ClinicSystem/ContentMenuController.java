@@ -27,9 +27,6 @@ public class ContentMenuController {
 
     @FXML
     private Button exitBtn;
-
-    @FXML
-    private Button appointBtn;
     
     private SimpleClient chatClient;
     
@@ -46,11 +43,6 @@ public class ContentMenuController {
     @FXML
     void showCovidServices(ActionEvent event) throws IOException {
         App.setRoot("covidServicesList");
-    }
-
-    @FXML
-    void showDoctors(ActionEvent event) throws IOException {
-        App.setRoot("doctorsList");
     }
 
     public void setClient(SimpleClient c) {
