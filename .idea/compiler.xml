@@ -6,11 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ClinicSystem (1)" />
         <module name="ClinicSystem" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="ClinicSystem" target="16" />
+      <module name="ClinicSystem" target="17" />
       <module name="ClinicSystem (1)" target="16" />
     </bytecodeTargetLevel>
   </component>

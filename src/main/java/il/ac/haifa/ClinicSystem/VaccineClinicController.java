@@ -157,6 +157,7 @@ public class VaccineClinicController {
                     EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
                         public void handle(ActionEvent e)
                         {
+                            ObservableList<String> data = FXCollections.observableArrayList();
                             int index = 0;
                             switch (d.getValue().getDayOfWeek().toString()){
                                 case "SUNDAY":
@@ -186,7 +187,6 @@ public class VaccineClinicController {
                                     //check if the appointment is taken
                                     hours.add(j.toString());
                                 }
-                                ObservableList<String> data = FXCollections.observableArrayList();
                                 data.addAll(hours);
                                 c.getTimeOptions().setItems(data);
                                 c.getTimeOptions().getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -199,7 +199,7 @@ public class VaccineClinicController {
 
                             }
                             else{
-                                c.getTimeOptions().setItems(null);
+                                c.getTimeOptions().setItems(data);
                             }
                         }
                     };
