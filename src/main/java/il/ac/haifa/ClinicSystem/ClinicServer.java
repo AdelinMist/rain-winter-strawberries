@@ -122,7 +122,7 @@ public class ClinicServer extends AbstractServer{
 			try {
 				session = sessionFactory.openSession();
 				session.beginTransaction();
-				
+
 				session.saveOrUpdate((Clinic)msg);
 				session.flush();
 				List<Clinic> clinics = getAll(Clinic.class);
@@ -145,7 +145,7 @@ public class ClinicServer extends AbstractServer{
 				session = sessionFactory.openSession();
 				session.beginTransaction();
 
-				session.merge((DoctorClinic)msg);
+				session.saveOrUpdate((DoctorClinic)msg);
 				session.flush();
 				Clinic c = ((DoctorClinic) msg).getClinic();
 				String hql = "FROM DoctorClinic DC WHERE DC.clinic = :clinic";
