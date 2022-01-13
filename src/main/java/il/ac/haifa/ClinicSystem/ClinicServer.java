@@ -122,15 +122,11 @@ public class ClinicServer extends AbstractServer{
 			try {
 				session = sessionFactory.openSession();
 				session.beginTransaction();
-
-				session.merge((Clinic)msg);
+				
+				session.saveOrUpdate((Clinic)msg);
 				session.flush();
 				List<Clinic> clinics = getAll(Clinic.class);
 				client.sendToClient(clinics);
-				System.out.println("!!!!!!!!!!!!!!");
-				System.out.println((clinics.get(0)).getVaccine_appointments().toString());
-
-
 
 				session.getTransaction().commit();
 			}catch (Exception exception) {
