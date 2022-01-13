@@ -7,7 +7,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -31,7 +31,7 @@ public class Vaccine_Appointment extends Appointment implements Serializable {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<VaccineClinic> vaccineClinics = null;
 
-    public Vaccine_Appointment(Date date, String time ,Clinic clinic){
+    public Vaccine_Appointment(LocalDate date, String time , Clinic clinic){
         super(date,clinic);
         this.time = time;
     }

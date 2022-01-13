@@ -2,7 +2,7 @@ package il.ac.haifa.ClinicSystem.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 
 @Entity
@@ -16,24 +16,24 @@ public class Appointment implements Serializable {
     @Column(name="appointment_id")
 
     private int id;
-    private Date date;
+    private LocalDate date;
     //private String time; the time will be in the sub class like vaccine appointment
     private String week; // means week many weeks forward the appointment , 0 mean this week
 
     @ManyToOne
     private Clinic clinic; // maybe need more
 
-    public Appointment(int id, Date day, String time, Clinic clinic) {
+    public Appointment(int id, LocalDate day, String time, Clinic clinic) {
         this.id = id;
         this.date = day;
         //this.time = time;
         this.clinic = clinic;
     }
-    public Appointment(Date date, Clinic clinic){
+    public Appointment(LocalDate date, Clinic clinic){
         this.date = date;
         this.clinic = clinic;
     }
-    public Date getDate(){
+    public LocalDate getDate(){
         return this.date;
     }
 
