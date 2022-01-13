@@ -59,7 +59,7 @@ public class Clinic implements Serializable{
 	@ElementCollection(targetClass=LocalTime.class)
 	private List<LocalTime> covidVaccCloseHours;
 
-	@OneToMany(mappedBy = "clinic")
+	@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Vaccine_Appointment> vaccine_appointments1;
 
