@@ -46,14 +46,14 @@ public class CoronaTestAppointmentController {
     private TableView<Clinic> vaccineClinicTable;
 
     private SimpleClient chatClient;
-    @FXML
+
 
     private List<Clinic> curClinic;
     private List<Corna_cheak_Appointment> next_vaccines;
     private ObservableList<Clinic> cList = FXCollections.observableArrayList();
     private Alert notSelectedAlert = new Alert(Alert.AlertType.ERROR);
-
-    void next_page(ActionEvent event) throws InterruptedException {
+    @FXML
+    void nextPage(ActionEvent event) throws InterruptedException {
         Clinic clinic = vaccineClinicTable.getSelectionModel().getSelectedItem();
         //Vaccine_Appointment vaccine = clinic.getVaccine_appointments().get(0);
         String time = clinic.getTimeOptions().getSelectionModel().getSelectedItem();

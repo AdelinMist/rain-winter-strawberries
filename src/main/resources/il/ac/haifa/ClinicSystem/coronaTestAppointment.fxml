@@ -30,7 +30,7 @@
         <AnchorPane prefHeight="39.0" prefWidth="1214.0" BorderPane.alignment="CENTER">
             <children>
                 <Button fx:id="returnBtn" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#returnToMenu" text="Return to Menu" />
-                <Button fx:id="addBtn" layoutX="1051.0" layoutY="8.0" mnemonicParsing="false" onAction="#next_page" text="next" />
+                <Button fx:id="addBtn" layoutX="1051.0" layoutY="8.0" mnemonicParsing="false" onAction="#nextPage" text="next" />
             </children>
         </AnchorPane>
     </bottom>

@@ -20,7 +20,8 @@ public class Vaccine_Appointment extends Appointment implements Serializable {
 
 
     //private transient ChoiceBox<String> timeOptions; // work like "12:10"
-    private boolean taken;
+
+
 
 
     public Vaccine_Appointment(LocalDate date, String time , Clinic clinic){
@@ -34,21 +35,20 @@ public class Vaccine_Appointment extends Appointment implements Serializable {
     }
     public Vaccine_Appointment( String time, boolean taken){
         this.time = time;
-        this.taken = taken;
+       // this.taken = taken;
 
     }
     public Vaccine_Appointment(String day, String time, boolean taken){
         this.day = day;
         this.time = time;
-        this.taken = taken;
+       // this.taken = taken;
 
     }
     public Vaccine_Appointment(Vaccine_Appointment d){
         this.id = d.getId();
         this.day = d.getDay();
         this.time = d.getTime();
-        this.taken = d.isTaken();
-
+//
     }
    public String getDayOfWeek() {
         return day;
@@ -89,13 +89,13 @@ public class Vaccine_Appointment extends Appointment implements Serializable {
         this.time = time;
     }
 
-    public boolean isTaken() {
-        return taken;
-    }
+    //public boolean isTaken() {
+       // return taken;
+    //}
 
-    public void setTaken(boolean taken) {
-        this.taken = taken;
-    }
+   // public void setTaken(boolean taken) {
+     //   this.taken = taken;
+    //}
 
 
 
