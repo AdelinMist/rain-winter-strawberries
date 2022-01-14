@@ -40,6 +40,10 @@ public class ClinicServer extends AbstractServer{
 		configuration.addAnnotatedClass(Doctor.class);
 		configuration.addAnnotatedClass(Vaccine_Appointment.class);
 		configuration.addAnnotatedClass(Appointment.class);
+		configuration.addAnnotatedClass(Corna_cheak_Appointment.class);
+		//configuration.addAnnotatedClass(Quiz.class);
+
+
 
 
 

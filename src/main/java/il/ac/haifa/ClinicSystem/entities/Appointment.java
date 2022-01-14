@@ -23,8 +23,8 @@ public class Appointment implements Serializable {
     @ManyToOne
     private Clinic clinic; // maybe need more
 
-    public Appointment(int id, LocalDate day, String time, Clinic clinic) {
-        this.id = id;
+    public Appointment(LocalDate day, String time, Clinic clinic) {
+
         this.date = day;
         //this.time = time;
         this.clinic = clinic;
