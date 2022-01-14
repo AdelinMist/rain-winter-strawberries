@@ -64,9 +64,19 @@ public class Clinic implements Serializable{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Vaccine_Appointment> vaccine_appointments1;
 
-	@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true )
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Corna_cheak_Appointment> Corna_cheak_Appointments1;
+
+
+	@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Sister_Appointment> sister_appointments1;
+
+	public void add_Sister_Appointment(Sister_Appointment appointment){
+		this.sister_appointments1.add(appointment);
+
+	}
 
 	private transient DatePicker dayPicker;
 	private transient ChoiceBox<String> timeOptions; // work like "12:10"
@@ -74,16 +84,14 @@ public class Clinic implements Serializable{
 
 	public void add_vaccine_appointment(Vaccine_Appointment vaccine_appointment){
 		this.vaccine_appointments1.add(vaccine_appointment);
-		System.out.println(vaccine_appointments1.toString());
-		System.out.println(vaccine_appointment.getTime());
+
 	}
 
 
 
 	public void add_coronaTest_appointment(Corna_cheak_Appointment corna_cheak_appointment){
 		this.Corna_cheak_Appointments1.add(corna_cheak_appointment);
-		System.out.println(vaccine_appointments1.toString());
-		System.out.println(corna_cheak_appointment.getTime());
+
 	}
 
 
@@ -353,5 +361,13 @@ public class Clinic implements Serializable{
 	}
 	public  List<Corna_cheak_Appointment> getCorna_cheak_Appointments1() {
 		return Corna_cheak_Appointments1 ;
+	}
+
+	public void setSister_appointments1(List<Sister_Appointment> sister_appointments1) {
+		this.sister_appointments1 = sister_appointments1;
+	}
+
+	public  List<Sister_Appointment> getSister_appointments1( ) {
+		return this.sister_appointments1 ;
 	}
 }

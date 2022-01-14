@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="borderPane" prefHeight="703.0" prefWidth="1214.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <Label fx:id="listLbl" alignment="CENTER" prefHeight="24.0" prefWidth="1214.0" text="sister appointment" textAlignment="CENTER" BorderPane.alignment="CENTER">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font></Label>
+    </top>
+    <center>
+        <TableView fx:id="vaccineClinicTable" prefHeight="640.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="name" prefWidth="300" text="Clinic Name" />
+                <TableColumn fx:id="place" prefWidth="400" text="Location" />
+                <TableColumn fx:id="dayPicker" prefWidth="150.0" text="date" />
+                <TableColumn fx:id="timeOptions" prefWidth="150.0" text="Hour" />
+
+            </columns>
+        </TableView>
+    </center>
+    <bottom>
+        <AnchorPane prefHeight="39.0" prefWidth="1214.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="returnBtn" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#returnToMenu" text="Return to Menu" />
+                <Button fx:id="addBtn" layoutX="1051.0" layoutY="8.0" mnemonicParsing="false" onAction="#nextPage" text="next" />
+            </children>
+        </AnchorPane>
+    </bottom>
+</BorderPane>

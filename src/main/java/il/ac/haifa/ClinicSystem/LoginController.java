@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class PrimaryController {
+public class LoginController {
 
     private SimpleClient chatClient;
     @FXML
@@ -26,6 +26,10 @@ public class PrimaryController {
 
     @FXML
     void CheckLogin(ActionEvent event) throws IOException{
+        String name = userButton.getText();
+        String pass = PassButton.getText();
+
+
 
         //SimpleClient.getClient().sendToServer("#LOGIN"+" "+userButton.getText()+" "+PassButton.getText());
     }

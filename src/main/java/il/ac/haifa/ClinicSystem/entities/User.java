@@ -20,7 +20,7 @@ public class User implements Serializable {
 
     @Column(name = "username")
     protected String username;
-
+    private String clinic_name; // for appointment 3.5 any user need own clinic (sister appointment)
     protected byte[] password;
     protected byte[] salt;
 

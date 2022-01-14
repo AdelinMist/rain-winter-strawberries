@@ -1,18 +1,26 @@
 package il.ac.haifa.ClinicSystem.entities;
 
+import org.hibernate.annotations.Polymorphism;
+import org.hibernate.annotations.PolymorphismType;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+
 @Entity
+@Table(name = "corna_cheak_appointments")
+@Polymorphism(type = PolymorphismType.EXPLICIT)
+
 public class Corna_cheak_Appointment  extends Appointment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="vaccine_appointment_id")
+
+    @Column(name="corona_cheak_appointment_id")
     private int id;
     @OneToOne
     private  Quiz quiz;
+
 
 
     private String time;
@@ -28,10 +36,7 @@ public class Corna_cheak_Appointment  extends Appointment implements Serializabl
 
     }
 
-    public Corna_cheak_Appointment(Appointment a) {
-        super(a);
 
-    }
 
     public Corna_cheak_Appointment() {
 

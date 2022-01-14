@@ -42,6 +42,8 @@ public class ClinicServer extends AbstractServer{
 		configuration.addAnnotatedClass(Appointment.class);
 		configuration.addAnnotatedClass(Corna_cheak_Appointment.class);
 		configuration.addAnnotatedClass(Quiz.class);
+		configuration.addAnnotatedClass(Sister_Appointment.class);
+
 
 
 
@@ -196,6 +198,26 @@ public class ClinicServer extends AbstractServer{
 				session.beginTransaction();
 
 				List<DoctorClinic> doctorClinics = getAll(DoctorClinic.class);
+				client.sendToClient(doctorClinics);
+
+				session.getTransaction().commit();
+			}catch (Exception exception) {
+				if (session != null) {
+					session.getTransaction().rollback();
+				}
+				System.err.println("An error occured, changes have been rolled back.");
+				exception.printStackTrace();
+			} finally {
+				if(session != null)
+					session.close();
+			}
+		}
+		else if(((String) msg).equals("#username")) {
+			try {
+				session = sessionFactory.openSession();
+				session.beginTransaction();
+
+				List<User> doctorClinics = getAll(User.class);
 				client.sendToClient(doctorClinics);
 
 				session.getTransaction().commit();

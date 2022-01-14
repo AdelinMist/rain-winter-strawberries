@@ -34,6 +34,10 @@ public class ClientMenuController {
     void gotovac(ActionEvent event) throws IOException {
         App.setRoot("ClinicVaccine");
     }
+    @FXML
+    void goSister(ActionEvent event) throws IOException {
+        App.setRoot("SisterAppointment");
+    }
 
     public void setClient(SimpleClient c) {
         this.chatClient = c;
