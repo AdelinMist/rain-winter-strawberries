@@ -3,6 +3,7 @@ package il.ac.haifa.ClinicSystem.entities;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -63,6 +64,10 @@ public class Clinic implements Serializable{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Vaccine_Appointment> vaccine_appointments1;
 
+	private transient DatePicker dayPicker;
+	private transient ChoiceBox<String> timeOptions; // work like "12:10"
+
+
 	public void add_vaccine_appointment(Vaccine_Appointment vaccine_appointment){
 		this.vaccine_appointments1.add(vaccine_appointment);
 		System.out.println(vaccine_appointments1.toString());
@@ -79,9 +84,6 @@ public class Clinic implements Serializable{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<DoctorClinic> doctorClinics = null;
 
-	@OneToMany(mappedBy = "clinic")
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<VaccineClinic> vaccineClinics = null;
 
 	private transient StringProperty curOpenHour;
 	private transient StringProperty curCloseHour;
@@ -106,7 +108,6 @@ public class Clinic implements Serializable{
 		this.covidVaccCloseHours = covidVaccCloseHours;
 		this.hasCovidTests = test;
 		this.hasCovidVaccinations = vac;
-		this.vaccineClinics = null;
 	}
 
 	public Clinic () {
@@ -148,10 +149,7 @@ public class Clinic implements Serializable{
 		 	this.doctorClinics.add(dc);
 		 }
 
-		 this.vaccineClinics = new ArrayList<VaccineClinic>();
-		 for(VaccineClinic dc: m.getV_app()){
-			 this.vaccineClinics.add(dc);
-		 }
+
 
 		 this.id = m.getId();
 		 this.hasCovidVaccinations = m.getHasCovidVaccinations();
@@ -171,17 +169,13 @@ public class Clinic implements Serializable{
 		return doctorClinics;
 	}
 
-	public List<VaccineClinic> getV_app() {
-		return vaccineClinics;
-	}
+
 
 	public void setDoctorClinics(List<DoctorClinic> doctorClinics) {
 		this.doctorClinics = doctorClinics;
 	}
 
-	public void setVaccineClinic(List<VaccineClinic> vaccineClinics) {
-		this.vaccineClinics = vaccineClinics;
-	}
+
 
 	public boolean getHasCovidTests() {
 		return hasCovidTests;
@@ -323,5 +317,21 @@ public class Clinic implements Serializable{
 	}
 	public List<Vaccine_Appointment> getVaccine_appointments() {
 		return this.vaccine_appointments1;
+	}
+
+	public DatePicker getDayPicker() {
+		return dayPicker;
+	}
+
+	public void setDayPicker(DatePicker next_vaccine_appointments1) {
+		this.dayPicker = next_vaccine_appointments1;
+	}
+
+	public ChoiceBox<String> getTimeOptions() {
+		return timeOptions;
+	}
+
+	public void setTimeOptions(ChoiceBox<String> timeOptions) {
+		this.timeOptions = timeOptions;
 	}
 }

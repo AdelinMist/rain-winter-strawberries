@@ -49,4 +49,12 @@ public class Appointment implements Serializable {
     public Appointment() {
 
     }
+
+    public Clinic getClinic() {
+        return clinic;
+    }
+
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
+    }
 }

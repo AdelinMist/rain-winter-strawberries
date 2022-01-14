@@ -40,7 +40,7 @@ public class ClinicServer extends AbstractServer{
 		configuration.addAnnotatedClass(Doctor.class);
 		configuration.addAnnotatedClass(Vaccine_Appointment.class);
 		configuration.addAnnotatedClass(Appointment.class);
-		configuration.addAnnotatedClass(VaccineClinic.class);
+
 
 
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
@@ -72,27 +72,25 @@ public class ClinicServer extends AbstractServer{
 		Clinic c = new Clinic("The White Tower", "Tar Valon", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
 		//session.saveOrUpdate(temp);
 		Doctor d = new Doctor("coolDoctor420", "password", "Mat Matthews", "Neurology");
-		Vaccine_Appointment va = new Vaccine_Appointment( "10:00", false);
+
 
 		DoctorClinic dc = new DoctorClinic(c, d, workingHours);
-		VaccineClinic vc = new VaccineClinic(c, va);
+
 
 		List<DoctorClinic> dcList = new ArrayList<DoctorClinic>();
-		List<VaccineClinic> vcList = new ArrayList<VaccineClinic>();
+
 
 		dcList.add(dc);
-		vcList.add(vc);
+
 		c.setDoctorClinics(dcList);
 		d.setDoctorClinics(dcList);
 
-		c.setVaccineClinic(vcList);
-		va.setVaccineClinic(vcList);
+
 
 		session.saveOrUpdate(c);
 		session.saveOrUpdate(d);
 		session.saveOrUpdate(dc);
-		session.saveOrUpdate(va);
-		session.saveOrUpdate(vc);
+
 		 /*
 		 * The call to session.flush() updates the DB immediately without ending the transaction.
 		 * Recommended to do after an arbitrary unit of work.

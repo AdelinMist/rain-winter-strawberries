@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 
 import il.ac.haifa.ClinicSystem.entities.Clinic;
 import il.ac.haifa.ClinicSystem.entities.DoctorClinic;
-import il.ac.haifa.ClinicSystem.entities.VaccineClinic;
 import il.ac.haifa.ClinicSystem.entities.Vaccine_Appointment;
 import il.ac.haifa.ClinicSystem.ocsf.client.AbstractClient;
 

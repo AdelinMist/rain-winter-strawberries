@@ -19,17 +19,15 @@ public class Vaccine_Appointment extends Appointment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="vaccine_appointment_id")
     private int id;
-    private transient DatePicker dayPicker;
+    //private transient DatePicker dayPicker;
     private  String day;
     private  String time; // work like "12:10"
 
 
 
-    private transient ChoiceBox<String> timeOptions; // work like "12:10"
+    //private transient ChoiceBox<String> timeOptions; // work like "12:10"
     private boolean taken;
-    @OneToMany(mappedBy = "vaccine")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<VaccineClinic> vaccineClinics = null;
+
 
     public Vaccine_Appointment(LocalDate date, String time , Clinic clinic){
         super(date,clinic);
@@ -77,21 +75,21 @@ public class Vaccine_Appointment extends Appointment implements Serializable {
     public String getTime() {
         return this.time;
     }
-    public ChoiceBox<String> getTimeOptions() {
+   /* public ChoiceBox<String> getTimeOptions() {
         return timeOptions;
     }
 
     public void setTimeOptions(ChoiceBox<String> timeOptions) {
         this.timeOptions = timeOptions;
-    }
+    }*/
 
-    public DatePicker getDayPicker() {
+    /*public DatePicker getDayPicker() {
         return dayPicker;
     }
 
     public void setDayPicker(DatePicker dayPicker) {
         this.dayPicker = dayPicker;
-    }
+    }*/
 
     public void setTime(String time) {
         this.time = time;
@@ -105,9 +103,6 @@ public class Vaccine_Appointment extends Appointment implements Serializable {
         this.taken = taken;
     }
 
-    public void setVaccineClinic(List<VaccineClinic> vaccineClinics) {
-        this.vaccineClinics = vaccineClinics;
-    }
 
 
 }
