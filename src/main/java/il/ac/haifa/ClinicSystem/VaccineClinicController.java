@@ -2,16 +2,25 @@ package il.ac.haifa.ClinicSystem;
 
 import il.ac.haifa.ClinicSystem.entities.Clinic;
 import il.ac.haifa.ClinicSystem.entities.Vaccine_Appointment;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -54,6 +63,7 @@ public class VaccineClinicController {
     private List<Vaccine_Appointment> next_vaccines;
     private ObservableList<Clinic> cList = FXCollections.observableArrayList();
     private Alert notSelectedAlert = new Alert(Alert.AlertType.ERROR);
+    Alert succsessAlert = new Alert(Alert.AlertType.INFORMATION);
 
 
     @FXML
@@ -76,7 +86,9 @@ public class VaccineClinicController {
             e.printStackTrace();
         }
         loadData();
-        //maybe add hear massage like "the appointment added successfully
+        succsessAlert.setTitle("Appointment confirmed");
+        succsessAlert.setHeaderText("You made an appointment to " + date + " at " + time);
+        succsessAlert.showAndWait();
     }
 
     @FXML
