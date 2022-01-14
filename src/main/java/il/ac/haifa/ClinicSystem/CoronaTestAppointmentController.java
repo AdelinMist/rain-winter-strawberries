@@ -1,5 +1,4 @@
 package il.ac.haifa.ClinicSystem;
-
 import il.ac.haifa.ClinicSystem.entities.Clinic;
 import il.ac.haifa.ClinicSystem.entities.Corna_cheak_Appointment;
 import javafx.collections.FXCollections;
@@ -19,20 +18,20 @@ import java.util.List;
 
 public class CoronaTestAppointmentController {
 
-    /*@FXML
+    @FXML
     private Button addBtn;
 
     @FXML
     private BorderPane borderPane;
 
     @FXML
-    private TableView<Clinic> table;
+    private TableColumn<Clinic, DatePicker> dayPicker;
 
     @FXML
-    private TableColumn<Clinic, String> clinic_name;
+    private Label listLbl;
 
     @FXML
-    private DatePicker date_pick;
+    private TableColumn<Clinic, String> name;
 
     @FXML
     private TableColumn<Clinic, String> place;
@@ -41,26 +40,48 @@ public class CoronaTestAppointmentController {
     private Button returnBtn;
 
     @FXML
-    private ChoiceBox<?> time_pick;
-    private List<Clinic> clinics;
-    private ObservableList<Clinic> cList = FXCollections.observableArrayList();
+    private TableColumn<Clinic, ChoiceBox<String>> timeOptions;
 
     @FXML
-    void next_page(ActionEvent event) {
+    private TableView<Clinic> vaccineClinicTable;
 
+    private SimpleClient chatClient;
+    @FXML
+
+    private List<Clinic> curClinic;
+    private List<Corna_cheak_Appointment> next_vaccines;
+    private ObservableList<Clinic> cList = FXCollections.observableArrayList();
+    private Alert notSelectedAlert = new Alert(Alert.AlertType.ERROR);
+
+    void next_page(ActionEvent event) throws InterruptedException {
+        Clinic clinic = vaccineClinicTable.getSelectionModel().getSelectedItem();
+        //Vaccine_Appointment vaccine = clinic.getVaccine_appointments().get(0);
+        String time = clinic.getTimeOptions().getSelectionModel().getSelectedItem();
+        LocalDate date = clinic.getDayPicker().getValue();
+        System.out.println(time + "\n" + date + "\n" + clinic.getName());
+        Corna_cheak_Appointment appointment = new Corna_cheak_Appointment(date, time, clinic);
+        clinic.add_coronaTest_appointment(appointment);
+        try {
+            chatClient.sendToServer(clinic);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        loadData();
     }
 
     @FXML
     void returnToMenu(ActionEvent event) throws IOException {
         App.setRoot("clientMenu");
     }
-
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+    @FXML
     void initialize() throws IOException, InterruptedException {
-        clinic_name.setCellValueFactory(new PropertyValueFactory<Clinic, String>("name"));
+
+        name.setCellValueFactory(new PropertyValueFactory<Clinic, String>("name"));
         place.setCellValueFactory(new PropertyValueFactory<Clinic, String>("location"));
-        time_pick = new ChoiceBox<String>();
-        date_pick = new DatePicker();
+        dayPicker.setCellValueFactory(new PropertyValueFactory<Clinic, DatePicker>("dayPicker"));
+        timeOptions.setCellValueFactory(new PropertyValueFactory<Clinic, ChoiceBox<String>>("timeOptions"));
+
+
 
 
         loadData();
@@ -75,97 +96,108 @@ public class CoronaTestAppointmentController {
             e.printStackTrace();
         }
 
-        synchronized(chatClient.getLock()) {
-            while(!chatClient.getGotList()) {
+        synchronized (chatClient.getLock()) {
+            while (!chatClient.getGotList()) {
 
                 chatClient.getLock().wait();
 
             }
         }
-        clinics = chatClient.getClinicList();
-        cList.removeAll(cList);
-        cList.addAll(clinics);
-        table.setItems(cList);
-        Clinic clinic = table.getSelectionModel().getSelectedItem();
-        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e)
-            {
-                ObservableList<String> data = FXCollections.observableArrayList();
-                int index = 0;
-                switch (date_pick.getValue().getDayOfWeek().toString()){
-                    case "SUNDAY":
-                        index = 0;
-                        break;
-                    case "MONDAY":
-                        index = 1;
-                        break;
-                    case "TUESDAY":
-                        index = 2;
-                        break;
-                    case "WEDNESDAY":
-                        index = 3;
-                        break;
-                    case "THURSDAY":
-                        index = 4;
-                        break;
-                    case "FRIDAY":
-                        index = 5;
-                        break;
-                    default:
-                        index = -1;
-                }
-                if(index !=-1) {
-                    List<String> hours = new ArrayList<>();
-                    for (LocalTime j = clinic.getCovidTestOpenHours().get(index); j.isBefore(clinic.getCovidTestCloseHours().get(index)); j = j.plusMinutes(10)) {
-                        //check if the appointment is taken
-                        String time = j.toString(); // details of the appointment
-                        LocalDate date = date_pick.getValue();
-                        List<Corna_cheak_Appointment> list = clinic.getCorna_cheak_Appointments1();
-                        boolean ok = true;
-                        System.out.println(list.size());
-                        for (int i = 0; i < list.size(); ++i) {
-                            Corna_cheak_Appointment corna_cheak_appointment = list.get(i);
-                            String time_app = corna_cheak_appointment.getTime();
-                            LocalDate date_app= corna_cheak_appointment.getDate();
-                            // System.out.println("time app: " + time_app+ "time: " + time +"1"+"\n"+ "date_app: "+ date_app + " date: "+ date);
-                            //System.out.println("time compare: " + (time_app == time) + " date compare " + date.isEqual(date_app) );
-                            if(time_app.equals(time) && date.isEqual(date_app)){// the appointment is token
+        curClinic = chatClient.getClinicList();
+        next_vaccines = new ArrayList<>();
+        if (curClinic != null) {
+            for (int i = 0; i < curClinic.size(); i++) {
+                Clinic clinic = curClinic.get(i);
 
-                                ok = false;
+                Corna_cheak_Appointment c = new Corna_cheak_Appointment();
+                c.setClinic(clinic);
+                DatePicker d = new DatePicker();
+                // c.setDayPicker(d);
+                clinic.setTimeOptions(new ChoiceBox<String>());
+                clinic.setDayPicker(d);
+                EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+                    public void handle(ActionEvent e) {
+                        ObservableList<String> data = FXCollections.observableArrayList();
+                        int index;
+                        switch (d.getValue().getDayOfWeek().toString()) {
+                            case "SUNDAY":
+                                index = 0;
                                 break;
+                            case "MONDAY":
+                                index = 1;
+                                break;
+                            case "TUESDAY":
+                                index = 2;
+                                break;
+                            case "WEDNESDAY":
+                                index = 3;
+                                break;
+                            case "THURSDAY":
+                                index = 4;
+                                break;
+                            case "FRIDAY":
+                                index = 5;
+                                break;
+                            default:
+                                index = -1;
+                        }
+                        if (index != -1) {
+                            List<String> hours = new ArrayList<>();
+                            for (LocalTime j = clinic.getCovidVaccOpenHours().get(index); j.isBefore(clinic.getCovidTestCloseHours().get(index)); j = j.plusMinutes(10)) {
+                                //check if the appointment is taken
+                                String time = j.toString(); // details of the appointment
+                                LocalDate date = clinic.getDayPicker().getValue();
+                                List<Corna_cheak_Appointment> list = clinic.getCorna_cheak_Appointments1();
+                                boolean ok = true;
+                                System.out.println(list.size());
+                                for (int i = 0; i < list.size(); ++i) {
+                                    Corna_cheak_Appointment corna_cheak_appointment = list.get(i);
+                                    String time_app = corna_cheak_appointment.getTime();
+                                    LocalDate date_app = corna_cheak_appointment.getDate();
+                                    // System.out.println("time app: " + time_app+ "time: " + time +"1"+"\n"+ "date_app: "+ date_app + " date: "+ date);
+                                    //System.out.println("time compare: " + (time_app == time) + " date compare " + date.isEqual(date_app) );
+                                    if (time_app.equals(time) && date.isEqual(date_app)) {// the appointment is token
+
+                                        ok = false;
+                                        break;
+                                    }
+                                }
+                                if (ok) {
+                                    hours.add(j.toString());
+                                }
+
                             }
-                        }
-                        if(ok) {
-                            hours.add(j.toString());
-                        }
+                            data.addAll(hours);
+                            clinic.getTimeOptions().setItems(data);
+                            clinic.getTimeOptions().getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+                                if (newSelection != null) {
+                                    c.setTime(newSelection);
+                                    c.setDay(d.getValue().toString());
 
+
+                                }
+                            });
+
+                        } else {
+                            clinic.getTimeOptions().setItems(data);
+                        }
                     }
-                    data.addAll(hours);
-                    time_pick = new ChoiceBox<String>(data);
-                    time_pick.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-                        if (newSelection != null) {
-                            //c.setTime(newSelection);
-                            //c.setDay(d.getValue().toString());
-                            //??????????
+                };
+                d.setOnAction(event);
 
-                        }
-                    });
 
-                }
-                else{
-                    time_pick = new ChoiceBox<String>(data);
-                }
+
             }
-        };
+
+
+        }
+        cList.removeAll(cList);
+        cList.addAll(curClinic);
+        vaccineClinicTable.setItems(cList);
     }
 
-
-
-    private SimpleClient chatClient;
     public void setClient(SimpleClient c) {
         this.chatClient = c;
     }
-
-*/
-
 }
+

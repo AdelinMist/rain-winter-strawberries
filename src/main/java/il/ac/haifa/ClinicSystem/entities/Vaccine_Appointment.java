@@ -1,14 +1,8 @@
 package il.ac.haifa.ClinicSystem.entities;
 
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "vaccine_appointments")

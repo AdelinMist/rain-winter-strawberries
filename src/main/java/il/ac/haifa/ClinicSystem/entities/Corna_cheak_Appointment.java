@@ -11,12 +11,18 @@ public class Corna_cheak_Appointment  extends Appointment implements Serializabl
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="vaccine_appointment_id")
     private int id;
-    /*@OneToOne
-    private  Quiz quiz;*/
+    @OneToOne
+    private  Quiz quiz;
+
+
     private String time;
+    private String day;
 
 
-
+    public Corna_cheak_Appointment(LocalDate date, String time , Clinic clinic){
+        super(date,clinic);
+        this.time = time;
+    }
     public Corna_cheak_Appointment(LocalDate date, Clinic clinic) {
         super(date, clinic);
 
@@ -38,4 +44,9 @@ public class Corna_cheak_Appointment  extends Appointment implements Serializabl
     public void setTime(String time) {
         this.time = time;
     }
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+
 }

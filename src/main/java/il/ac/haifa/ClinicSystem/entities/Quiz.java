@@ -3,7 +3,7 @@ package il.ac.haifa.ClinicSystem.entities;
 import javax.persistence.*;
 
 @Entity
-//@Table(name = "quizzes")
+@Table(name = "quizzes")
 public class Quiz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
