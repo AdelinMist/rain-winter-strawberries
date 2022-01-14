@@ -11,7 +11,6 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="ClinicSystem" target="16" />
-      <module name="ClinicSystem (1)" target="16" />
     </bytecodeTargetLevel>
   </component>
 </project>
