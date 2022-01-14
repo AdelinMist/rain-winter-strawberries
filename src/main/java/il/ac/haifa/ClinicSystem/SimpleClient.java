@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import il.ac.haifa.ClinicSystem.entities.Clinic;
 import il.ac.haifa.ClinicSystem.entities.DoctorClinic;
+import il.ac.haifa.ClinicSystem.entities.User;
 import il.ac.haifa.ClinicSystem.entities.Vaccine_Appointment;
 import il.ac.haifa.ClinicSystem.ocsf.client.AbstractClient;
 
@@ -15,6 +16,15 @@ public class SimpleClient extends AbstractClient{
     
     private final Object lock = new Object();
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	private  User user;
     
     private List<?> curList;
     private boolean gotList = false;
@@ -83,6 +93,11 @@ public class SimpleClient extends AbstractClient{
 	 public List<Clinic> getClinicList(){
 		 return (List<Clinic>)curList;
 	 }
+
+	public List<User> getUserList(){
+		return (List<User>)curList;
+	}
+
 	public List<Vaccine_Appointment> getVacList(){
 		return (List<Vaccine_Appointment>)curList;
 	}
@@ -90,6 +105,8 @@ public class SimpleClient extends AbstractClient{
 		return (List<DoctorClinic>)curList;
 	}
 	//public List<VaccineClinic> getVaccineClinicList(){return (List<VaccineClinic>)curList; }
+
+
 
 
 	public static void main(String[] args) throws IOException {

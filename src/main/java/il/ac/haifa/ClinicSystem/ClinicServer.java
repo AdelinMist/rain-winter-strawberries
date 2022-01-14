@@ -190,6 +190,29 @@ public class ClinicServer extends AbstractServer{
 					session.close();
 			}
 		}
+
+		else if(((String) msg).equals("#LOGIN")) {
+			try {
+				session = sessionFactory.openSession();
+				session.beginTransaction();
+
+				List<User> users = getAll(User.class);
+				client.sendToClient(users);
+
+				session.getTransaction().commit();
+			}catch (Exception exception) {
+				if (session != null) {
+					session.getTransaction().rollback();
+				}
+				System.err.println("An error occured, changes have been rolled back.");
+				exception.printStackTrace();
+			} finally {
+				if(session != null)
+					session.close();
+			}
+
+		}
+
 		else if(((String) msg).equals("#DoctorClinicList")) {
 			try {
 				session = sessionFactory.openSession();
