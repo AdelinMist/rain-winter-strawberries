@@ -1,9 +1,6 @@
 package il.ac.haifa.ClinicSystem.entities;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 public class Corna_cheak_Appointment  extends Appointment implements Serializable {
@@ -13,6 +10,16 @@ public class Corna_cheak_Appointment  extends Appointment implements Serializabl
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="vaccine_appointment_id")
     private int id;
+    @OneToOne
+    private  Quiz quiz;
+    private String time;
 
 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 }
