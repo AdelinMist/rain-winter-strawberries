@@ -74,7 +74,7 @@ public class Clinic implements Serializable{
 		System.out.println(vaccine_appointment.getTime());
 	}
 
-	@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
+	/*@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Corna_cheak_Appointment> Corna_cheak_Appointments1;
 
@@ -82,7 +82,7 @@ public class Clinic implements Serializable{
 		this.Corna_cheak_Appointments1.add(corna_cheak_appointment);
 		System.out.println(vaccine_appointments1.toString());
 		System.out.println(corna_cheak_appointment.getTime());
-	}
+	}*/
 
 
 
@@ -346,10 +346,10 @@ public class Clinic implements Serializable{
 	public void setTimeOptions(ChoiceBox<String> timeOptions) {
 		this.timeOptions = timeOptions;
 	}
-	public void setCorna_cheak_Appointments1(List<Corna_cheak_Appointment> corna_cheak_Appointments1) {
+	/*public void setCorna_cheak_Appointments1(List<Corna_cheak_Appointment> corna_cheak_Appointments1) {
 		Corna_cheak_Appointments1 = corna_cheak_Appointments1;
 	}
 	public  List<Corna_cheak_Appointment> getCorna_cheak_Appointments1() {
 		return Corna_cheak_Appointments1 ;
-	}
+	}*/
 }

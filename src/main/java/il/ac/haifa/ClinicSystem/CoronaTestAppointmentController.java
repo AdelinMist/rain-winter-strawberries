@@ -19,7 +19,7 @@ import java.util.List;
 
 public class CoronaTestAppointmentController {
 
-    @FXML
+    /*@FXML
     private Button addBtn;
 
     @FXML
@@ -166,6 +166,6 @@ public class CoronaTestAppointmentController {
         this.chatClient = c;
     }
 
-
+*/
 
 }
