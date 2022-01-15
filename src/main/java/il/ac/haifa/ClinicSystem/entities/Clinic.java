@@ -84,6 +84,7 @@ public class Clinic implements Serializable{
 
 	public void add_vaccine_appointment(Vaccine_Appointment vaccine_appointment){
 		this.vaccine_appointments1.add(vaccine_appointment);
+		System.out.println(vaccine_appointment.getTime() + "insert to the list!");
 
 	}
 

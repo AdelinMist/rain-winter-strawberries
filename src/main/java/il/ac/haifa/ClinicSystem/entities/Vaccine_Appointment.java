@@ -1,27 +1,35 @@
 package il.ac.haifa.ClinicSystem.entities;
 
-import org.hibernate.annotations.Polymorphism;
-import org.hibernate.annotations.PolymorphismType;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "vaccine_appointments")
-@Polymorphism(type = PolymorphismType.EXPLICIT)
 
-public class Vaccine_Appointment extends Appointment implements Serializable {
+public class Vaccine_Appointment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="vaccine_appointment_id")
     private int id;
     //private transient DatePicker dayPicker;
     private  String day;
     private  String time; // work like "12:10"
+    private LocalDate date;
+    @ManyToOne
+    private Clinic clinic; // maybe need more
+    public Clinic getClinic() {
+        return clinic;
+    }
 
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
+    }
+    public LocalDate getDate(){
+        return this.date;
+    }
 
 
     //private transient ChoiceBox<String> timeOptions; // work like "12:10"
@@ -30,7 +38,8 @@ public class Vaccine_Appointment extends Appointment implements Serializable {
 
 
     public Vaccine_Appointment(LocalDate date, String time , Clinic clinic){
-        super(date,clinic);
+        this.date = date;
+        this.clinic = clinic;
         this.time = time;
     }
 
