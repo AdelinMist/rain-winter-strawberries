@@ -1,7 +1,5 @@
 package il.ac.haifa.ClinicSystem;
 
-import il.ac.haifa.ClinicSystem.entities.*;
-import il.ac.haifa.ClinicSystem.entities.DoctorClinic;
 import il.ac.haifa.ClinicSystem.entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +16,7 @@ import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.List;
 
-public class PrimaryController {
+public class LoginController {
 
     private List<User> users;
     private SimpleClient chatClient;
@@ -37,7 +35,7 @@ public class PrimaryController {
 
     @FXML
     void CheckLogin(ActionEvent event) throws IOException{
-        PrimaryController c =new PrimaryController();
+        LoginController c =new LoginController();
         c.setClient(chatClient);
         String usermane= userButton.getText();
         String password= PassButton.getText();
