@@ -6,7 +6,8 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "vaccine_appointments")
-public class Vaccine_Appointment extends Appointment implements Serializable {
+
+public class Vaccine_Appointment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -16,7 +17,19 @@ public class Vaccine_Appointment extends Appointment implements Serializable {
     //private transient DatePicker dayPicker;
     private  String day;
     private  String time; // work like "12:10"
+    private LocalDate date;
+    @ManyToOne
+    private Clinic clinic; // maybe need more
+    public Clinic getClinic() {
+        return clinic;
+    }
 
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
+    }
+    public LocalDate getDate(){
+        return this.date;
+    }
 
 
     //private transient ChoiceBox<String> timeOptions; // work like "12:10"
@@ -25,7 +38,8 @@ public class Vaccine_Appointment extends Appointment implements Serializable {
 
 
     public Vaccine_Appointment(LocalDate date, String time , Clinic clinic){
-        super(date,clinic);
+        this.date = date;
+        this.clinic = clinic;
         this.time = time;
     }
 
@@ -45,7 +59,7 @@ public class Vaccine_Appointment extends Appointment implements Serializable {
 
     }
     public Vaccine_Appointment(Vaccine_Appointment d){
-        this.id = d.getId();
+       // this.id = d.getId();
         this.day = d.getDay();
         this.time = d.getTime();
 //
@@ -54,9 +68,9 @@ public class Vaccine_Appointment extends Appointment implements Serializable {
         return day;
    }
 
-    public int getId() {
+    /*public int getId() {
         return id;
-    }
+    }*/
 
     public String getDay() {
         return day;

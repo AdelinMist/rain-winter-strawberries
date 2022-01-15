@@ -1,18 +1,15 @@
 /**
- * Sample Skeleton for 'primary.fxml' Controller Class
+ * Sample Skeleton for 'Login.fxml' Controller Class
  */
 
 package il.ac.haifa.ClinicSystem;
 
-import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class ContentMenuController {
 

@@ -3,7 +3,7 @@ package il.ac.haifa.ClinicSystem.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 
-public class FamilyDoctorAppointment extends Appointment implements Serializable {
+public class FamilyDoctorAppointment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
