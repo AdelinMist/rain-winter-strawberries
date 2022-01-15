@@ -28,7 +28,7 @@ public class ClientMenuController {
 
     @FXML
     void clickDoctor(ActionEvent event) throws IOException {
-        App.setRoot("doctorList");
+        App.setRoot("doctorSpecialty");
     }
     @FXML
     void gotovac(ActionEvent event) throws IOException {
