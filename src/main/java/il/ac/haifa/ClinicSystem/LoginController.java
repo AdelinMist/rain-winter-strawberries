@@ -35,8 +35,8 @@ public class LoginController {
 
     @FXML
     void CheckLogin(ActionEvent event) throws IOException{
-        LoginController c =new LoginController();
-        c.setClient(chatClient);
+        LoginController c =new LoginController();//why???????
+        c.setClient(chatClient); // why?????????/
         String usermane= userButton.getText();
         String password= PassButton.getText();
 
@@ -86,8 +86,9 @@ public class LoginController {
                         App.setRoot("clientMenu");
                     }*/
 
-                    App.setRoot("clientMenu");
                     chatClient.setUser(user);
+                    App.setRoot("clientMenu");
+
                 }
 
 

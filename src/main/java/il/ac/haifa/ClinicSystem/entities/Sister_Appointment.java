@@ -29,6 +29,11 @@ public class Sister_Appointment   implements Serializable {
     public Clinic getClinic() {
         return clinic;
     }
+    @ManyToOne
+    User user;
+    public User getUser(){
+        return this.user;
+    }
 
     public void setClinic(Clinic clinic) {
         this.clinic = clinic;

@@ -78,8 +78,7 @@ public class Clinic implements Serializable{
 
 	}
 
-	private transient DatePicker dayPicker;
-	private transient ChoiceBox<String> timeOptions; // work like "12:10"
+
 
 
 	public void add_vaccine_appointment(Vaccine_Appointment vaccine_appointment){
@@ -94,6 +93,8 @@ public class Clinic implements Serializable{
 		this.Corna_cheak_Appointments1.add(corna_cheak_appointment);
 
 	}
+	private transient DatePicker dayPicker;
+	private transient ChoiceBox<String> timeOptions; // work like "12:10"
 
 
 

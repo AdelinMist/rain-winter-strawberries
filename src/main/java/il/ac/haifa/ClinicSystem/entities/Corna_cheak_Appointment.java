@@ -19,7 +19,11 @@ public class Corna_cheak_Appointment implements Serializable {
    private LocalDate date;
     @ManyToOne
     private Clinic clinic; // maybe need more
-
+    @ManyToOne
+    User user;
+    public User getUser(){
+        return this.user;
+    }
     public Clinic getClinic() {
         return clinic;
     }

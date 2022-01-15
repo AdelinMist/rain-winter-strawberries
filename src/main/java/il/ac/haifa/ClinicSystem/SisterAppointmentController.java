@@ -1,6 +1,7 @@
 package il.ac.haifa.ClinicSystem;
 import il.ac.haifa.ClinicSystem.entities.Clinic;
 import il.ac.haifa.ClinicSystem.entities.Sister_Appointment;
+import il.ac.haifa.ClinicSystem.entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -52,6 +53,7 @@ public class SisterAppointmentController {
     private List<Sister_Appointment> next_vaccines;
     private ObservableList<Clinic> cList = FXCollections.observableArrayList();
     private Alert notSelectedAlert = new Alert(Alert.AlertType.ERROR);
+    Alert succsessAlert = new Alert(Alert.AlertType.INFORMATION);
     @FXML
     void nextPage(ActionEvent event) throws InterruptedException {
         Clinic clinic = vaccineClinicTable.getSelectionModel().getSelectedItem();
@@ -61,12 +63,18 @@ public class SisterAppointmentController {
         System.out.println(time + "\n" + date + "\n" + clinic.getName());
          Sister_Appointment appointment = new Sister_Appointment(date, time, clinic);
         clinic.add_Sister_Appointment(appointment);
+        User user = chatClient.getUser();// add the appointment to the clinic
+        user.add_Sister_Appointment(appointment);// add the appointment to the user
         try {
             chatClient.sendToServer(clinic);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         loadData();
+        succsessAlert.setTitle("Appointment confirmed");
+        succsessAlert.setHeaderText("You made an appointment to " + date + " at " + time);
+        succsessAlert.showAndWait();
     }
 
     @FXML

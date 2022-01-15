@@ -1,26 +1,16 @@
 package il.ac.haifa.ClinicSystem;
 
 import il.ac.haifa.ClinicSystem.entities.Clinic;
+import il.ac.haifa.ClinicSystem.entities.User;
 import il.ac.haifa.ClinicSystem.entities.Vaccine_Appointment;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-
 import javafx.scene.control.cell.PropertyValueFactory;
-
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.stage.Popup;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -80,6 +70,8 @@ public class VaccineClinicController {
         System.out.println(time + "\n" + date + "\n" + clinic.getName());
         Vaccine_Appointment appointment = new Vaccine_Appointment(date, time, clinic);
         clinic.add_vaccine_appointment(appointment);
+        User user = chatClient.getUser();// add the appointment to the clinic
+        user.add_vaccine_appointment(appointment);// add the appointment to the user
         try {
             chatClient.sendToServer(clinic);
         } catch (IOException e) {

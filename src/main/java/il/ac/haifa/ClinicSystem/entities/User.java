@@ -1,11 +1,15 @@
 package il.ac.haifa.ClinicSystem.entities;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -23,6 +27,35 @@ public class User implements Serializable {
     private String clinic_name; // for appointment 3.5 any user need own clinic (sister appointment)
     protected byte[] password;
     protected byte[] salt;
+
+    @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Vaccine_Appointment> vaccine_appointments1;
+
+    @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true )
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Corna_cheak_Appointment> Corna_cheak_Appointments1;
+
+
+    @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Sister_Appointment> sister_appointments1;
+
+    public void add_Sister_Appointment(Sister_Appointment appointment){
+        this.sister_appointments1.add(appointment);
+
+    }
+
+    public void add_vaccine_appointment(Vaccine_Appointment vaccine_appointment){
+        this.vaccine_appointments1.add(vaccine_appointment);
+        System.out.println(vaccine_appointment.getTime() + "insert to the list!");
+
+    }
+
+    public void add_coronaTest_appointment(Corna_cheak_Appointment corna_cheak_appointment){
+        this.Corna_cheak_Appointments1.add(corna_cheak_appointment);
+
+    }
 
     public User() {
 
