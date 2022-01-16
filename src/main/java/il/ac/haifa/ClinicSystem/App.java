@@ -1,5 +1,6 @@
 package il.ac.haifa.ClinicSystem;
 
+import il.ac.haifa.ClinicSystem.entities.Quiz;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,7 +28,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("Login"), 1214, 703);
+        scene = new Scene(loadFXML("clinicList"), 1214, 703);
         stage.setScene(scene);
         stage.show();
     }
@@ -56,6 +57,7 @@ public class App extends Application {
         else if(fxml.equals("coronaTestAppointment")) {
             CoronaTestAppointmentController controller = new CoronaTestAppointmentController();
             controller.setClient(client);
+
             fxmlLoader.setController(controller);
         }
         else if(fxml.equals("quiz_corona_test")) {
@@ -88,14 +90,14 @@ public class App extends Application {
         }
 
         else if(fxml.equals("contentMenu")) {
-        	ContentMenuController controller = new ContentMenuController();
-	        controller.setClient(client);
-	        fxmlLoader.setController(controller);
+            ContentMenuController controller = new ContentMenuController();
+            controller.setClient(client);
+            fxmlLoader.setController(controller);
         }
         else if(fxml.equals("clinicList")) {
-        	ClinicListController controller = new ClinicListController();
-	        controller.setClient(client);
-	        fxmlLoader.setController(controller);
+            ClinicListController controller = new ClinicListController();
+            controller.setClient(client);
+            fxmlLoader.setController(controller);
         }
         else if(fxml.equals("covidServicesList")) {
             CovidServicesListController controller = new CovidServicesListController();
@@ -107,7 +109,22 @@ public class App extends Application {
             controller.setClient(client);
             fxmlLoader.setController(controller);
         }
-        
+
+        return fxmlLoader.load();
+    }
+    public static void setRoot1(String fxml, Quiz quiz) throws IOException { // for quiz
+        scene.setRoot(loadFXML1(fxml , quiz));
+    }
+
+    private static Parent loadFXML1(String fxml , Quiz quiz) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+
+        if(fxml.equals("coronaTestAppointment")) {
+            CoronaTestAppointmentController controller = new CoronaTestAppointmentController();
+            controller.setClient(client);
+            controller.setQuiz(quiz);
+            fxmlLoader.setController(controller);
+        }
         return fxmlLoader.load();
     }
 

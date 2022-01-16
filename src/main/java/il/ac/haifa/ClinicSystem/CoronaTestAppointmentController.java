@@ -1,6 +1,7 @@
 package il.ac.haifa.ClinicSystem;
 import il.ac.haifa.ClinicSystem.entities.Clinic;
 import il.ac.haifa.ClinicSystem.entities.Corna_cheak_Appointment;
+import il.ac.haifa.ClinicSystem.entities.Quiz;
 import il.ac.haifa.ClinicSystem.entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,6 +48,11 @@ public class CoronaTestAppointmentController {
     private TableView<Clinic> vaccineClinicTable;
 
     private SimpleClient chatClient;
+    private Quiz quiz;
+    public void setQuiz(Quiz quiz){
+        this.quiz = quiz;
+    }
+
 
 
     private List<Clinic> curClinic;
@@ -62,6 +68,8 @@ public class CoronaTestAppointmentController {
         LocalDate date = clinic.getDayPicker().getValue();
         System.out.println(time + "\n" + date + "\n" + clinic.getName());
         Corna_cheak_Appointment appointment = new Corna_cheak_Appointment(date, time, clinic);
+        //appointment.setQuiz(quiz);
+        //quiz.setAppointment(appointment);
         clinic.add_coronaTest_appointment(appointment);
         User user = chatClient.getUser();// add the appointment to the clinic
         user.add_coronaTest_appointment(appointment);// add the appointment to the user
@@ -71,9 +79,9 @@ public class CoronaTestAppointmentController {
             e.printStackTrace();
         }
         loadData();
-        succsessAlert.setTitle("Appointment confirmed");
+       /* succsessAlert.setTitle("Appointment confirmed");
         succsessAlert.setHeaderText("You made an appointment to " + date + " at " + time);
-        succsessAlert.showAndWait();
+        succsessAlert.showAndWait();*/
     }
 
     @FXML
