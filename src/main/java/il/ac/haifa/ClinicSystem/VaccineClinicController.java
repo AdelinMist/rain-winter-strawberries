@@ -78,6 +78,8 @@ public class VaccineClinicController {
             e.printStackTrace();
         }
         loadData();
+        SendMail mail = new SendMail();
+        mail.send(chatClient.getUser());
         succsessAlert.setTitle("Appointment confirmed");
         succsessAlert.setHeaderText("You made an appointment to " + date + " at " + time);
         succsessAlert.showAndWait();

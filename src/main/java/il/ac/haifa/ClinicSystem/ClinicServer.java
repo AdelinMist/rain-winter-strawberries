@@ -77,7 +77,7 @@ public class ClinicServer extends AbstractServer{
 		}
 		Clinic c = new Clinic("The White Tower", "Tar Valon", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
 		//session.saveOrUpdate(temp);
-		Doctor d = new Doctor("coolDoctor420", "password", "Mat Matthews", "Neurology");
+		Doctor d = new Doctor("coolDoctor420", "password", "Mat Matthews", "Neurology","doctor@gmail.com");
 
 
 		DoctorClinic dc = new DoctorClinic(c, d, workingHours);

@@ -4,15 +4,8 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import javax.swing.*;
 import java.io.Serializable;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "doctors")
@@ -35,8 +28,8 @@ public class Doctor extends User implements Serializable {
 
     }
 
-    public Doctor(String username, String pasword, String name, String specialization) {
-        super(username, pasword);
+    public Doctor(String username, String pasword, String name, String specialization , String email) {
+        super(username, pasword , email);
         this.name = name;
         this.specialization = specialization;
     }

@@ -40,6 +40,11 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Sister_Appointment> sister_appointments1;
+    private String email;
+    public  String getEmail(){
+        return this.email;
+    }
+
 
     public void add_Sister_Appointment(Sister_Appointment appointment){
         this.sister_appointments1.add(appointment);
@@ -61,8 +66,9 @@ public class User implements Serializable {
 
     }
 
-    public User(String username, String password) {
+    public User(String username, String password , String email) {
         this.username = username;
+        this.email = email;
 
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
