@@ -144,7 +144,7 @@ public class ClinicServer extends AbstractServer{
 					session.close();
 			}
 		}
-		if(msg instanceof DoctorClinic)  {
+		else if(msg instanceof DoctorClinic)  {
 			try {
 				session = sessionFactory.openSession();
 				session.beginTransaction();
@@ -159,6 +159,66 @@ public class ClinicServer extends AbstractServer{
 				q.setParameter("clinic", c);
 				List<DoctorClinic> doctorClinics = (List<DoctorClinic>) q.list();
 				client.sendToClient(doctorClinics);
+
+				session.getTransaction().commit();
+			}catch (Exception exception) {
+				if (session != null) {
+					session.getTransaction().rollback();
+				}
+				System.err.println("An error occured, changes have been rolled back.");
+				exception.printStackTrace();
+			} finally {
+				if(session != null)
+					session.close();
+			}
+		}
+		else if(msg instanceof Vaccine_Appointment)  {
+			try {
+				session = sessionFactory.openSession();
+				session.beginTransaction();
+
+				User u = ((Vaccine_Appointment)msg).getUser();
+				String hql = "FROM Vaccine_Appointment VA WHERE VA.user = :user";
+
+				@SuppressWarnings("unchecked")
+				Query q = session.createQuery(hql);
+				q.setParameter("user", u);
+
+				List<Vaccine_Appointment> vaccineAppointments = (List<Vaccine_Appointment>) q.list();
+				client.sendToClient(vaccineAppointments);
+
+				session.delete((Vaccine_Appointment)msg);
+				session.flush();
+
+				session.getTransaction().commit();
+			}catch (Exception exception) {
+				if (session != null) {
+					session.getTransaction().rollback();
+				}
+				System.err.println("An error occured, changes have been rolled back.");
+				exception.printStackTrace();
+			} finally {
+				if(session != null)
+					session.close();
+			}
+		}
+		else if(msg instanceof Corna_cheak_Appointment)  {
+			try {
+				session = sessionFactory.openSession();
+				session.beginTransaction();
+
+				User u = ((Corna_cheak_Appointment)msg).getUser();
+				String hql = "FROM Corna_cheak_Appointment CA WHERE CA.user = :user";
+
+				@SuppressWarnings("unchecked")
+				Query q = session.createQuery(hql);
+				q.setParameter("user", u);
+
+				List<Corna_cheak_Appointment> covidTestAppointments = (List<Corna_cheak_Appointment>) q.list();
+				client.sendToClient(covidTestAppointments);
+
+				session.delete((Vaccine_Appointment)msg);
+				session.flush();
 
 				session.getTransaction().commit();
 			}catch (Exception exception) {
@@ -242,6 +302,65 @@ public class ClinicServer extends AbstractServer{
 
 				List<User> doctorClinics = getAll(User.class);
 				client.sendToClient(doctorClinics);
+
+				session.getTransaction().commit();
+			}catch (Exception exception) {
+				if (session != null) {
+					session.getTransaction().rollback();
+				}
+				System.err.println("An error occured, changes have been rolled back.");
+				exception.printStackTrace();
+			} finally {
+				if(session != null)
+					session.close();
+			}
+		}
+
+		else if(((String) msg).split("\\|")[0].equals("#VaccineAppointments")) {
+			try {
+				session = sessionFactory.openSession();
+				session.beginTransaction();
+
+				System.out.println("im here vaccine");
+
+				int user_id = Integer.parseInt(((String) msg).split("\\|")[1]);
+				User u = session.get(User.class, user_id);
+				String hql = "FROM Vaccine_Appointment VA WHERE VA.user = :user";
+
+				@SuppressWarnings("unchecked")
+				Query q = session.createQuery(hql);
+				q.setParameter("user", u);
+
+				List<Vaccine_Appointment> vaccineAppointments = (List<Vaccine_Appointment>) q.list();
+				client.sendToClient(vaccineAppointments);
+
+				session.getTransaction().commit();
+			}catch (Exception exception) {
+				if (session != null) {
+					session.getTransaction().rollback();
+				}
+				System.err.println("An error occured, changes have been rolled back.");
+				exception.printStackTrace();
+			} finally {
+				if(session != null)
+					session.close();
+			}
+		}
+		else if(((String) msg).split("\\|")[0].equals("#CovidTestAppointments")) {
+			try {
+				session = sessionFactory.openSession();
+				session.beginTransaction();
+
+				int user_id = Integer.parseInt(((String) msg).split("\\|")[1]);
+				User u = session.get(User.class, user_id);
+				String hql = "FROM Corna_cheak_Appointment CA WHERE CA.user = :user";
+
+				@SuppressWarnings("unchecked")
+				Query q = session.createQuery(hql);
+				q.setParameter("user", u);
+
+				List<Corna_cheak_Appointment> covidTestAppointments = (List<Corna_cheak_Appointment>) q.list();
+				client.sendToClient(covidTestAppointments);
 
 				session.getTransaction().commit();
 			}catch (Exception exception) {

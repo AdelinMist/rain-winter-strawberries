@@ -20,7 +20,7 @@
     <orderEntry type="library" name="Maven: de.jensd:fontawesomefx-materialdesignfont:2.0.26-9.1.2" level="project" />
     <orderEntry type="library" name="Maven: de.jensd:fontawesomefx-commons:9.1.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:17" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:win:17" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:mac-aarch64:17" level="project" />
     <orderEntry type="library" name="Maven: de.jensd:fontawesomefx-fontawesome:4.7.0-9.1.2" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:5.4.23.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.4.1.Final" level="project" />
@@ -41,10 +41,13 @@
     <orderEntry type="library" name="Maven: org.jvnet.staxex:stax-ex:1.8" level="project" />
     <orderEntry type="library" name="Maven: com.sun.xml.fastinfoset:FastInfoset:1.2.15" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:17" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:17" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:mac-aarch64:17" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:17" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:win:17" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:mac-aarch64:17" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:17" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:mac:17" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:mac-aarch64:17" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:linux:17" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:win:17" level="project" />
   </component>
 </module>

@@ -78,7 +78,7 @@ public class CoronaTestAppointmentController {
 
     @FXML
     void returnToMenu(ActionEvent event) throws IOException {
-        App.setRoot("clientMenu");
+        App.setRoot("orderAppointmentMenu");
     }
     @FXML
     void initialize() throws IOException, InterruptedException {

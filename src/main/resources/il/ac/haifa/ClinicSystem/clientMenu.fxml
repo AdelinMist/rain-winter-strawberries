@@ -2,12 +2,16 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="doctorBTN" layoutX="198.0" layoutY="187.0" mnemonicParsing="false" onAction="#clickDoctor" text="appointment to professional doctor" />
-      <Button fx:id="vaccine" layoutX="197.0" layoutY="139.0" mnemonicParsing="false" onAction="#gotovac" prefHeight="26.0" prefWidth="205.0" text="vaccine appointment " />
-      <Button fx:id="covid_test" layoutX="197.0" layoutY="235.0" mnemonicParsing="false" onAction="#gotoQuiz" prefHeight="26.0" prefWidth="205.0" text="covid test" />
-      <Button fx:id="sisterAppointment" layoutX="196.0" layoutY="286.0" mnemonicParsing="false" onAction="#goSister" prefHeight="26.0" prefWidth="205.0" text="Sister appointment" />
+      <VBox alignment="CENTER" layoutX="140.0" layoutY="67.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="viewBtn" mnemonicParsing="false" onAction="#showViewMenu" prefHeight="26.0" prefWidth="205.0" text="view appointments" />
+            <Button fx:id="orderBtn" mnemonicParsing="false" onAction="#showOrderMenu" prefHeight="26.0" prefWidth="205.0" text="order appointments" />
+            <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="205.0" text="exit" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

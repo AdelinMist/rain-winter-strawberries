@@ -1,7 +1,3 @@
-/**
- * Sample Skeleton for 'clientMenu.fxml' Controller Class
- */
-
 package il.ac.haifa.ClinicSystem;
 
 import javafx.event.ActionEvent;
@@ -13,31 +9,31 @@ import java.io.IOException;
 public class ClientMenuController {
 
     private SimpleClient chatClient;
-    @FXML
-    private Button covid_test;
-    @FXML
-    private Button vaccine;
-
-    @FXML // fx:id="doctorBTN"
-    private Button doctorBTN; // Value injected by FXMLLoader
 
     @FXML
-    void gotoQuiz(ActionEvent event) throws IOException {
-        App.setRoot("quiz_corona_test");
+    private Button exitBtn;
+
+    @FXML
+    private Button orderBtn;
+
+    @FXML
+    private Button viewBtn;
+
+    @FXML
+    void exit(ActionEvent event) throws IOException {
+        chatClient.closeConnection();
     }
 
     @FXML
-    void clickDoctor(ActionEvent event) throws IOException {
-        App.setRoot("doctorList");
+    void showOrderMenu(ActionEvent event) throws IOException {
+        App.setRoot("orderAppointmentMenu");
     }
+
     @FXML
-    void gotovac(ActionEvent event) throws IOException {
-        App.setRoot("ClinicVaccine");
+    void showViewMenu(ActionEvent event) throws IOException {
+        App.setRoot("appointmentsMenu");
     }
-    @FXML
-    void goSister(ActionEvent event) throws IOException {
-        App.setRoot("SisterAppointment");
-    }
+
 
     public void setClient(SimpleClient c) {
         this.chatClient = c;

@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 
-import il.ac.haifa.ClinicSystem.entities.Clinic;
-import il.ac.haifa.ClinicSystem.entities.DoctorClinic;
-import il.ac.haifa.ClinicSystem.entities.User;
-import il.ac.haifa.ClinicSystem.entities.Vaccine_Appointment;
+import il.ac.haifa.ClinicSystem.entities.*;
 import il.ac.haifa.ClinicSystem.ocsf.client.AbstractClient;
 
 public class SimpleClient extends AbstractClient{
@@ -94,20 +91,20 @@ public class SimpleClient extends AbstractClient{
 		 return (List<Clinic>)curList;
 	 }
 
-	public List<User> getUserList(){
+	 public List<User> getUserList(){
 		return (List<User>)curList;
 	}
 
-	public List<Vaccine_Appointment> getVacList(){
+	 public List<Vaccine_Appointment> getVacList(){
 		return (List<Vaccine_Appointment>)curList;
 	}
 	 public List<DoctorClinic> getDoctorClinicList(){
 		return (List<DoctorClinic>)curList;
 	}
 	//public List<VaccineClinic> getVaccineClinicList(){return (List<VaccineClinic>)curList; }
-
-
-
+	public List<Corna_cheak_Appointment> getCovidTestAppList(){
+		return (List<Corna_cheak_Appointment>)curList;
+	}
 
 	public static void main(String[] args) throws IOException {
 			
