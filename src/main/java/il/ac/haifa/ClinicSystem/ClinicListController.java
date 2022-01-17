@@ -1,15 +1,10 @@
 package il.ac.haifa.ClinicSystem;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-
 import il.ac.haifa.ClinicSystem.entities.Clinic;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,6 +12,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class ClinicListController {
 
@@ -61,6 +60,7 @@ public class ClinicListController {
 	@FXML
     void showChangeHours(ActionEvent event) throws InterruptedException, IOException { //change so that chosed day is displayed on changehours window, if there is any.
     	Clinic curClinic = clinicTable.getSelectionModel().getSelectedItem();
+
     	String chosenDay = curClinic.getDayOfWeek().getSelectionModel().getSelectedItem();
 		if(curClinic == null){
 			notSelectedAlert.setContentText("No Clinic Selected!");
