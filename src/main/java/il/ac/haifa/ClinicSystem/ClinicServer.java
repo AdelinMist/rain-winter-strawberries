@@ -17,7 +17,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -77,7 +80,7 @@ public class ClinicServer extends AbstractServer{
 		}
 		Clinic c = new Clinic("The White Tower", "Tar Valon", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
 		//session.saveOrUpdate(temp);
-		Doctor d = new Doctor("coolDoctor420", "password", "Mat Matthews", "Neurology","doctor@gmail.com");
+		Doctor d = new Doctor("coolDoctor420", "password", "Mat Matthews", "Neurology","tkhruirjhnh@gmail.com");
 
 
 		DoctorClinic dc = new DoctorClinic(c, d, workingHours);
@@ -178,6 +181,12 @@ public class ClinicServer extends AbstractServer{
 				session.beginTransaction();
 
 				User u = ((Vaccine_Appointment)msg).getUser();
+				//int user_id = u.getId();
+
+				session.delete((Vaccine_Appointment)msg);
+				session.flush();
+
+				//u = session.get(User.class, user_id);
 				String hql = "FROM Vaccine_Appointment VA WHERE VA.user = :user";
 
 				@SuppressWarnings("unchecked")
@@ -186,9 +195,6 @@ public class ClinicServer extends AbstractServer{
 
 				List<Vaccine_Appointment> vaccineAppointments = (List<Vaccine_Appointment>) q.list();
 				client.sendToClient(vaccineAppointments);
-
-				session.delete((Vaccine_Appointment)msg);
-				session.flush();
 
 				session.getTransaction().commit();
 			}catch (Exception exception) {
@@ -208,6 +214,10 @@ public class ClinicServer extends AbstractServer{
 				session.beginTransaction();
 
 				User u = ((Corna_cheak_Appointment)msg).getUser();
+
+				session.delete((Vaccine_Appointment)msg);
+				session.flush();
+
 				String hql = "FROM Corna_cheak_Appointment CA WHERE CA.user = :user";
 
 				@SuppressWarnings("unchecked")
@@ -216,9 +226,6 @@ public class ClinicServer extends AbstractServer{
 
 				List<Corna_cheak_Appointment> covidTestAppointments = (List<Corna_cheak_Appointment>) q.list();
 				client.sendToClient(covidTestAppointments);
-
-				session.delete((Vaccine_Appointment)msg);
-				session.flush();
 
 				session.getTransaction().commit();
 			}catch (Exception exception) {
@@ -321,8 +328,6 @@ public class ClinicServer extends AbstractServer{
 				session = sessionFactory.openSession();
 				session.beginTransaction();
 
-				System.out.println("im here vaccine");
-
 				int user_id = Integer.parseInt(((String) msg).split("\\|")[1]);
 				User u = session.get(User.class, user_id);
 				String hql = "FROM Vaccine_Appointment VA WHERE VA.user = :user";
@@ -419,6 +424,54 @@ public class ClinicServer extends AbstractServer{
 
 		ClinicServer server = new ClinicServer(Integer.parseInt(args[0]));
 		// Integer.parseInt(args[0]));
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+
+				while (true){
+					// the time for sends remainder mails
+					String now = LocalTime.now().truncatedTo(ChronoUnit.SECONDS).format(DateTimeFormatter.ISO_LOCAL_TIME);
+					int value = ("01:47:00").compareTo(now);
+
+
+					if (value==0) {//value == 0
+						System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+						LocalDate tomorrow = LocalDate.now().plusDays(1);
+						System.out.println(tomorrow);
+
+
+						List<Corna_cheak_Appointment> covidTestAppointments = new ArrayList<>();
+						System.out.println(" after get list");
+						try {
+							session = sessionFactory.openSession();
+							session.beginTransaction();
+							covidTestAppointments = getAll(Corna_cheak_Appointment.class);
+							session.getTransaction().commit();
+						} catch (Exception exception) {
+							if (session != null) {
+								session.getTransaction().rollback();
+							}
+							System.err.println("An error occured, changes have been rolled back.");
+							exception.printStackTrace();
+						} finally {
+							if (session != null)
+								session.close();
+						}
+						System.out.println(covidTestAppointments.size());
+						for (int i = 0; i < covidTestAppointments.size(); i++) {
+
+							if (covidTestAppointments.get(i).getDate().isEqual(tomorrow)) {
+								SendMail mail = new SendMail();
+								mail.send_remainder(covidTestAppointments.get(i).getUser());
+						}
+					}
+				}
+
+				}
+			}
+		}).start();
+
+
 		server.listen();
 
 	}
