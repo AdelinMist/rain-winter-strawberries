@@ -1,11 +1,10 @@
 package il.ac.haifa.ClinicSystem;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 
 import java.io.IOException;
 
@@ -44,6 +43,6 @@ public class DoctorSpecialtyController {
             notSelectedAlert.showAndWait();
             return;
         }
-        App.setRoot("doctorList");
+        App.setRoot("doctorAppointment");
     }
 }

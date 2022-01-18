@@ -39,6 +39,11 @@ public class App extends Application {
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        if(fxml.equals("doctorAppointment")) {
+            DoctorAppointmentController controller = new DoctorAppointmentController();
+            controller.setClient(client);
+            fxmlLoader.setController(controller);
+        }
         if(fxml.equals("clientMenu")) {
             ClientMenuController controller = new ClientMenuController();
             controller.setClient(client);
