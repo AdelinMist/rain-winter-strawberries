@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class DoctorSpecialtyController {
 
-    static String value;
+    public static String specialty;
     private Alert notSelectedAlert = new Alert(Alert.AlertType.ERROR);
 
     @FXML
@@ -37,8 +37,8 @@ public class DoctorSpecialtyController {
                         selected.setText(specialtyBox.getValue() + " selected");
                     }
                 };*/
-        value = specialtyBox.getValue();
-        if(value == null){
+        specialty = specialtyBox.getValue();
+        if(specialty == null){
             notSelectedAlert.setContentText("No specialty Selected!");
             notSelectedAlert.showAndWait();
             return;

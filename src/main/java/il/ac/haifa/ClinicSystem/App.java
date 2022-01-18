@@ -62,7 +62,6 @@ public class App extends Application {
         else if(fxml.equals("coronaTestAppointment")) {
             CoronaTestAppointmentController controller = new CoronaTestAppointmentController();
             controller.setClient(client);
-
             fxmlLoader.setController(controller);
         }
         else if(fxml.equals("quiz_corona_test")) {
