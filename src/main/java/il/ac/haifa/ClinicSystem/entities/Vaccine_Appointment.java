@@ -25,6 +25,7 @@ public class Vaccine_Appointment implements Serializable {
     }
     @ManyToOne
     private User user;
+
     public User getUser(){
         return this.user;
     }

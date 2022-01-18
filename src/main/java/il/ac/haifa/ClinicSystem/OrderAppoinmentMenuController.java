@@ -36,7 +36,9 @@ public class OrderAppoinmentMenuController {
 
     @FXML
     void clickDoctor(ActionEvent event) throws IOException {
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
         App.setRoot("doctorSpecialty");
+
     }
     @FXML
     void gotovac(ActionEvent event) throws IOException {

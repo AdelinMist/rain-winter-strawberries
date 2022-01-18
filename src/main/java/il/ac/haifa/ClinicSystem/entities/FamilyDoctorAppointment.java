@@ -23,12 +23,15 @@ public class FamilyDoctorAppointment implements Serializable {
         this.time = time;
     }
 
+
+
     private LocalDate date;
     @ManyToOne
     private Clinic clinic; // maybe need more
     public Clinic getClinic() {
-        return clinic;
+        return this.clinic;
     }
+
     @ManyToOne
     User user;
     public User getUser(){

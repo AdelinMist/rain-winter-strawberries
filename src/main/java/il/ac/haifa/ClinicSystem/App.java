@@ -34,22 +34,29 @@ public class App extends Application {
     }
 
     public static void setRoot(String fxml) throws IOException {
+        System.out.println(fxml);
         scene.setRoot(loadFXML(fxml));
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        if(fxml.equals("clinics_of_doctor_type")) {
+        System.out.println(fxml);
+        if(fxml.equals("doctorSpecialty")) {
+            DoctorSpecialtyController controller = new DoctorSpecialtyController();
+            controller.setClient(client);
+            fxmlLoader.setController(controller);
+        }
+        else if(fxml.equals("Login")) {
+            LoginController controller = new LoginController();
+            controller.setClient(client);
+            fxmlLoader.setController(controller);
+        }
+        else if(fxml.equals("clinics_of_doctor_type")) {
             clinics_of_doctor_typeController controller = new clinics_of_doctor_typeController();
             controller.setClient(client);
             fxmlLoader.setController(controller);
         }
-        if(fxml.equals("doctorAppointment")) {
-            DoctorAppointmentController controller = new DoctorAppointmentController();
-            controller.setClient(client);
-            fxmlLoader.setController(controller);
-        }
-        if(fxml.equals("clientMenu")) {
+        else if(fxml.equals("clientMenu")) {
             ClientMenuController controller = new ClientMenuController();
             controller.setClient(client);
             fxmlLoader.setController(controller);
@@ -61,11 +68,6 @@ public class App extends Application {
         }
         else if(fxml.equals("FamilyAppointment")) {
             FamilyAppointmentController controller = new FamilyAppointmentController();
-            controller.setClient(client);
-            fxmlLoader.setController(controller);
-        }
-        else if(fxml.equals("Login")) {
-            LoginController controller = new LoginController();
             controller.setClient(client);
             fxmlLoader.setController(controller);
         }
@@ -118,11 +120,21 @@ public class App extends Application {
             controller.setClient(client);
             fxmlLoader.setController(controller);
         }
+         else if(fxml.equals("appointmentsMenu")) {
+             AppointmentsMenuController controller = new AppointmentsMenuController();
+             controller.setClient(client);
+             fxmlLoader.setController(controller);
+         }
         else if(fxml.equals("appointmentsMenu")) {
             AppointmentsMenuController controller = new AppointmentsMenuController();
             controller.setClient(client);
             fxmlLoader.setController(controller);
         }
+         else if(fxml.equals("doctorAppointment")) {
+             DoctorAppointmentController controller = new DoctorAppointmentController();
+             controller.setClient(client);
+             fxmlLoader.setController(controller);
+         }
 
         return fxmlLoader.load();
     }

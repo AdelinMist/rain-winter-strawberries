@@ -4,11 +4,6 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.List;
 @Entity
 @Table(name = "patients")
@@ -40,6 +35,14 @@ public class Patient extends User{
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<FamilyDoctorAppointment> family_Appointments1;
 
+    @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true )
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ProDoctorAppointment> pro_Appointments1;
+
+    public void add_pro_Appointment(ProDoctorAppointment appointment){
+        this.pro_Appointments1.add(appointment);
+
+    }
 
 
     public void add_Sister_Appointment(Sister_Appointment appointment){

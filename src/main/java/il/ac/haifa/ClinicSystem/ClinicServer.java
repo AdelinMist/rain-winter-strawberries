@@ -86,7 +86,7 @@ public class ClinicServer extends AbstractServer{
 		Doctor d1 = new Doctor("coolDoctor421", "password", "Mat Matthews", "ENT","tkhruirjhnh@gmail.com");
 		Doctor d2 = new Doctor("coolDoctor422", "password", "Mat Matthews", "Neurology","tkhruirjhnh@gmail.com");
 
-		Patient u = new Patient("daniel","123","daniel@gmail.com","The White Tower", "daniel r");
+		Patient u = new Patient("daniel","123","tkhruirjhnh@gmail.com","The White Tower", "daniel r");
 		DoctorClinic dc = new DoctorClinic(c, d, workingHours);
 		DoctorClinic dc1 = new DoctorClinic(c, d1, workingHours);
 		DoctorClinic dc2 = new DoctorClinic(c2, d1, workingHours);
@@ -330,6 +330,26 @@ public class ClinicServer extends AbstractServer{
 					session.close();
 			}
 		}
+		else if(((String) msg).equals("#Doctors")) {
+			try {
+				session = sessionFactory.openSession();
+				session.beginTransaction();
+
+				List<Doctor> doctors = getAll(Doctor.class);
+				client.sendToClient(doctors);
+
+				session.getTransaction().commit();
+			}catch (Exception exception) {
+				if (session != null) {
+					session.getTransaction().rollback();
+				}
+				System.err.println("An error occured, changes have been rolled back.");
+				exception.printStackTrace();
+			} finally {
+				if(session != null)
+					session.close();
+			}
+		}
 		else if(((String) msg).equals("#username")) {
 			try {
 				session = sessionFactory.openSession();
@@ -459,7 +479,7 @@ public class ClinicServer extends AbstractServer{
 				while (true){
 					// the time for sends remainder mails
 					String now = LocalTime.now().truncatedTo(ChronoUnit.SECONDS).format(DateTimeFormatter.ISO_LOCAL_TIME);
-					int value = ("15:14:00").compareTo(now);
+					int value = ("01:38:00").compareTo(now); // 00: 00: 00
 
 
 					if (value==0) {//value == 0
@@ -470,12 +490,16 @@ public class ClinicServer extends AbstractServer{
 
 						List<Corna_cheak_Appointment> covidTestAppointments = new ArrayList<>();
 						List<Vaccine_Appointment> vaccine_appointments =  new ArrayList<>();
+						List<ProDoctorAppointment> proDoctorAppointments = new ArrayList<>();
+						List<FamilyDoctorAppointment> familyDoctorAppointments = new ArrayList<>();
 						System.out.println(" after get list");
 						try {
 							session = sessionFactory.openSession();
 							session.beginTransaction();
 							covidTestAppointments = getAll(Corna_cheak_Appointment.class);
 							vaccine_appointments = getAll(Vaccine_Appointment.class);
+							proDoctorAppointments = getAll(ProDoctorAppointment.class);
+							familyDoctorAppointments = getAll(FamilyDoctorAppointment.class);
 							session.getTransaction().commit();
 						} catch (Exception exception) {
 							if (session != null) {
@@ -500,6 +524,18 @@ public class ClinicServer extends AbstractServer{
 							if (vaccine_appointments.get(i).getDate().isEqual(tomorrow)) {
 								SendMail mail = new SendMail();
 								mail.send_remainder_vaccine(covidTestAppointments.get(i).getUser(), vaccine_appointments.get(i));
+							}
+						}
+						for(int i = 0 ; i<proDoctorAppointments.size() ; i++){
+							if (proDoctorAppointments.get(i).getDate().isEqual(tomorrow)) {
+								SendMail mail = new SendMail();
+								mail.send_remainder_pro(proDoctorAppointments.get(i).getUser(), proDoctorAppointments.get(i));
+							}
+						}
+						for(int i = 0 ; i<familyDoctorAppointments.size() ; i++){
+							if (familyDoctorAppointments.get(i).getDate().isEqual(tomorrow)) {
+								SendMail mail = new SendMail();
+								mail.send_remainder_family(familyDoctorAppointments.get(i).getUser(), familyDoctorAppointments.get(i));
 							}
 						}
 					}

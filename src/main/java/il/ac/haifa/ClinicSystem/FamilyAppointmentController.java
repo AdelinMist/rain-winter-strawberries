@@ -2,7 +2,6 @@ package il.ac.haifa.ClinicSystem;
 import il.ac.haifa.ClinicSystem.entities.Clinic;
 import il.ac.haifa.ClinicSystem.entities.FamilyDoctorAppointment;
 import il.ac.haifa.ClinicSystem.entities.Patient;
-import il.ac.haifa.ClinicSystem.entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -74,10 +73,13 @@ import java.util.List;
                 e.printStackTrace();
             }
 
-            loadData();
+
             succsessAlert.setTitle("Appointment confirmed");
             succsessAlert.setHeaderText("You made an appointment to " + date + " at " + time);
             succsessAlert.showAndWait();
+            SendMail mail = new SendMail();
+            mail.send_remainder_family(chatClient.getUser(),appointment);
+            loadData();
         }
 
         @FXML

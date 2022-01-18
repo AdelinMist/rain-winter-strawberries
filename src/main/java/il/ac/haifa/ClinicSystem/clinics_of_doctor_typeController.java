@@ -1,8 +1,5 @@
 package il.ac.haifa.ClinicSystem;
-import il.ac.haifa.ClinicSystem.entities.Clinic;
-import il.ac.haifa.ClinicSystem.entities.Doctor;
-import il.ac.haifa.ClinicSystem.entities.DoctorClinic;
-import il.ac.haifa.ClinicSystem.entities.ProDoctorAppointment;
+import il.ac.haifa.ClinicSystem.entities.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -64,19 +61,24 @@ public class clinics_of_doctor_typeController {
         System.out.println(time + "\n" + date + "\n" + clinic.getName());
         ProDoctorAppointment appointment = new ProDoctorAppointment(date, time, clinic,DoctorAppointmentController.doctornext);
         clinic.add_pro_Appointment(appointment);
-        //User user = chatClient.getUser();// add the appointment to the clinic
-        //user.add_Sister_Appointment(appointment);// add the appointment to the user
-        //appointment.setUser(user);
+        doctor.add(appointment);
+        Patient user = (Patient) chatClient.getUser();// add the appointment to the clinic
+        user.add_pro_Appointment(appointment);// add the appointment to the user
+        appointment.setUser(user);
+        appointment.setDoctor(doctor);
         try {
             chatClient.sendToServer(clinic);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        loadData();
+
         succsessAlert.setTitle("Appointment confirmed");
         succsessAlert.setHeaderText("You made an appointment to " + date + " at " + time);
         succsessAlert.showAndWait();
+        SendMail mail = new SendMail();
+        mail.send_remainder_pro(chatClient.getUser(),appointment);
+        loadData();
     }
 
     @FXML
@@ -98,8 +100,9 @@ public class clinics_of_doctor_typeController {
     }
 
     private void loadData() throws InterruptedException {
-
-        List<DoctorClinic> temp = doctor.getDoctorClinics();
+        List<DoctorClinic> temp = new ArrayList<>();
+        curClinic = new ArrayList<>();
+         temp = doctor.getDoctorClinics();
         for(int i = 0; i<temp.size(); i++){
             curClinic.add(temp.get(i).getClinic());
         }
@@ -146,7 +149,7 @@ public class clinics_of_doctor_typeController {
                                 //check if the appointment is taken
                                 String time = j.toString(); // details of the appointment
                                 LocalDate date = clinic.getDayPicker().getValue();
-                                List<ProDoctorAppointment> list = clinic.getProAppointments();
+                                List<ProDoctorAppointment> list = doctor.getAppointments();
                                 boolean ok = true;
                                 System.out.println(list.size());
                                 for (int i = 0; i < list.size(); ++i) {

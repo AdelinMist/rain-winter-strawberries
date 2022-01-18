@@ -82,6 +82,10 @@ public class Clinic implements Serializable{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<FamilyDoctorAppointment> family_appointments1;
 
+	@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<FamilyDoctorAppointment> familyDoctorAppointments;
+
 	public void add_pro_Appointment(ProDoctorAppointment appointment){
 		this.pro_appointments1.add(appointment);
 
@@ -402,4 +406,6 @@ public class Clinic implements Serializable{
 	public  List<Sister_Appointment> getSister_appointments1( ) {
 		return this.sister_appointments1 ;
 	}
+
+
 }

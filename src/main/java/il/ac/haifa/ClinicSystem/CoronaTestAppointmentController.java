@@ -78,9 +78,11 @@ public class CoronaTestAppointmentController {
             e.printStackTrace();
         }
         loadData();
-       /* succsessAlert.setTitle("Appointment confirmed");
+        succsessAlert.setTitle("Appointment confirmed");
         succsessAlert.setHeaderText("You made an appointment to " + date + " at " + time);
-        succsessAlert.showAndWait();*/
+        succsessAlert.showAndWait();
+        SendMail mail = new SendMail();
+        mail.send_remainder_covidtest(chatClient.getUser(),appointment);
     }
 
     @FXML

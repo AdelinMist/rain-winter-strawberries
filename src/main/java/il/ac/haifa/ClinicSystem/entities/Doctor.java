@@ -76,4 +76,15 @@ public class Doctor extends User implements Serializable {
     public Clinic getClinic() {
         return clinic;
     }
+
+    public List<ProDoctorAppointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<ProDoctorAppointment> appointments) {
+        this.appointments = appointments;
+    }
+    public void add(ProDoctorAppointment appointment){
+        this.appointments.add(appointment);
+    }
 }
