@@ -1,5 +1,6 @@
 package il.ac.haifa.ClinicSystem;
 import il.ac.haifa.ClinicSystem.entities.Clinic;
+import il.ac.haifa.ClinicSystem.entities.Patient;
 import il.ac.haifa.ClinicSystem.entities.Sister_Appointment;
 import il.ac.haifa.ClinicSystem.entities.User;
 import javafx.collections.FXCollections;
@@ -63,7 +64,7 @@ public class SisterAppointmentController {
         System.out.println(time + "\n" + date + "\n" + clinic.getName());
          Sister_Appointment appointment = new Sister_Appointment(date, time, clinic);
         clinic.add_Sister_Appointment(appointment);
-        User user = chatClient.getUser();// add the appointment to the clinic
+        Patient user = (Patient) chatClient.getUser();// add the appointment to the clinic
         user.add_Sister_Appointment(appointment);// add the appointment to the user
         appointment.setUser(user);
         try {

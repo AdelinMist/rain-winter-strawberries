@@ -28,7 +28,7 @@ public class Doctor extends User implements Serializable {
     }
 
     public Doctor(String username, String pasword, String name, String specialization , String email) {
-        super(username, pasword , email);
+        super(username, pasword , email, name);
         this.specialization = specialization;
     }
 
@@ -52,6 +52,8 @@ public class Doctor extends User implements Serializable {
     public int getId() {
         return this.id;
     }
+
+
 
     public String getSpecialization() {
         return specialization;

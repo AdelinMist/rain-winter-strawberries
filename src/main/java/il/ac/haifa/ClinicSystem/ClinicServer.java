@@ -42,6 +42,7 @@ public class ClinicServer extends AbstractServer{
 		configuration.addAnnotatedClass(DoctorClinic.class);
 		configuration.addAnnotatedClass(Doctor.class);
 		configuration.addAnnotatedClass(Vaccine_Appointment.class);
+		configuration.addAnnotatedClass(FamilyDoctorAppointment.class);
 
 		configuration.addAnnotatedClass(Corna_cheak_Appointment.class);
 		configuration.addAnnotatedClass(Quiz.class);
@@ -78,11 +79,12 @@ public class ClinicServer extends AbstractServer{
 				workingHours.put(d, new Pair<>(LocalTime.of(10,0), LocalTime.of(16,0)));
 			}
 		}
+		Clinic c2 = new Clinic("The White Tower2", "Tar Valon2", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
 		Clinic c = new Clinic("The White Tower", "Tar Valon", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
 		//session.saveOrUpdate(temp);
 		Doctor d = new Doctor("coolDoctor420", "password", "Mat Matthews", "Neurology","tkhruirjhnh@gmail.com");
 
-
+		Patient u = new Patient("daniel","123","daniel@gmail.com","The White Tower", "daniel r");
 		DoctorClinic dc = new DoctorClinic(c, d, workingHours);
 
 
@@ -95,8 +97,9 @@ public class ClinicServer extends AbstractServer{
 		d.setDoctorClinics(dcList);
 
 
-
+		session.saveOrUpdate(u);
 		session.saveOrUpdate(c);
+		session.saveOrUpdate(c2);
 		session.saveOrUpdate(d);
 		session.saveOrUpdate(dc);
 
@@ -372,7 +375,7 @@ public class ClinicServer extends AbstractServer{
 				if (session != null) {
 					session.getTransaction().rollback();
 				}
-				System.err.println("An error occured, changes have been rolled back.");
+				System.err.println("An error occurred, changes have been rolled back.");
 				exception.printStackTrace();
 			} finally {
 				if(session != null)
@@ -414,7 +417,7 @@ public class ClinicServer extends AbstractServer{
 			if (session != null) {
 				session.getTransaction().rollback();
 			}
-			System.err.println("An error occured, changes have been rolled back.");
+			System.err.println("An error occurred, changes have been rolled back.");
 			exception.printStackTrace();
 		} finally {
 			if(session != null)
@@ -431,7 +434,7 @@ public class ClinicServer extends AbstractServer{
 				while (true){
 					// the time for sends remainder mails
 					String now = LocalTime.now().truncatedTo(ChronoUnit.SECONDS).format(DateTimeFormatter.ISO_LOCAL_TIME);
-					int value = ("01:47:00").compareTo(now);
+					int value = ("15:14:00").compareTo(now);
 
 
 					if (value==0) {//value == 0
@@ -441,11 +444,13 @@ public class ClinicServer extends AbstractServer{
 
 
 						List<Corna_cheak_Appointment> covidTestAppointments = new ArrayList<>();
+						List<Vaccine_Appointment> vaccine_appointments =  new ArrayList<>();
 						System.out.println(" after get list");
 						try {
 							session = sessionFactory.openSession();
 							session.beginTransaction();
 							covidTestAppointments = getAll(Corna_cheak_Appointment.class);
+							vaccine_appointments = getAll(Vaccine_Appointment.class);
 							session.getTransaction().commit();
 						} catch (Exception exception) {
 							if (session != null) {
@@ -462,10 +467,17 @@ public class ClinicServer extends AbstractServer{
 
 							if (covidTestAppointments.get(i).getDate().isEqual(tomorrow)) {
 								SendMail mail = new SendMail();
-								mail.send_remainder(covidTestAppointments.get(i).getUser());
+								mail.send_remainder_covidtest(covidTestAppointments.get(i).getUser(), covidTestAppointments.get(i));
+							}
+						}
+						System.out.println(vaccine_appointments.size());
+						for(int i = 0 ; i<vaccine_appointments.size() ; i++){
+							if (vaccine_appointments.get(i).getDate().isEqual(tomorrow)) {
+								SendMail mail = new SendMail();
+								mail.send_remainder_vaccine(covidTestAppointments.get(i).getUser(), vaccine_appointments.get(i));
+							}
 						}
 					}
-				}
 
 				}
 			}

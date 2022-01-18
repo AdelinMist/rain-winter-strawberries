@@ -16,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "clinics")
 public class Clinic implements Serializable{
+
 	
 	 private static final long serialVersionUID = 1L;
 	
@@ -73,8 +74,16 @@ public class Clinic implements Serializable{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Sister_Appointment> sister_appointments1;
 
+	@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<FamilyDoctorAppointment> family_appointments1;
+
 	public void add_Sister_Appointment(Sister_Appointment appointment){
 		this.sister_appointments1.add(appointment);
+
+	}
+	public void add_Family_Appointment(FamilyDoctorAppointment appointment){
+		this.family_appointments1.add(appointment);
 
 	}
 
@@ -371,5 +380,13 @@ public class Clinic implements Serializable{
 
 	public  List<Sister_Appointment> getSister_appointments1( ) {
 		return this.sister_appointments1 ;
+	}
+
+	public List<FamilyDoctorAppointment> getFamily_appointments1() {
+		return family_appointments1;
+	}
+
+	public void setFamily_appointments1(List<FamilyDoctorAppointment> family_appointments1) {
+		this.family_appointments1 = family_appointments1;
 	}
 }

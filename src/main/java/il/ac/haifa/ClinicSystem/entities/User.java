@@ -26,52 +26,27 @@ public class User implements Serializable {
 
     @Column(name = "username")
     protected String username;
-    private String clinic_name; // for appointment 3.5 any user need own clinic (sister appointment)
+    private String name;
     protected byte[] password;
     protected byte[] salt;
 
-    @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Vaccine_Appointment> vaccine_appointments1;
 
-    @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true )
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Corna_cheak_Appointment> Corna_cheak_Appointments1;
-
-
-    @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<Sister_Appointment> sister_appointments1;
     private String email;
     public  String getEmail(){
         return this.email;
     }
 
 
-    public void add_Sister_Appointment(Sister_Appointment appointment){
-        this.sister_appointments1.add(appointment);
 
-    }
-
-    public void add_vaccine_appointment(Vaccine_Appointment vaccine_appointment){
-        this.vaccine_appointments1.add(vaccine_appointment);
-        System.out.println(vaccine_appointment.getTime() + "insert to the list!");
-
-    }
-
-    public void add_coronaTest_appointment(Corna_cheak_Appointment corna_cheak_appointment){
-        this.Corna_cheak_Appointments1.add(corna_cheak_appointment);
-
-    }
 
     public User() {
 
     }
 
-    public User(String username, String password , String email) {
+    public User(String username, String password , String email, String name) {
         this.username = username;
         this.email = email;
-
+        this.name = name;
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
         random.nextBytes(salt);
@@ -92,6 +67,7 @@ public class User implements Serializable {
     public User(User u){
         this.username = u.getUsername();
         this.salt = u.getSalt().clone();
+        this.name = u.getName();
         this.password = u.getPassword().clone();
         this.id = u.getId();
         this.name = u.getName();
@@ -124,6 +100,15 @@ public class User implements Serializable {
     public byte[] getPassword() {
         return password;
     }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
 
     public void setPassword(String password) {
         SecureRandom random = new SecureRandom();
