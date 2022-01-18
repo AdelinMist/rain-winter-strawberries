@@ -14,8 +14,8 @@ public class Corna_cheak_Appointment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="corona_cheak_appointment_id")
     private int id;
-   /* @OneToOne
-    private  Quiz quiz;*/
+    @OneToOne
+    private  Quiz quiz;
    private LocalDate date;
     @ManyToOne
     private Clinic clinic; // maybe need more
@@ -24,11 +24,9 @@ public class Corna_cheak_Appointment implements Serializable {
     public User getUser(){
         return this.user;
     }
-
-    public void setUser(User user) {
+    public  void setUser(User user){
         this.user = user;
     }
-
     public Clinic getClinic() {
         return clinic;
     }
@@ -41,6 +39,9 @@ public class Corna_cheak_Appointment implements Serializable {
     }
 
 
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }
 
     private String time;
     private String day;

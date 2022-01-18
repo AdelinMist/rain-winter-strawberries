@@ -41,7 +41,7 @@ public class QuizController {
         String answer1 = text1.getText();
         String answer2 = text2.getText();
         Quiz quiz= new Quiz(answer1,answer2);
-        App.setRoot("coronaTestAppointment");
+        App.setRoot1("coronaTestAppointment" , quiz);
     }
 
 }
