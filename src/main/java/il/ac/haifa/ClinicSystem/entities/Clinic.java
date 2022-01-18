@@ -120,7 +120,7 @@ public class Clinic implements Serializable{
 
 	}
 	private transient DatePicker dayPicker;
-	private transient ChoiceBox<String> timeOptions; // work like "12:10"
+	private transient ChoiceBox<String> timeOptions; // saved as "hh:mm", for example "12:10"
 
 
 
@@ -144,8 +144,9 @@ public class Clinic implements Serializable{
 	//private transient LocalTime curOpenHour;
 	//private transient LocalTime curCloseHour;
 	private transient ChoiceBox<String> dayOfWeek;
-	private transient ChoiceBox<String> weekofvacciene; // eliron add that
+	private transient ChoiceBox<String> weekofvacciene; //Eliron added that
 
+	//regular constructor
 	public Clinic(String name, String location, List<LocalTime> openHours, List<LocalTime> closeHours,
 				  List<LocalTime> covidTestOpenHours, List<LocalTime> covidTestCloseHours, List<LocalTime> covidVaccOpenHours, List<LocalTime> covidVaccCloseHours, boolean test, boolean vac) {
 		this.name = name;
@@ -162,7 +163,8 @@ public class Clinic implements Serializable{
 
 	public Clinic () {
 	 }
-	 
+
+	 //deep copy constructor
 	 public Clinic(Clinic m) {
 		this.name = m.getName();
 		this.location = m.getLocation();
