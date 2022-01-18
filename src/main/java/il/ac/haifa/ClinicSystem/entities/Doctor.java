@@ -17,7 +17,6 @@ public class Doctor extends User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String name;
     private String specialization;
 
     @OneToMany(mappedBy = "doctor")
@@ -33,8 +32,7 @@ public class Doctor extends User implements Serializable {
     }
 
     public Doctor(String username, String pasword, String name, String specialization , String email) {
-        super(username, pasword , email);
-        this.name = name;
+        super(username, pasword , email, name);
         this.specialization = specialization;
     }
     public Doctor(String username, String pasword, String name, String specialization , String email , Clinic clinic){
@@ -46,7 +44,6 @@ public class Doctor extends User implements Serializable {
     public Doctor(Doctor d){
         super((User)d);
         this.id = d.getId();
-        this.name = d.getName();
         this.specialization = d.getSpecialization();
         this.doctorClinics = d.getDoctorClinics();
     }
@@ -66,13 +63,7 @@ public class Doctor extends User implements Serializable {
         return this.id;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getSpecialization() {
         return specialization;

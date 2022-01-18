@@ -59,6 +59,11 @@ public class App extends Application {
             controller.setClient(client);
             fxmlLoader.setController(controller);
         }
+        else if(fxml.equals("FamilyAppointment")) {
+            FamilyAppointmentController controller = new FamilyAppointmentController();
+            controller.setClient(client);
+            fxmlLoader.setController(controller);
+        }
         else if(fxml.equals("Login")) {
             LoginController controller = new LoginController();
             controller.setClient(client);
