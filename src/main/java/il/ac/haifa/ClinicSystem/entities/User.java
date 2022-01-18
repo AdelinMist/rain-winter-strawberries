@@ -22,6 +22,8 @@ public class User implements Serializable {
     @Column(name="user_id")
     private int id;
 
+    private String name;
+
     @Column(name = "username")
     protected String username;
     private String clinic_name; // for appointment 3.5 any user need own clinic (sister appointment)
@@ -92,6 +94,15 @@ public class User implements Serializable {
         this.salt = u.getSalt().clone();
         this.password = u.getPassword().clone();
         this.id = u.getId();
+        this.name = u.getName();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUsername() {
