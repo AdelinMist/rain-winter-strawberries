@@ -78,6 +78,10 @@ public class Clinic implements Serializable{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<ProDoctorAppointment> pro_appointments1;
 
+	@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<FamilyDoctorAppointment> family_appointments1;
+
 	public void add_pro_Appointment(ProDoctorAppointment appointment){
 		this.pro_appointments1.add(appointment);
 
@@ -88,6 +92,11 @@ public class Clinic implements Serializable{
 
 	public void add_Sister_Appointment(Sister_Appointment appointment){
 		this.sister_appointments1.add(appointment);
+
+	}
+
+	public void add_Family_Appointment(FamilyDoctorAppointment appointment){
+		this.family_appointments1.add(appointment);
 
 	}
 
@@ -192,8 +201,16 @@ public class Clinic implements Serializable{
 		 this.hasCovidVaccinations = m.getHasCovidVaccinations();
 		 this.hasCovidTests = m.getHasCovidTests();
 	 }
-	 
-	 @Override
+
+	public List<FamilyDoctorAppointment> getFamily_appointments1() {
+		return family_appointments1;
+	}
+
+	public void setFamily_appointments1(List<FamilyDoctorAppointment> family_appointments1) {
+		this.family_appointments1 = family_appointments1;
+	}
+
+	@Override
 	 public String toString() {
 	        return String.format(name + " | " + location + "\n");
 	    }
