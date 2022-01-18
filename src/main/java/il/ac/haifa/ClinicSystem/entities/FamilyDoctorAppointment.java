@@ -2,17 +2,77 @@ package il.ac.haifa.ClinicSystem.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 
+@Entity
+@Table(name = "FamilyDoctor_appointments")
 public class FamilyDoctorAppointment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="FamilyDoctorAppointment_id")
-
     private int id;
+    // maybe need a lab? what is the difference between lab and clinic ?
+    private  String day;
+    private  String time; // work like "12:10"
+    //private String clinic_name; // for any user have own clinic
+    public FamilyDoctorAppointment(LocalDate date, String time , Clinic clinic) {
+        this.date = date;
+        this.clinic = clinic;
+        this.time = time;
+    }
 
+    private LocalDate date;
     @ManyToOne
-    @JoinColumn(name = "doctor_id", nullable=true) //am not sure about doctor_id being correct here
-    private Doctor doctor;
+    private Clinic clinic; // maybe need more
+    public Clinic getClinic() {
+        return clinic;
+    }
+    @ManyToOne
+    User user;
+    public User getUser(){
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
+    }
+    public LocalDate getDate(){
+        return this.date;
+    }
+
+    /*public Sister_Appointment(LocalDate date, String time , Clinic clinic, String clinic_name) {
+        super(date, clinic);
+        this.time = time;
+        this.clinic_name = clinic_name;
+    }*/
+
+    public FamilyDoctorAppointment( String time,LocalDate date , Clinic clinic) {
+        this.date = date;
+        this.clinic = clinic;
+        this.time = time;
+    }
+
+    public FamilyDoctorAppointment(){}
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 }

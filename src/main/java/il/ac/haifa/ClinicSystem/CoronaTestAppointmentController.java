@@ -1,8 +1,5 @@
 package il.ac.haifa.ClinicSystem;
-import il.ac.haifa.ClinicSystem.entities.Clinic;
-import il.ac.haifa.ClinicSystem.entities.Corna_cheak_Appointment;
-import il.ac.haifa.ClinicSystem.entities.Quiz;
-import il.ac.haifa.ClinicSystem.entities.User;
+import il.ac.haifa.ClinicSystem.entities.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -71,7 +68,7 @@ public class CoronaTestAppointmentController {
         //appointment.setQuiz(quiz);
         //quiz.setAppointment(appointment);
         clinic.add_coronaTest_appointment(appointment);
-        User user = chatClient.getUser();// add the appointment to the clinic
+        Patient user = (Patient)chatClient.getUser();// add the appointment to the clinic
         appointment.setUser(user);
         user.add_coronaTest_appointment(appointment);// add the appointment to the user
         appointment.setUser(user);

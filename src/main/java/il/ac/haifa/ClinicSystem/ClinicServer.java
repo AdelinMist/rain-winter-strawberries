@@ -42,6 +42,7 @@ public class ClinicServer extends AbstractServer{
 		configuration.addAnnotatedClass(DoctorClinic.class);
 		configuration.addAnnotatedClass(Doctor.class);
 		configuration.addAnnotatedClass(Vaccine_Appointment.class);
+		configuration.addAnnotatedClass(FamilyDoctorAppointment.class);
 
 		configuration.addAnnotatedClass(Corna_cheak_Appointment.class);
 		configuration.addAnnotatedClass(Quiz.class);
@@ -78,11 +79,12 @@ public class ClinicServer extends AbstractServer{
 				workingHours.put(d, new Pair<>(LocalTime.of(10,0), LocalTime.of(16,0)));
 			}
 		}
+		Clinic c2 = new Clinic("The White Tower2", "Tar Valon2", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
 		Clinic c = new Clinic("The White Tower", "Tar Valon", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
 		//session.saveOrUpdate(temp);
 		Doctor d = new Doctor("coolDoctor420", "password", "Mat Matthews", "Neurology","tkhruirjhnh@gmail.com");
 
-
+		Patient u = new Patient("daniel","123","daniel@gmail.com","The White Tower", "daniel r");
 		DoctorClinic dc = new DoctorClinic(c, d, workingHours);
 
 
@@ -95,8 +97,9 @@ public class ClinicServer extends AbstractServer{
 		d.setDoctorClinics(dcList);
 
 
-
+		session.saveOrUpdate(u);
 		session.saveOrUpdate(c);
+		session.saveOrUpdate(c2);
 		session.saveOrUpdate(d);
 		session.saveOrUpdate(dc);
 

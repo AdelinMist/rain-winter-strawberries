@@ -1,6 +1,7 @@
 package il.ac.haifa.ClinicSystem;
 
 import il.ac.haifa.ClinicSystem.entities.Clinic;
+import il.ac.haifa.ClinicSystem.entities.Patient;
 import il.ac.haifa.ClinicSystem.entities.User;
 import il.ac.haifa.ClinicSystem.entities.Vaccine_Appointment;
 import javafx.collections.FXCollections;
@@ -70,7 +71,7 @@ public class VaccineClinicController {
         System.out.println(time + "\n" + date + "\n" + clinic.getName());
         Vaccine_Appointment appointment = new Vaccine_Appointment(date, time, clinic);
         clinic.add_vaccine_appointment(appointment);
-        User user = chatClient.getUser();// add the appointment to the clinic
+        Patient user = (Patient)chatClient.getUser();// add the appointment to the clinic
         user.add_vaccine_appointment(appointment);// add the appointment to the user
         appointment.setUser(user);
         try {

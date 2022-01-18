@@ -46,6 +46,10 @@ public class OrderAppoinmentMenuController {
     void goSister(ActionEvent event) throws IOException {
         App.setRoot("SisterAppointment");
     }
+    @FXML
+    void goFamily(ActionEvent event) throws IOException {
+        App.setRoot("FamilyAppointment");
+    }
 
     @FXML
     void returnToMenu(ActionEvent event) throws IOException {
