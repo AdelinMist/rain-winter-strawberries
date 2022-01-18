@@ -182,7 +182,7 @@ public class Clinic implements Serializable{
 	 
 	 @Override
 	 public String toString() {
-	        return String.format(name + " | " + location + " | " + openHours + "\n");
+	        return String.format(name + " | " + location + "\n");
 	    }
 
 	 public int getId(){
