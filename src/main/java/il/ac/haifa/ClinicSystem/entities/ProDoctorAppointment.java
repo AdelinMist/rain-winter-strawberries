@@ -16,6 +16,17 @@ public class ProDoctorAppointment implements Serializable {
     private LocalDate date;
     @ManyToOne
     private Clinic clinic; // maybe need more
+
+    private String time;
+
+    public ProDoctorAppointment(LocalDate date, String time, Clinic clinic,Doctor doctor) {
+        this.date = date;
+        this.clinic = clinic;
+        this.time = time;
+        this.doctor = doctor;
+    }
+    public ProDoctorAppointment(){}
+
     public Clinic getClinic() {
         return clinic;
     }
@@ -30,4 +41,16 @@ public class ProDoctorAppointment implements Serializable {
     @ManyToOne
     @JoinColumn(name = "doctor_id", nullable=true) //am not sure about doctor_id being correct here
     private Doctor doctor;
+
+    private String day;
+    public void setDay(String day){
+        this.day = day;
+    }
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 }

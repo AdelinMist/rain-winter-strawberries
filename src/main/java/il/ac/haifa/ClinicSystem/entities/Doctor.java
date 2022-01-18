@@ -23,12 +23,21 @@ public class Doctor extends User implements Serializable {
     @OneToMany(mappedBy = "doctor")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<DoctorClinic> doctorClinics = null;
+    @OneToMany(mappedBy = "doctor")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ProDoctorAppointment> appointments ;
+
 
     public Doctor() {
 
     }
 
     public Doctor(String username, String pasword, String name, String specialization , String email) {
+        super(username, pasword , email);
+        this.name = name;
+        this.specialization = specialization;
+    }
+    public Doctor(String username, String pasword, String name, String specialization , String email , Clinic clinic){
         super(username, pasword , email);
         this.name = name;
         this.specialization = specialization;
@@ -41,6 +50,7 @@ public class Doctor extends User implements Serializable {
         this.specialization = d.getSpecialization();
         this.doctorClinics = d.getDoctorClinics();
     }
+    private  Clinic clinic;
 
     public List<DoctorClinic> getDoctorClinics() {
         return doctorClinics;
@@ -70,5 +80,13 @@ public class Doctor extends User implements Serializable {
 
     public void setSpecialization(String mailAdd) {
         this.specialization = mailAdd;
+    }
+
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
+    }
+
+    public Clinic getClinic() {
+        return clinic;
     }
 }

@@ -46,6 +46,7 @@ public class ClinicServer extends AbstractServer{
 		configuration.addAnnotatedClass(Corna_cheak_Appointment.class);
 		configuration.addAnnotatedClass(Quiz.class);
 		configuration.addAnnotatedClass(Sister_Appointment.class);
+		configuration.addAnnotatedClass(ProDoctorAppointment.class);
 
 
 
@@ -78,28 +79,51 @@ public class ClinicServer extends AbstractServer{
 				workingHours.put(d, new Pair<>(LocalTime.of(10,0), LocalTime.of(16,0)));
 			}
 		}
+		Clinic c2 = new Clinic("The White Tower2", "narnia", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
 		Clinic c = new Clinic("The White Tower", "Tar Valon", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
 		//session.saveOrUpdate(temp);
 		Doctor d = new Doctor("coolDoctor420", "password", "Mat Matthews", "Neurology","tkhruirjhnh@gmail.com");
+		Doctor d1 = new Doctor("coolDoctor421", "password", "Mat Matthews", "ENT","tkhruirjhnh@gmail.com");
+		Doctor d2 = new Doctor("coolDoctor422", "password", "Mat Matthews", "Neurology","tkhruirjhnh@gmail.com");
 
 
 		DoctorClinic dc = new DoctorClinic(c, d, workingHours);
+		DoctorClinic dc1 = new DoctorClinic(c, d1, workingHours);
+		DoctorClinic dc2 = new DoctorClinic(c2, d1, workingHours);
+		DoctorClinic dc3 = new DoctorClinic(c2, d2, workingHours);
+		List<DoctorClinic> dcList_forc = new ArrayList<DoctorClinic>();
+		List<DoctorClinic> dcList_forc2 = new ArrayList<DoctorClinic>();
+		List<DoctorClinic> dcList_ford = new ArrayList<DoctorClinic>();
+		List<DoctorClinic> dcList_ford1 = new ArrayList<DoctorClinic>();
+		List<DoctorClinic> dcList_ford2 = new ArrayList<DoctorClinic>();
 
 
-		List<DoctorClinic> dcList = new ArrayList<DoctorClinic>();
+		dcList_forc.add(dc);
+		dcList_forc.add(dc1);
+		dcList_forc2.add(dc2);
+		dcList_forc2.add(dc3);
+		dcList_ford.add(dc);
+		dcList_ford1.add(dc1);
+		dcList_ford1.add(dc2);
+		dcList_ford2.add(dc3);
+		c.setDoctorClinics(dcList_forc);
+		c2.setDoctorClinics(dcList_forc2);
+		d.setDoctorClinics(dcList_ford);
+		d1.setDoctorClinics(dcList_ford1);
+		d2.setDoctorClinics(dcList_ford2);
 
-
-		dcList.add(dc);
-
-		c.setDoctorClinics(dcList);
-		d.setDoctorClinics(dcList);
 
 
 
 		session.saveOrUpdate(c);
+		session.saveOrUpdate(c2);
 		session.saveOrUpdate(d);
+		session.saveOrUpdate(d1);
+		session.saveOrUpdate(d2);
 		session.saveOrUpdate(dc);
-
+		session.saveOrUpdate(dc1);
+		session.saveOrUpdate(dc2);
+		session.saveOrUpdate(dc3);
 		 /*
 		 * The call to session.flush() updates the DB immediately without ending the transaction.
 		 * Recommended to do after an arbitrary unit of work.
@@ -289,6 +313,26 @@ public class ClinicServer extends AbstractServer{
 
 				List<DoctorClinic> doctorClinics = getAll(DoctorClinic.class);
 				client.sendToClient(doctorClinics);
+
+				session.getTransaction().commit();
+			}catch (Exception exception) {
+				if (session != null) {
+					session.getTransaction().rollback();
+				}
+				System.err.println("An error occured, changes have been rolled back.");
+				exception.printStackTrace();
+			} finally {
+				if(session != null)
+					session.close();
+			}
+		}
+		else if(((String) msg).equals("#Doctors")) {
+			try {
+				session = sessionFactory.openSession();
+				session.beginTransaction();
+
+				List<Doctor> doctors = getAll(Doctor.class);
+				client.sendToClient(doctors);
 
 				session.getTransaction().commit();
 			}catch (Exception exception) {
