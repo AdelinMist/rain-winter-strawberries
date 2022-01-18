@@ -72,6 +72,7 @@ public class VaccineClinicController {
         clinic.add_vaccine_appointment(appointment);
         User user = chatClient.getUser();// add the appointment to the clinic
         user.add_vaccine_appointment(appointment);// add the appointment to the user
+        appointment.setUser(user);
         try {
             chatClient.sendToServer(clinic);
         } catch (IOException e) {

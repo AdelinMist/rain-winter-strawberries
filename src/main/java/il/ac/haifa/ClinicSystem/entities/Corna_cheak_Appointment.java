@@ -24,6 +24,11 @@ public class Corna_cheak_Appointment implements Serializable {
     public User getUser(){
         return this.user;
     }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Clinic getClinic() {
         return clinic;
     }

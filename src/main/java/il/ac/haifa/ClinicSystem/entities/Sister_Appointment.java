@@ -35,6 +35,10 @@ public class Sister_Appointment   implements Serializable {
         return this.user;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public void setClinic(Clinic clinic) {
         this.clinic = clinic;
     }

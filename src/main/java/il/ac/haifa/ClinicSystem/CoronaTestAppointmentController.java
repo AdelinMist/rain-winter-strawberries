@@ -65,6 +65,7 @@ public class CoronaTestAppointmentController {
         clinic.add_coronaTest_appointment(appointment);
         User user = chatClient.getUser();// add the appointment to the clinic
         user.add_coronaTest_appointment(appointment);// add the appointment to the user
+        appointment.setUser(user);
         try {
             chatClient.sendToServer(clinic);
         } catch (IOException e) {
