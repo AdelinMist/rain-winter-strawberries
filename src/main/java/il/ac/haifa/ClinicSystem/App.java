@@ -28,7 +28,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("Login"), 1214, 703);
+        scene = new Scene(loadFXML("clientMenu"), 1214, 703);
         stage.setScene(scene);
         stage.show();
     }
@@ -39,6 +39,11 @@ public class App extends Application {
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        if(fxml.equals("doctorAppointment")) {
+            DoctorAppointmentController controller = new DoctorAppointmentController();
+            controller.setClient(client);
+            fxmlLoader.setController(controller);
+        }
         if(fxml.equals("clientMenu")) {
             ClientMenuController controller = new ClientMenuController();
             controller.setClient(client);
@@ -62,7 +67,6 @@ public class App extends Application {
         else if(fxml.equals("coronaTestAppointment")) {
             CoronaTestAppointmentController controller = new CoronaTestAppointmentController();
             controller.setClient(client);
-
             fxmlLoader.setController(controller);
         }
         else if(fxml.equals("quiz_corona_test")) {
