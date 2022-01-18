@@ -15,8 +15,7 @@ public class ProDoctorAppointment implements Serializable {
     private int id;
     private LocalDate date;
     @ManyToOne
-    private Clinic clinic; // maybe need more
-
+    private Clinic clinic;
     private String time;
 
     public ProDoctorAppointment(LocalDate date, String time, Clinic clinic,Doctor doctor) {

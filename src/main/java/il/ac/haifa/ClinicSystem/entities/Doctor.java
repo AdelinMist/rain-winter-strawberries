@@ -21,7 +21,7 @@ public class Doctor extends User implements Serializable {
 
     @OneToMany(mappedBy = "doctor")
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<DoctorClinic> doctorClinics = null;
+    private List<DoctorClinic> doctorClinics = null; //each doctor may work in several clinic and for each clinic he needs info about work times and etc.
     @OneToMany(mappedBy = "doctor")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProDoctorAppointment> appointments ;

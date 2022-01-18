@@ -26,6 +26,7 @@ public class App extends Application {
 		System.exit(0);
 	}
 
+	//the function that loads the initial scene of the client
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("Login"), 1214, 703);
@@ -33,12 +34,16 @@ public class App extends Application {
         stage.show();
     }
 
+    //the function used around the program in order to change screens
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
+        //We are searching for the needed fxml file in order to load it and it's controller
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+
+        //we are doing a case for each one of the fxml files in order to load the appropriate controller
         if(fxml.equals("clinics_of_doctor_type")) {
             clinics_of_doctor_typeController controller = new clinics_of_doctor_typeController();
             controller.setClient(client);
@@ -124,13 +129,14 @@ public class App extends Application {
             fxmlLoader.setController(controller);
         }
 
+        //at last we load the fxml file and return it
         return fxmlLoader.load();
     }
-    public static void setRoot1(String fxml, Quiz quiz) throws IOException { // for quiz
+    public static void setRoot1(String fxml, Quiz quiz) throws IOException { // Special case for quiz because we need to load an additional Quiz object
         scene.setRoot(loadFXML1(fxml , quiz));
     }
 
-    private static Parent loadFXML1(String fxml , Quiz quiz) throws IOException {
+    private static Parent loadFXML1(String fxml , Quiz quiz) throws IOException { // Special case for quiz because we need to load an additional Quiz object
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
 
         if(fxml.equals("coronaTestAppointment")) {
