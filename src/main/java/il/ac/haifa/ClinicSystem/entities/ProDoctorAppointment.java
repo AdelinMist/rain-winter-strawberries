@@ -15,8 +15,7 @@ public class ProDoctorAppointment implements Serializable {
     private int id;
     private LocalDate date;
     @ManyToOne
-    private Clinic clinic; // maybe need more
-
+    private Clinic clinic;
     private String time;
 
     public ProDoctorAppointment(LocalDate date, String time, Clinic clinic,Doctor doctor) {
@@ -26,6 +25,15 @@ public class ProDoctorAppointment implements Serializable {
         this.doctor = doctor;
     }
     public ProDoctorAppointment(){}
+    @ManyToOne
+    private User user;
+    public User getUser(){
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Clinic getClinic() {
         return clinic;
@@ -52,5 +60,13 @@ public class ProDoctorAppointment implements Serializable {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 }

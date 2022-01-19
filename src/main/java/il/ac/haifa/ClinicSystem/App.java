@@ -28,7 +28,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("choose"), 1214, 703);
+        scene = new Scene(loadFXML("Login"), 1214, 703);
         stage.setScene(scene);
         stage.show();
     }
@@ -69,13 +69,6 @@ public class App extends Application {
             controller.setClient(client);
             fxmlLoader.setController(controller);
         }
-
-        else if(fxml.equals("LoginPhy")) {
-            LoginPhyController controller = new LoginPhyController();
-            controller.setClient(client);
-            fxmlLoader.setController(controller);
-        }
-
         else if(fxml.equals("coronaTestAppointment")) {
             CoronaTestAppointmentController controller = new CoronaTestAppointmentController();
             controller.setClient(client);
@@ -130,19 +123,6 @@ public class App extends Application {
             controller.setClient(client);
             fxmlLoader.setController(controller);
         }
-
-        else if(fxml.equals("ApinmntMngmnt")) {
-            ApinmntMngmntController controller = new ApinmntMngmntController();
-            controller.setClient(client);
-            fxmlLoader.setController(controller);
-        }
-
-        else if(fxml.equals("choose")) {
-            chooseController controller = new chooseController();
-            //controller.setClient(client);
-            fxmlLoader.setController(controller);
-        }
-
 
         return fxmlLoader.load();
     }

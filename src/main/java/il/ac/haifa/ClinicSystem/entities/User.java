@@ -71,11 +71,14 @@ public class User implements Serializable {
         this.username = username;
         this.email = email;
         this.name = name;
+
+        //generating SecureRandom object in order to create salt for a good password hashing
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
         random.nextBytes(salt);
         this.salt = salt;
 
+        //using SHA-512 in order to hash the password
         MessageDigest md = null;
         try {
             md = MessageDigest.getInstance("SHA-512");
@@ -84,6 +87,7 @@ public class User implements Serializable {
         }
         md.update(salt);
 
+        //hashing the password and updating it
         byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
         this.password = hashedPassword;
     }
@@ -124,6 +128,7 @@ public class User implements Serializable {
     }
 
     public void setPassword(String password) {
+        //same as in constructor function
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
         random.nextBytes(salt);

@@ -13,22 +13,23 @@ public class FamilyDoctorAppointment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="FamilyDoctorAppointment_id")
     private int id;
-    // maybe need a lab? what is the difference between lab and clinic ?
     private  String day;
-    private  String time; // work like "12:10"
-    //private String clinic_name; // for any user have own clinic
+    private  String time; // saved as "hh:mm" like "12:10"
     public FamilyDoctorAppointment(LocalDate date, String time , Clinic clinic) {
         this.date = date;
         this.clinic = clinic;
         this.time = time;
     }
 
+
+    private boolean is_family;
     private LocalDate date;
     @ManyToOne
     private Clinic clinic; // maybe need more
     public Clinic getClinic() {
-        return clinic;
+        return this.clinic;
     }
+
     @ManyToOne
     User user;
     public User getUser(){
@@ -45,12 +46,6 @@ public class FamilyDoctorAppointment implements Serializable {
     public LocalDate getDate(){
         return this.date;
     }
-
-    /*public Sister_Appointment(LocalDate date, String time , Clinic clinic, String clinic_name) {
-        super(date, clinic);
-        this.time = time;
-        this.clinic_name = clinic_name;
-    }*/
 
     public FamilyDoctorAppointment( String time,LocalDate date , Clinic clinic) {
         this.date = date;
@@ -74,5 +69,13 @@ public class FamilyDoctorAppointment implements Serializable {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public boolean isIs_family() {
+        return is_family;
+    }
+
+    public void setIs_family(boolean is_family) {
+        this.is_family = is_family;
     }
 }

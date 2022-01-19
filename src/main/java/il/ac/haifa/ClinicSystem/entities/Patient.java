@@ -4,11 +4,6 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.List;
 @Entity
 @Table(name = "patients")
@@ -20,8 +15,7 @@ public class Patient extends User{
     @Column(name="user_id")
     private int id;
 
-    private String clinic_name; // for appointment 3.5 any user need own clinic (sister appointment)
-
+    private String clinic_name; //each patient needs to have a Clinic in order to make a sister appointment
 
     @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -40,6 +34,14 @@ public class Patient extends User{
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<FamilyDoctorAppointment> family_Appointments1;
 
+    @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true )
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ProDoctorAppointment> pro_Appointments1;
+
+    public void add_pro_Appointment(ProDoctorAppointment appointment){
+        this.pro_Appointments1.add(appointment);
+
+    }
 
 
     public void add_Sister_Appointment(Sister_Appointment appointment){
@@ -48,18 +50,15 @@ public class Patient extends User{
     }
     public void add_Family_Appointment(FamilyDoctorAppointment appointment){
         this.family_Appointments1.add(appointment);
-
     }
 
     public void add_vaccine_appointment(Vaccine_Appointment vaccine_appointment){
         this.vaccine_appointments1.add(vaccine_appointment);
         System.out.println(vaccine_appointment.getTime() + "insert to the list!");
-
     }
 
-    public void add_coronaTest_appointment(Corna_cheak_Appointment corna_cheak_appointment){
+    public void add_coronaTest_appointment(Corna_cheak_Appointment corna_cheak_appointment){ //It hurts my soul
         this.Corna_cheak_Appointments1.add(corna_cheak_appointment);
-
     }
 
     public Patient(String clinic_name) {

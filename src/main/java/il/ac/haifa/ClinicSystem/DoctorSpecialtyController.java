@@ -13,6 +13,10 @@ public class DoctorSpecialtyController {
     public static String specialty;
     private Alert notSelectedAlert = new Alert(Alert.AlertType.ERROR);
 
+    private SimpleClient chatClient;
+    public void setClient(SimpleClient c) {
+        this.chatClient = c;
+    }
     @FXML
     private Button backBTN;
 

@@ -82,6 +82,15 @@ public class Clinic implements Serializable{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<FamilyDoctorAppointment> family_appointments1;
 
+	@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<FamilyDoctorAppointment> familyDoctorAppointments;
+
+
+	//private  transient  ChoiceBox<String> family ;
+
+
+
 	public void add_pro_Appointment(ProDoctorAppointment appointment){
 		this.pro_appointments1.add(appointment);
 
@@ -116,8 +125,13 @@ public class Clinic implements Serializable{
 
 	}
 	private transient DatePicker dayPicker;
-	private transient ChoiceBox<String> timeOptions; // work like "12:10"
-
+	private transient ChoiceBox<String> timeOptions,family; // saved as "hh:mm", for example "12:10"
+	public void setFamily(ChoiceBox<String> fiamly) {
+		this.family = fiamly;
+	}
+	public  ChoiceBox<String> getFamily() {
+		return this.family;
+	}
 
 
 
@@ -140,8 +154,9 @@ public class Clinic implements Serializable{
 	//private transient LocalTime curOpenHour;
 	//private transient LocalTime curCloseHour;
 	private transient ChoiceBox<String> dayOfWeek;
-	private transient ChoiceBox<String> weekofvacciene; // eliron add that
+	private transient ChoiceBox<String> weekofvacciene; //Eliron added that
 
+	//regular constructor
 	public Clinic(String name, String location, List<LocalTime> openHours, List<LocalTime> closeHours,
 				  List<LocalTime> covidTestOpenHours, List<LocalTime> covidTestCloseHours, List<LocalTime> covidVaccOpenHours, List<LocalTime> covidVaccCloseHours, boolean test, boolean vac) {
 		this.name = name;
@@ -158,7 +173,8 @@ public class Clinic implements Serializable{
 
 	public Clinic () {
 	 }
-	 
+
+	 //deep copy constructor
 	 public Clinic(Clinic m) {
 		this.name = m.getName();
 		this.location = m.getLocation();
@@ -402,4 +418,6 @@ public class Clinic implements Serializable{
 	public  List<Sister_Appointment> getSister_appointments1( ) {
 		return this.sister_appointments1 ;
 	}
+
+
 }

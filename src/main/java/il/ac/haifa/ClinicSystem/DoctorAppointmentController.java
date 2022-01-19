@@ -19,10 +19,7 @@ import java.util.List;
 public class DoctorAppointmentController {
     //when you need the Doctor type, write DoctorSpecialtyController.specialty
     //private String specialty = DoctorSpecialtyController.specialty;
-    private SimpleClient chatClient;
-    public void setClient(SimpleClient c) {
-        this.chatClient = c;
-    }
+
 
     @FXML
     private Button addBtn;
@@ -31,20 +28,25 @@ public class DoctorAppointmentController {
     private BorderPane borderPane;
 
     @FXML
-    private TableColumn<Doctor, String> name;
+    private Label listLbl;
 
     @FXML
-    private Label listLbl;
+    private TableColumn<Doctor, String> name;
 
     @FXML
     private Button returnBtn;
 
     @FXML
     private TableView<Doctor> vaccineClinicTable;
+
     public static Doctor doctornext;
 
     private List<Doctor> doctors;
     private ObservableList<Doctor> cList = FXCollections.observableArrayList();
+    private SimpleClient chatClient;
+    public void setClient(SimpleClient c) {
+        this.chatClient = c;
+    }
 
     @FXML
     void nextPage(ActionEvent event) throws IOException {
