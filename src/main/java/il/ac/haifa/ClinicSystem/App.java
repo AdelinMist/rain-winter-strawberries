@@ -162,7 +162,13 @@ public class App extends Application {
 
         else if(fxml.equals("doctorApinmntMngmnt")) {
             doctorApinmntMngmntController controller = new doctorApinmntMngmntController();
-            //controller.setClient(client);
+            controller.setClient(client);
+            fxmlLoader.setController(controller);
+        }
+
+        else if(fxml.equals("secretaryMngmnt")) {
+            secretaryMngmntController controller = new secretaryMngmntController();
+            controller.setClient(client);
             fxmlLoader.setController(controller);
         }
 

@@ -1,6 +1,8 @@
 package il.ac.haifa.ClinicSystem;
 
 import il.ac.haifa.ClinicSystem.entities.Doctor;
+import il.ac.haifa.ClinicSystem.entities.Patient;
+import il.ac.haifa.ClinicSystem.entities.Secretary;
 import il.ac.haifa.ClinicSystem.entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -85,15 +87,18 @@ public class LoginPhyController {
                         App.setRoot("doctorScreen");
                     }
 
-                    else{
+                    else if(user instanceof Patient){
                         App.setRoot("ApinmntMngmnt");
+                    }
+
+                    else if(user instanceof Secretary){
+                        App.setRoot("secretaryMngmnt");
                     }
 
                 }
 
             }
         }
-
 
 
     }

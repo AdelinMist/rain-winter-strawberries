@@ -90,6 +90,8 @@ public class Clinic implements Serializable{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<FamilyDoctorAppointment> familyDoctorAppointments;
 
+	@OneToOne
+	private Secretary secretary;
 
 	//private  transient  ChoiceBox<String> family ;
 

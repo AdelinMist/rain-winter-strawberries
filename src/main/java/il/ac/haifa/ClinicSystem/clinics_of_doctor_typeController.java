@@ -65,6 +65,8 @@ public class clinics_of_doctor_typeController {
         Patient user = (Patient) chatClient.getUser();// add the appointment to the clinic
         user.add_pro_Appointment(appointment);// add the appointment to the user
         appointment.setUser(user);
+        appointment.setUsername(user.getName());
+        appointment.setName(doctor.getSpecialization());
         appointment.setDoctor(doctor);
         try {
             chatClient.sendToServer(clinic);

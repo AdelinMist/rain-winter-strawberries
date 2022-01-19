@@ -22,6 +22,16 @@ public class labAppointment   implements Serializable {
         this.time = time;
     }
 
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     private LocalDate date;
     @ManyToOne
     private Clinic clinic; // maybe need more

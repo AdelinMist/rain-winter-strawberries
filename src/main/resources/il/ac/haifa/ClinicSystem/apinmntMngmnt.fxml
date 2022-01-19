@@ -10,7 +10,7 @@
 
 <BorderPane fx:id="borderPane" prefHeight="703.0" prefWidth="1214.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <top>
-        <Label fx:id="listLbl" alignment="CENTER" prefHeight="24.0" prefWidth="1214.0" text="Clinic List" textAlignment="CENTER" BorderPane.alignment="CENTER">
+        <Label fx:id="listLbl" alignment="CENTER" prefHeight="24.0" prefWidth="1214.0" text="APM List" textAlignment="CENTER" BorderPane.alignment="CENTER">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font></Label>

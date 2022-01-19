@@ -21,6 +21,16 @@ public class Corna_cheak_Appointment implements Serializable {
     private Clinic clinic; // maybe need more
     @ManyToOne
     User user;
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public User getUser(){
         return this.user;
     }

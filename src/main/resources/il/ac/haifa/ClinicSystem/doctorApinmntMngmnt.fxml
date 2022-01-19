@@ -18,9 +18,8 @@
     <center>
         <TableView fx:id="apointmentsTable" prefHeight="640.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="name" prefWidth="300" text="Clinic Name" />
-                <TableColumn fx:id="dayPicker" prefWidth="150.0" text="date" />
-                <TableColumn fx:id="timeOptions" prefWidth="150.0" text="Hour" />
+                <TableColumn fx:id="name" prefWidth="300" text="appointment type" />
+                <TableColumn fx:id="time" prefWidth="150.0" text="Hour" />
 
             </columns>
         </TableView>
@@ -29,7 +28,7 @@
         <AnchorPane prefHeight="39.0" prefWidth="1214.0" BorderPane.alignment="CENTER">
             <children>
                 <Button fx:id="returnBtn" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#returnToMenu" text="Return to Menu" />
-                <Button fx:id="nextInine" layoutX="1051.0" layoutY="8.0" mnemonicParsing="false" onAction="#nextInline" text="next" />
+
             </children>
         </AnchorPane>
     </bottom>

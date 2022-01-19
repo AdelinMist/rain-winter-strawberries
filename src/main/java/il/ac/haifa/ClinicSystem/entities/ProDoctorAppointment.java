@@ -14,11 +14,31 @@ public class ProDoctorAppointment implements Serializable {
     @Column(name="ProDoctorAppointment_id")
     private int id;
     private LocalDate date;
+
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     @ManyToOne
     private Clinic clinic;
     private String time;
+    private String name;
 
-    public ProDoctorAppointment(LocalDate date, String time, Clinic clinic,Doctor doctor) {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ProDoctorAppointment(LocalDate date, String time, Clinic clinic, Doctor doctor) {
         this.date = date;
         this.clinic = clinic;
         this.time = time;

@@ -71,6 +71,7 @@ import java.util.List;
             Patient user = (Patient) chatClient.getUser();// add the appointment to the clinic
             user.add_Family_Appointment(appointment);// add the appointment to the user
             appointment.setUser(user);
+            appointment.setUsername(user.getName());
             boolean is_family = false;
             if(clinic.getFamily().getValue().equals("family"))
                 is_family = true;

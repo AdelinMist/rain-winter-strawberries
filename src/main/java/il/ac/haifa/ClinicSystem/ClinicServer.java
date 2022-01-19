@@ -48,6 +48,7 @@ public class ClinicServer extends AbstractServer{
 		configuration.addAnnotatedClass(Corna_cheak_Appointment.class);
 		configuration.addAnnotatedClass(Quiz.class);
 		configuration.addAnnotatedClass(Sister_Appointment.class);
+		configuration.addAnnotatedClass(Secretary.class);
 
 
 
@@ -91,6 +92,9 @@ public class ClinicServer extends AbstractServer{
 		Doctor d2 = new Doctor("coolDoctor420", "password", "Jane Cohen", "Psychiatrist","Jane@gmail.com");
 		//!!!!!!!!!!!!!!!!! we should probably add a doctor user with one of our presenters email
 		Patient u = new Patient("daniel","123","daniel@gmail.com","Clalit", "Daniel D");
+
+		Secretary s = new Secretary("lina", "123","daniel@gmail.com", "Clalit", "lina", c );
+
 		DoctorClinic dc = new DoctorClinic(c, d, workingHours);
 		DoctorClinic dc1 = new DoctorClinic(c, d1, workingHours);
 		DoctorClinic dc2 = new DoctorClinic(c2, d1, workingHours);
@@ -131,6 +135,7 @@ public class ClinicServer extends AbstractServer{
 		session.saveOrUpdate(dc1);
 		session.saveOrUpdate(dc2);
 		session.saveOrUpdate(dc3);
+		session.saveOrUpdate(s);
 
 		 /*
 		 * The call to session.flush() updates the DB immediately without ending the transaction.

@@ -66,6 +66,7 @@ public class labAppointmentController {
         clinic.add_lab_Appointment(appointment);
         Patient user = (Patient) chatClient.getUser();// add the appointment to the clinic
         user.add_lab_Appointment(appointment);// add the appointment to the user
+        appointment.setUsername(user.getName());
         appointment.setUser(user);
         try {
             chatClient.sendToServer(clinic);

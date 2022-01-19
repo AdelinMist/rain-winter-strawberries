@@ -66,6 +66,7 @@ public class SisterAppointmentController {
         clinic.add_Sister_Appointment(appointment);
         Patient user = (Patient) chatClient.getUser();// add the appointment to the clinic
         user.add_Sister_Appointment(appointment);// add the appointment to the user
+        appointment.setUsername(user.getName());
         appointment.setUser(user);
         try {
             chatClient.sendToServer(clinic);
