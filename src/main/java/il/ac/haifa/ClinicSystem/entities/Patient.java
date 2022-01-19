@@ -82,6 +82,14 @@ public class Patient extends User{
         this.clinic_name = clinic_name;
     }
 
+    public List<labAppointment> getLab_appointments1() {
+        return lab_appointments1;
+    }
+
+    public List<ProDoctorAppointment> getPro_Appointments1() {
+        return pro_Appointments1;
+    }
+
     public Patient(User u, String clinic_name) {
         super(u);
         this.clinic_name = clinic_name;

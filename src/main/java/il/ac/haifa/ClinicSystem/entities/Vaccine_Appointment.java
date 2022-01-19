@@ -28,6 +28,16 @@ public class Vaccine_Appointment implements Serializable {
 
     private String username;
 
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
+    private boolean visited=false;
+
     public String getUsername() {
         return username;
     }

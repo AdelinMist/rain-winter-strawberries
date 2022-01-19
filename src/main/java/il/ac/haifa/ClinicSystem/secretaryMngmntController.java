@@ -153,6 +153,106 @@ public class secretaryMngmntController {
 
     }
 
+    @FXML
+    private Button next1;
+
+    @FXML
+    private Button next2;
+
+    @FXML
+    private Button next3;
+
+    @FXML
+    private Button next4;
+
+    @FXML
+    private Button next5;
+
+    @FXML
+    private Button next6;
+
+
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+    @FXML
+    void next1(ActionEvent event) throws InterruptedException {
+        Corna_cheak_Appointment appointment= CCAppointment.getSelectionModel().getSelectedItem();
+        appointment.setVisited(true);
+        alert.setTitle("next in line");
+        alert.setHeaderText("Patient " + appointment.getUsername() + " Room 1" );
+        alert.setContentText("Corona test Appointment");
+        alert.showAndWait();
+
+        CCList.remove(appointment);
+
+    }
+
+    @FXML
+    void next2(ActionEvent event) throws InterruptedException {
+        FamilyDoctorAppointment appointment= FDAppointment.getSelectionModel().getSelectedItem();
+        appointment.setVisited(true);
+        alert.setTitle("next in line");
+        alert.setHeaderText("Patient " + appointment.getUsername() + " Room 2" );
+        alert.setContentText("Family doctor Appointment");
+        alert.showAndWait();
+
+        FDList.remove(appointment);
+
+
+    }
+
+    @FXML
+    void next3(ActionEvent event) throws InterruptedException {
+        labAppointment appointment= LabAppointment.getSelectionModel().getSelectedItem();
+        appointment.setVisited(true);
+        alert.setTitle("next in line");
+        alert.setHeaderText("Patient " + appointment.getUsername() + " Room 3" );
+        alert.setContentText("lab Appointment");
+        alert.showAndWait();
+
+        labList.remove(appointment);
+
+    }
+
+    @FXML
+    void next4(ActionEvent event) throws InterruptedException {
+        ProDoctorAppointment appointment= PDAppointment.getSelectionModel().getSelectedItem();
+        appointment.setVisited(true);
+        alert.setTitle("next in line");
+        alert.setHeaderText("Patient " + appointment.getUsername() + " Room 4" );
+        alert.setContentText("pro doctor Appointment");
+        alert.showAndWait();
+
+        PDList.remove(appointment);
+
+    }
+
+    @FXML
+    void next5(ActionEvent event) throws InterruptedException {
+        Sister_Appointment appointment = SisAppointment.getSelectionModel().getSelectedItem();
+        appointment.setVisited(true);
+        alert.setTitle("next in line");
+        alert.setHeaderText("Patient " + appointment.getUsername() + " Room 5");
+        alert.setContentText("sister Appointment");
+        alert.showAndWait();
+
+        sisList.remove(appointment);
+
+
+    }
+
+    @FXML
+    void next6(ActionEvent event) throws InterruptedException {
+        Vaccine_Appointment appointment= VacAppointment.getSelectionModel().getSelectedItem();
+        appointment.setVisited(true);
+        alert.setTitle("next in line");
+        alert.setHeaderText("Patient " + appointment.getUsername() + " Room 6" );
+        alert.setContentText("vaccine Appointment");
+        alert.showAndWait();
+
+        vacList.remove(appointment);
+
+    }
 
     @FXML
     void returnToMenu(ActionEvent event) {

@@ -23,6 +23,16 @@ public class Corna_cheak_Appointment implements Serializable {
     User user;
     private String username;
 
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
+    private boolean visited=false;
+
     public String getUsername() {
         return username;
     }

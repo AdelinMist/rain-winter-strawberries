@@ -25,8 +25,9 @@
     <bottom>
         <AnchorPane prefHeight="39.0" prefWidth="1214.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="returnBtn" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#returnToMenu" text="Return to Menu" />
-            <Button fx:id="showAppointments" layoutX="518.0" layoutY="8.0" mnemonicParsing="false" onAction="#showAppointments" text="Show appointments" />
+            <Button fx:id="showAppointments" layoutX="320.0" layoutY="8.0" mnemonicParsing="false" onAction="#showAppointments" text="Show appointments" />
+            <Button fx:id="labOrder" layoutX="601.0" layoutY="7.0" mnemonicParsing="false" onAction="#labOrder" prefHeight="26.0" prefWidth="144.0" text="Lab appointment order" />
+            <Button fx:id="sisOrder" layoutX="828.0" layoutY="7.0" mnemonicParsing="false" onAction="#sisOrder" prefHeight="26.0" prefWidth="154.0" text="Sisiter appointment order" />
             </children>
         </AnchorPane>
     </bottom>

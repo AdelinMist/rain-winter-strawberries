@@ -68,6 +68,7 @@ public class SisterAppointmentController {
         user.add_Sister_Appointment(appointment);// add the appointment to the user
         appointment.setUsername(user.getName());
         appointment.setUser(user);
+
         try {
             chatClient.sendToServer(clinic);
         } catch (IOException e) {

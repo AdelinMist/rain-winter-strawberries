@@ -39,6 +39,11 @@ public class ApinmntMngmntController {
     @FXML
     private TableColumn<Clinic, String> name;
 
+    @FXML
+    private Button labOrder;
+
+    @FXML
+    private Button sisOrder;
 
     @FXML
     private Button returnBtn;
@@ -52,10 +57,6 @@ public class ApinmntMngmntController {
     private Alert notSelectedAlert = new Alert(Alert.AlertType.ERROR);
 
 
-    @FXML
-    void returnToMenu(ActionEvent event) throws IOException {
-        App.setRoot("clientMenu");
-    }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() throws IOException, InterruptedException {
@@ -205,12 +206,12 @@ public class ApinmntMngmntController {
         for(FamilyDoctorAppointment i: list3){
 
             if(i.getDate().equals(date)){
-                List<FamilyDoctorAppointment> crnaChkAppList=((Patient) chatClient.getUser()).getFamily_Appointments1();
-                for(FamilyDoctorAppointment appointment : crnaChkAppList){
+                List<FamilyDoctorAppointment> FDList=((Patient) chatClient.getUser()).getFamily_Appointments1();
+                for(FamilyDoctorAppointment appointment : FDList){
                     if(appointment.getDate().equals(date)){
                         alert.setTitle("Appointment details");
                         alert.setHeaderText("Your number is: " + counter);
-                        alert.setContentText("Family Doctor Appointment Appointment");
+                        alert.setContentText("Family Doctor Appointment ");
                         counter++;
                         alert.showAndWait();
                     }
@@ -219,8 +220,52 @@ public class ApinmntMngmntController {
             }
         }
 
+        List<ProDoctorAppointment> list4=curClinic.getProAppointments();
+        for(FamilyDoctorAppointment i: list3){
 
+            if(i.getDate().equals(date)){
+                List<ProDoctorAppointment> PDList=((Patient) chatClient.getUser()).getPro_Appointments1();
+                for(ProDoctorAppointment appointment : PDList){
+                    if(appointment.getDate().equals(date)){
+                        alert.setTitle("Appointment details");
+                        alert.setHeaderText("Your number is: " + counter);
+                        alert.setContentText("Pro Doctor Appointment ");
+                        counter++;
+                        alert.showAndWait();
+                    }
+                }
 
+            }
+        }
+
+        List<labAppointment> list5=curClinic.getLab_appointments1();
+        for(labAppointment i: list5){
+
+            if(i.getDate().equals(date)){
+                List<labAppointment> labList=((Patient) chatClient.getUser()).getLab_appointments1();
+                for(labAppointment appointment : labList){
+                    if(appointment.getDate().equals(date)){
+                        alert.setTitle("Appointment details");
+                        alert.setHeaderText("Your number is: " + counter);
+                        alert.setContentText("lab Appointment ");
+                        counter++;
+                        alert.showAndWait();
+                    }
+                }
+
+            }
+        }
+
+    }
+
+    @FXML
+    void labOrder(ActionEvent event) throws IOException {
+        App.setRoot("labAppointment");
+    }
+
+    @FXML
+    void sisOrder(ActionEvent event) throws IOException {
+        App.setRoot("SisterAppointment");
     }
 
 
