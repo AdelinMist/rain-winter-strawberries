@@ -115,8 +115,13 @@ public class ClinicListController {
 
     	loadData();
     }
-  
-    public void loadData() throws InterruptedException {
+
+
+	/**
+	 * making a request to the server for the Clinic List and loading it into the program
+	 * @throws InterruptedException
+	 */
+	public void loadData() throws InterruptedException {
     	chatClient.setGotList(false);
 
 		 try {

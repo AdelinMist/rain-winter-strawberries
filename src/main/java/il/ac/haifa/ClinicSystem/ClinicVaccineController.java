@@ -101,6 +101,12 @@ public class ClinicVaccineController {
         App.setRoot("contentMenu");
     }
 
+    /**
+     * the function takes the chosen day of the week
+     * @param event event is given when button is pressed, we don't care about it
+     * @throws IOException
+     * @throws InterruptedException
+     */
     @FXML
     void next_page(ActionEvent event) throws IOException, InterruptedException {
         Clinic curClinic = clinicTable.getSelectionModel().getSelectedItem();

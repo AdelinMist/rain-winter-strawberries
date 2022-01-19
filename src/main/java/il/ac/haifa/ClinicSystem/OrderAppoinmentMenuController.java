@@ -62,6 +62,16 @@ public class OrderAppoinmentMenuController {
         App.setRoot("clientMenu");
     }
 
+    @FXML
+    private Button family;
+
+    @FXML
+    private Button lab;
+
+
+
+
+
     public void setClient(SimpleClient c) {
         this.chatClient = c;
     }

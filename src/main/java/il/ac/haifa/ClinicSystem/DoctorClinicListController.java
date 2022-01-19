@@ -60,6 +60,13 @@ public class DoctorClinicListController {
     private ObservableList<DoctorClinic> cList = FXCollections.observableArrayList();
     private Alert notSelectedAlert = new Alert(Alert.AlertType.ERROR);
 
+    /**
+     * changing the hours of the selected clinic to be the
+     * time that was selected in the screen
+     * @param event sent by button on Click, we don't need it
+     * @throws InterruptedException
+     * @throws IOException
+     */
     @FXML
     void showChangeDoctorHours(ActionEvent event) throws InterruptedException, IOException {
         DoctorClinic curDoctorClinic = doctorClinicTable.getSelectionModel().getSelectedItem();

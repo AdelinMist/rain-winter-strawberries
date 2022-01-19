@@ -98,6 +98,11 @@ public class labAppointmentController {
         loadData();
     }
 
+    /**
+     *
+     * making a request to the server for the Clinic List and loading it into the program
+     * @throws InterruptedException
+     */
     private void loadData() throws InterruptedException {
         chatClient.setGotList(false);
 
