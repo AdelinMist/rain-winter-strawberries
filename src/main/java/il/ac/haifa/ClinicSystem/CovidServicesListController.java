@@ -63,7 +63,7 @@ public class CovidServicesListController {
 
     @FXML
     void returnToMenu(ActionEvent event) throws IOException {
-        App.setRoot("contentMenu");
+        App.setRoot("systemManagerMenu");
     }
 
     @FXML

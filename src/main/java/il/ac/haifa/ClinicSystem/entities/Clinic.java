@@ -335,9 +335,11 @@ public class Clinic implements Serializable{
 
 	@Override
 	 public boolean equals(Object obj) {
-		 if(this.id == ((Clinic)obj).getId()) {
-			 return true;
-		 }
+		if(obj != null){
+			if(this.id == ((Clinic)obj).getId()) {
+				return true;
+			}
+		}
 		 return false;
 	 }
 

@@ -21,7 +21,7 @@
     </rowConstraints>
     <children>
         <Button fx:id="clinicListBtn" onAction="#showClinicList" text="Change Clinics Hours" GridPane.rowIndex="1" />
-        <Label fx:id="MenuLabel" alignment="CENTER" contentDisplay="CENTER" text="Main Menu" textAlignment="CENTER">
+        <Label fx:id="MenuLabel" alignment="CENTER" contentDisplay="CENTER" text="System Manager Menu" textAlignment="CENTER">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>

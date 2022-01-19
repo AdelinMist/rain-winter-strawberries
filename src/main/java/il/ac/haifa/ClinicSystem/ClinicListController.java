@@ -102,7 +102,7 @@ public class ClinicListController {
 
     @FXML
     void returnToMenu(ActionEvent event) throws IOException {
-    	App.setRoot("contentMenu");
+    	App.setRoot("systemManagerMenu");
     }
     
     @FXML // This method is called by the FXMLLoader when initialization is complete

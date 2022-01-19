@@ -83,9 +83,10 @@ public class ClinicServer extends AbstractServer{
 		Clinic c = new Clinic("The White Tower", "Tar Valon", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
 		//session.saveOrUpdate(temp);
 		Doctor d = new Doctor("coolDoctor420", "password", "Mat Matthews", "Neurology","tkhruirjhnh@gmail.com");
+		Doctor d2 = new Doctor("dococ", "passcode", "Matrim Cauthon", "Luck","Taveren@gmail.com");
 
 		Patient u = new Patient("daniel","123","daniel@gmail.com","The White Tower", "daniel r");
-		DoctorClinic dc = new DoctorClinic(c, d, workingHours);
+		DoctorClinic dc = new DoctorClinic(c, d, workingHours), dc2 = new DoctorClinic(c, d2, workingHours);
 
 
 		List<DoctorClinic> dcList = new ArrayList<DoctorClinic>();
@@ -106,6 +107,8 @@ public class ClinicServer extends AbstractServer{
 		session.saveOrUpdate(c2);
 		session.saveOrUpdate(d);
 		session.saveOrUpdate(dc);
+		session.saveOrUpdate(d2);
+		session.saveOrUpdate(dc2);
 		session.saveOrUpdate(cm1);
 		session.saveOrUpdate(cm2);
 		session.saveOrUpdate(sm);
@@ -573,9 +576,9 @@ public class ClinicServer extends AbstractServer{
 				while (true){
 					// the time for sends remainder mails
 					String now = LocalTime.now().truncatedTo(ChronoUnit.SECONDS).format(DateTimeFormatter.ISO_LOCAL_TIME);
-					int value = ("15:14:00").compareTo(now);
+					int value = ("00:00:00").compareTo(now);
 
-					if((LocalDate.now().getDayOfWeek().equals("SUNDAY") && LocalTime.now().equals(LocalTime.of(0,0))) || clinicReportMap.isEmpty()){ //initializing reports each week
+					if((LocalDate.now().getDayOfWeek().equals("SUNDAY") && value == 0) || clinicReportMap.isEmpty()){ //initializing reports each week
 						//System.out.println("In Create Report!!!!!!!!!!!!!!!!");
 						List<Clinic> clinicsInDB = new ArrayList<>();
 						List<Vaccine_Appointment> vacAppInDB = new ArrayList<>();
@@ -615,7 +618,6 @@ public class ClinicServer extends AbstractServer{
 								clinicReportMap.put(clinic_id, newReport.getId());
 								session.saveOrUpdate(c);
 							}
-							List<WeeklyClinicReport> reps = getAll(WeeklyClinicReport.class);
 							session.getTransaction().commit();
 						}catch (Exception exception) {
 							if (session != null) {

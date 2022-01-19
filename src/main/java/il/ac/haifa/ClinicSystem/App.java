@@ -129,6 +129,11 @@ public class App extends Application {
             controller.setParams(client, ((ClinicManager)client.getUser()).getClinic());
             fxmlLoader.setController(controller);
         }
+        else if(fxml.equals("chooseClinic")) {
+            ChooseClinicMenuController controller = new ChooseClinicMenuController();
+            controller.setClient(client);
+            fxmlLoader.setController(controller);
+        }
 
         return fxmlLoader.load();
     }

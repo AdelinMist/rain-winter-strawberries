@@ -1,5 +1,9 @@
 package il.ac.haifa.ClinicSystem.entities;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.control.ChoiceBox;
 import javafx.util.Pair;
 import org.hibernate.annotations.LazyCollection;
@@ -138,6 +142,13 @@ public class WeeklyClinicReport implements Serializable {
     private int professionalDocNotArrivedCount = 0;
     private int nurseNotArrivedCount = 0;
     private int labNotArrivedCount = 0;
+
+    private transient DoubleProperty sunday; //stringproperties for one of the reports displays
+    private transient DoubleProperty monday;
+    private transient DoubleProperty tuesday;
+    private transient DoubleProperty wednesday;
+    private transient DoubleProperty thursday;
+    private transient DoubleProperty friday;
 
     private transient ChoiceBox<String> doctorOptions;
 
@@ -354,4 +365,34 @@ public class WeeklyClinicReport implements Serializable {
     public void setCovidTestNotArrivedCount(int covidTestNotArrivedCount) {
         this.covidTestNotArrivedCount = covidTestNotArrivedCount;
     }
+
+    public DoubleProperty sundayProperty() { return sunday; } //properties setters and getters
+    public void setSundayProperty(SimpleDoubleProperty s){ this.sunday = s; }
+    public Double getSunday() { return sunday.get(); }
+    public void setSunday(Double name) { sunday.set(name); }
+
+    public DoubleProperty mondayProperty() { return monday; }
+    public void setMondayProperty(SimpleDoubleProperty s){ this.monday = s; }
+    public Double getMonday() { return monday.get(); }
+    public void setMonday(Double name) { monday.set(name); }
+
+    public DoubleProperty tuesdayProperty() { return tuesday; }
+    public void setTuesdayProperty(SimpleDoubleProperty s){ this.tuesday = s; }
+    public Double getTuesday() { return tuesday.get(); }
+    public void setTuesday(Double name) { tuesday.set(name); }
+
+    public DoubleProperty wednesdayProperty() { return wednesday; }
+    public void setWednesdayProperty(SimpleDoubleProperty s){ this.wednesday = s; }
+    public Double getWednesday() { return wednesday.get(); }
+    public void setWednesday(Double name) { wednesday.set(name); }
+
+    public DoubleProperty thursdayProperty() { return thursday; }
+    public void setThursdayProperty(SimpleDoubleProperty s){ this.thursday = s; }
+    public Double getThursday() { return thursday.get(); }
+    public void setThursday(Double name) { thursday.set(name); }
+
+    public DoubleProperty fridayProperty() { return friday; }
+    public void setFridayProperty(SimpleDoubleProperty s){ this.friday = s; }
+    public Double getFriday() { return friday.get(); }
+    public void setFriday(Double name) { friday.set(name); }
 }

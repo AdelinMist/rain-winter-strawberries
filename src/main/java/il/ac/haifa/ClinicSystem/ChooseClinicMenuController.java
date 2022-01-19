@@ -52,7 +52,7 @@ public class ChooseClinicMenuController {
 
         Stage stage = new Stage();
         Scene scene;
-        FXMLLoader fxmlLoader = new FXMLLoader(ClinicManagerMenuController.class.getResource("weeklyReportList.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ChooseClinicMenuController.class.getResource("weeklyReportList.fxml"));
         WeeklyReportListController controller = new WeeklyReportListController();
         controller.setParams(chatClient, thisClinic);
         fxmlLoader.setController(controller);
