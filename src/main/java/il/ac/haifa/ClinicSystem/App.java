@@ -43,6 +43,11 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
 
         //we are loading the appropriate controller for each fxml page
+        if(fxml.equals("doctorSpecialty")) {
+            DoctorSpecialtyController controller = new DoctorSpecialtyController();
+            controller.setClient(client);
+            fxmlLoader.setController(controller);
+        }
         if(fxml.equals("clinics_of_doctor_type")) {
             clinics_of_doctor_typeController controller = new clinics_of_doctor_typeController();
             controller.setClient(client);
