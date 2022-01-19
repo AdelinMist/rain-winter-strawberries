@@ -48,12 +48,22 @@ public class App extends Application {
             controller.setClient(client);
             fxmlLoader.setController(controller);
         }
-        if(fxml.equals("doctorAppointment")) {
+        else if(fxml.equals("doctorSpecialty")) {
+            DoctorSpecialtyController controller = new DoctorSpecialtyController();
+            controller.setClient(client);
+            fxmlLoader.setController(controller);
+        }
+        else if(fxml.equals("labAppointment")) {
+            labAppointmentController controller = new labAppointmentController();
+            controller.setClient(client);
+            fxmlLoader.setController(controller);
+        }
+        else if(fxml.equals("doctorAppointment")) {
             DoctorAppointmentController controller = new DoctorAppointmentController();
             controller.setClient(client);
             fxmlLoader.setController(controller);
         }
-        if(fxml.equals("clientMenu")) {
+        else if(fxml.equals("clientMenu")) {
             ClientMenuController controller = new ClientMenuController();
             controller.setClient(client);
             fxmlLoader.setController(controller);
