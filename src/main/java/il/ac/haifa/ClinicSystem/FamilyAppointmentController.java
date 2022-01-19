@@ -59,6 +59,13 @@ import java.util.List;
         private ObservableList<Clinic> cList = FXCollections.observableArrayList();
         private Alert notSelectedAlert = new Alert(Alert.AlertType.ERROR);
         Alert succsessAlert = new Alert(Alert.AlertType.INFORMATION);
+
+        /**
+         * We add the selected appointment into our DB
+         * and proceed
+         * @param event passed by Button OnClick, we don't use it
+         * @throws InterruptedException
+         */
         @FXML
         void nextPage(ActionEvent event) throws InterruptedException {
             Clinic clinic = vaccineClinicTable.getSelectionModel().getSelectedItem();

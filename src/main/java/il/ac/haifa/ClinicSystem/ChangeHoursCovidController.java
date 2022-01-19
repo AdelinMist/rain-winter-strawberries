@@ -49,6 +49,12 @@ public class ChangeHoursCovidController {
     private Alert alert = new Alert(Alert.AlertType.ERROR);
     private Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
 
+    /**
+     * <p> See ChangeHoursController for additional explanations about the function </p>
+     * @see ChangeHoursController
+     * @param event when the button gets pressed it passes event to the function
+     * @throws IOException
+     */
     @FXML
     void commitChanges(ActionEvent event) throws IOException {
         String selectedDay = dayChoice.getSelectionModel().getSelectedItem();

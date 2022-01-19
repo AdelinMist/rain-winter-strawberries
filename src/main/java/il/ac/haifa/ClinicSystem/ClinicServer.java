@@ -32,6 +32,7 @@ public class ClinicServer extends AbstractServer{
 	private static Session session;
 	private static SessionFactory sessionFactory;
 
+
 	private static SessionFactory getSessionFactory() throws HibernateException {
 		Configuration configuration = new Configuration();
 
@@ -61,7 +62,13 @@ public class ClinicServer extends AbstractServer{
 		return configuration.buildSessionFactory(serviceRegistry);
 	}
 
-	//here we generate initial Clinics and and everything that's in them
+	/**
+	 * Generating the initial state of the database
+	 * creating the Clinics, Doctors and their relationships
+	 * @see Clinic
+	 * @see Doctor
+	 * @throws Exception
+	 */
 	private static void generateClinics() throws Exception {
 		List<String> days = Arrays.asList("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
 		List<LocalTime> open = new ArrayList<>(), close = new ArrayList<>(), testopen = new ArrayList<>(), testclose = new ArrayList<>(), vaccopen = new ArrayList<>(), vaccclose = new ArrayList<>();

@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text fill="#0598ff" layoutX="111.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="choose if to show home site or physical site">
+      <Text fill="#0598ff" layoutX="111.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Remote Site or Physical site">
          <font>
             <Font size="21.0" />
          </font>

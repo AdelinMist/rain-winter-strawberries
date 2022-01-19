@@ -1,6 +1,7 @@
 package il.ac.haifa.ClinicSystem;
 
 import il.ac.haifa.ClinicSystem.entities.Doctor;
+import il.ac.haifa.ClinicSystem.entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -67,6 +68,11 @@ public class DoctorAppointmentController {
         loadData();
     }
 
+    /**
+     *
+     * making a request to the server for the Doctor List and loading it into the program
+     * @throws InterruptedException
+     */
     public void loadData() throws InterruptedException {
         chatClient.setGotList(false);
 

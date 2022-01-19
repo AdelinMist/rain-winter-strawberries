@@ -38,6 +38,13 @@ public class App extends Application {
         scene.setRoot(loadFXML(fxml));
     }
 
+    /**
+     * Returns the product of fxmlLoader when we use it to load the fxml file
+     * and add the controller to it
+     * @param fxml
+     * @return      the fxml page and it's controller attached
+     * @throws IOException
+     */
     private static Parent loadFXML(String fxml) throws IOException {
         //we are loading the necessary fxml file with FXML loader
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
@@ -179,6 +186,13 @@ public class App extends Application {
         scene.setRoot(loadFXML1(fxml , quiz));
     }
 
+    /**
+     * @see #loadFXML(String)
+     * @param fxml fxml page that is loaded
+     * @param quiz we require an additional quiz parameter for the controller
+     * @return
+     * @throws IOException
+     */
     private static Parent loadFXML1(String fxml , Quiz quiz) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
 

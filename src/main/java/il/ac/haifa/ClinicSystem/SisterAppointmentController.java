@@ -97,6 +97,10 @@ public class SisterAppointmentController {
         loadData();
     }
 
+    /**
+     *
+     * @throws InterruptedException
+     */
     private void loadData() throws InterruptedException {
         chatClient.setGotList(false);
 

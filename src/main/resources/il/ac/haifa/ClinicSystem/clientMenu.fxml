@@ -18,7 +18,7 @@
          <children>
             <AnchorPane fx:id="up" prefHeight="195.0" prefWidth="700.0" style="-fx-background-color: #3D4977;">
                <children>
-                  <Text fx:id="txet" fontSmoothingType="LCD" layoutX="27.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hi welcom back! " textAlignment="JUSTIFY" wrappingWidth="322.13673400878906">
+                  <Text fx:id="txet" fontSmoothingType="LCD" layoutX="27.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome back!" textAlignment="JUSTIFY" wrappingWidth="322.13673400878906">
                      <font>
                         <Font name="System Italic" size="28.0" />
                      </font>
