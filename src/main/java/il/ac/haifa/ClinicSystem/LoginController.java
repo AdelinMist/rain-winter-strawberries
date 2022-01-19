@@ -1,5 +1,6 @@
 package il.ac.haifa.ClinicSystem;
 
+import il.ac.haifa.ClinicSystem.entities.Doctor;
 import il.ac.haifa.ClinicSystem.entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -82,12 +83,12 @@ public class LoginController {
 
                 if(Arrays.equals(hashedPassword, user.getPassword())){
                     flag=1;
-                    /*if(user instanceof Doctor){
-                        App.setRoot("DoctorClinic");
+                    if(user instanceof Doctor){
+                        App.setRoot("doctorScreen");
                     }
                     else{
                         App.setRoot("clientMenu");
-                    }*/
+                    }
 
                     chatClient.setUser(user);
                     App.setRoot("clientMenu");
