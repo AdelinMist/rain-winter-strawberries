@@ -55,7 +55,7 @@ public class ClinicVaccineController {
     private Alert notSelectedAlert = new Alert(Alert.AlertType.ERROR);
 
     @FXML
-    void showChangeHours(ActionEvent event) throws InterruptedException, IOException { //change so that chosed day is displayed on changehours window, if there is any.
+    void showChangeHours(ActionEvent event) throws InterruptedException, IOException { //change so that chosen day is displayed on changeHours window, if there is any.
         Clinic curClinic = clinicTable.getSelectionModel().getSelectedItem();
         String chosenDay = curClinic.getDayOfWeek().getSelectionModel().getSelectedItem();
         if(curClinic == null){

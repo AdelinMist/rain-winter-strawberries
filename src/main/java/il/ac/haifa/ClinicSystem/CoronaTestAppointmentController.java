@@ -172,12 +172,14 @@ public class CoronaTestAppointmentController {
                                     LocalDate date_app = corna_cheak_appointment.getDate();
                                     // System.out.println("time app: " + time_app+ "time: " + time +"1"+"\n"+ "date_app: "+ date_app + " date: "+ date);
                                     //System.out.println("time compare: " + (time_app == time) + " date compare " + date.isEqual(date_app) );
-                                    if (time_app.equals(time) && date.isEqual(date_app)) {// the appointment is token
+                                    if (time_app.equals(time) && date.isEqual(date_app)) {// the appointment is taken
 
                                         ok = false;
                                         break;
                                     }
                                 }
+
+                                //if appointment is not taken we add it
                                 if (ok) {
                                     hours.add(j.toString());
                                 }

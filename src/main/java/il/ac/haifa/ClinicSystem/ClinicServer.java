@@ -87,8 +87,8 @@ public class ClinicServer extends AbstractServer{
 		Doctor d = new Doctor("Matt123", "123456789", "Matt Matthews", "Neurology","Matt@gmail.com");
 		Doctor d1 = new Doctor("Israel", "987654321", "Israel Israeli", "ENT","Israel@gmail.com");
 		// I didn't have the heart to change coolDoctor420
-		Doctor d2 = new Doctor("coolDoctor420", "password", "Jane Cohen", "Psychiatrist","Jane@walla.com");
-
+		Doctor d2 = new Doctor("coolDoctor420", "password", "Jane Cohen", "Psychiatrist","Jane@gmail.com");
+		//!!!!!!!!!!!!!!!!! we should probably add a doctor user with one of our presenters email
 		Patient u = new Patient("daniel","123","daniel@gmail.com","Clalit", "Daniel D");
 		DoctorClinic dc = new DoctorClinic(c, d, workingHours);
 		DoctorClinic dc1 = new DoctorClinic(c, d1, workingHours);
@@ -140,6 +140,7 @@ public class ClinicServer extends AbstractServer{
 		session.flush();
 	}
 
+	//this function gives us all instances of a certain class, useful when we need all objects of some entity type
 	private static <T> List<T> getAll(Class<T> object) {
 		CriteriaBuilder builder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteriaQuery = builder.createQuery(object);
@@ -156,6 +157,7 @@ public class ClinicServer extends AbstractServer{
 
 	@Override
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
+		//handling massages from client that ask to add objects to the DB
 		if(msg instanceof Clinic)  {
 			try {
 				session = sessionFactory.openSession();
@@ -270,6 +272,8 @@ public class ClinicServer extends AbstractServer{
 					session.close();
 			}
 		}
+
+		//handling requests from client to get certain parts of the database
 		else if(((String) msg).equals("#ClinicList")) {
 			try {
 				session = sessionFactory.openSession();

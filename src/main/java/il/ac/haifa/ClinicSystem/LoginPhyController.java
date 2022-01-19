@@ -37,7 +37,7 @@ public class LoginPhyController {
     void CheckLogin(ActionEvent event) throws IOException{
         LoginController c =new LoginController();//why???????
         c.setClient(chatClient); // why?????????/
-        String usermane= userButton.getText();
+        String username= userButton.getText();
         String password= PassButton.getText();
 
         chatClient.setGotList(false);
@@ -60,7 +60,7 @@ public class LoginPhyController {
         }
         users = chatClient.getUserList();
         for(User user:users){
-            if(user.getUsername().equals(usermane)){
+            if(user.getUsername().equals(username)){
 
                 SecureRandom random = new SecureRandom();
                 byte[] salt = new byte[16];
