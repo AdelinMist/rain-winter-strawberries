@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
     public class FamilyAppointmentController {
@@ -30,6 +31,9 @@ import java.util.List;
 
         @FXML
         private Label listLbl;
+
+        @FXML
+        private TableColumn<Clinic,ChoiceBox<String>> family;
 
         @FXML
         private TableColumn<Clinic, String> name;
@@ -67,6 +71,10 @@ import java.util.List;
             Patient user = (Patient) chatClient.getUser();// add the appointment to the clinic
             user.add_Family_Appointment(appointment);// add the appointment to the user
             appointment.setUser(user);
+            boolean is_family = false;
+            if(clinic.getFamily().getValue().equals("family"))
+                is_family = true;
+            appointment.setIs_family(is_family);
             try {
                 chatClient.sendToServer(clinic);
             } catch (IOException e) {
@@ -93,6 +101,7 @@ import java.util.List;
             place.setCellValueFactory(new PropertyValueFactory<Clinic, String>("location"));
             dayPicker.setCellValueFactory(new PropertyValueFactory<Clinic, DatePicker>("dayPicker"));
             timeOptions.setCellValueFactory(new PropertyValueFactory<Clinic, ChoiceBox<String>>("timeOptions"));
+            family.setCellValueFactory(new PropertyValueFactory<Clinic, ChoiceBox<String>>("family"));
 
 
 
@@ -130,6 +139,10 @@ import java.util.List;
                     c.setClinic(curClinic.get(clinicIndex));
                     DatePicker d = new DatePicker();
                     // c.setDayPicker(d);
+                    List<String> days = Arrays.asList("family", "children");
+                    ObservableList<String> data1 = FXCollections.observableArrayList();
+                    data1.addAll(days);
+                    curClinic.get(clinicIndex).setFamily(new ChoiceBox<String>(data1));
                     curClinic.get(clinicIndex).setTimeOptions(new ChoiceBox<String>());
                     curClinic.get(clinicIndex).setDayPicker(d);
                     EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {

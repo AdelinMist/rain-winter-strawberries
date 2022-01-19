@@ -22,7 +22,7 @@ public class FamilyDoctorAppointment implements Serializable {
     }
 
 
-
+    private boolean is_family;
     private LocalDate date;
     @ManyToOne
     private Clinic clinic; // maybe need more
@@ -69,5 +69,13 @@ public class FamilyDoctorAppointment implements Serializable {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public boolean isIs_family() {
+        return is_family;
+    }
+
+    public void setIs_family(boolean is_family) {
+        this.is_family = is_family;
     }
 }

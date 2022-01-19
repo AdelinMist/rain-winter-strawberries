@@ -86,6 +86,11 @@ public class Clinic implements Serializable{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<FamilyDoctorAppointment> familyDoctorAppointments;
 
+
+	//private  transient  ChoiceBox<String> family ;
+
+
+
 	public void add_pro_Appointment(ProDoctorAppointment appointment){
 		this.pro_appointments1.add(appointment);
 
@@ -120,8 +125,13 @@ public class Clinic implements Serializable{
 
 	}
 	private transient DatePicker dayPicker;
-	private transient ChoiceBox<String> timeOptions; // saved as "hh:mm", for example "12:10"
-
+	private transient ChoiceBox<String> timeOptions,family; // saved as "hh:mm", for example "12:10"
+	public void setFamily(ChoiceBox<String> fiamly) {
+		this.family = fiamly;
+	}
+	public  ChoiceBox<String> getFamily() {
+		return this.family;
+	}
 
 
 
