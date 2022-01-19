@@ -36,7 +36,9 @@ public class OrderAppoinmentMenuController {
 
     @FXML
     void clickDoctor(ActionEvent event) throws IOException {
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
         App.setRoot("doctorSpecialty");
+
     }
     @FXML
     void gotovac(ActionEvent event) throws IOException {
@@ -47,6 +49,10 @@ public class OrderAppoinmentMenuController {
         App.setRoot("SisterAppointment");
     }
     @FXML
+    void goLab(ActionEvent event) throws IOException {
+        App.setRoot("labAppointment");
+    }
+    @FXML
     void goFamily(ActionEvent event) throws IOException {
         App.setRoot("FamilyAppointment");
     }
@@ -55,6 +61,16 @@ public class OrderAppoinmentMenuController {
     void returnToMenu(ActionEvent event) throws IOException {
         App.setRoot("clientMenu");
     }
+
+    @FXML
+    private Button family;
+
+    @FXML
+    private Button lab;
+
+
+
+
 
     public void setClient(SimpleClient c) {
         this.chatClient = c;

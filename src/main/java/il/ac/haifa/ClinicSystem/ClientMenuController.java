@@ -7,7 +7,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
+import javafx.scene.image.ImageView ;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -19,13 +22,28 @@ public class ClientMenuController {
     private Alert alert = new Alert(Alert.AlertType.ERROR);
 
     @FXML
+    private AnchorPane dwon;
+
+    @FXML
     private Button exitBtn;
+
+    @FXML
+    private AnchorPane midlle;
 
     @FXML
     private Button greenBtn;
 
     @FXML
     private Button orderBtn;
+
+    @FXML
+    private ImageView picture;
+
+    @FXML
+    private Text txet;
+
+    @FXML
+    private AnchorPane up;
 
     @FXML
     private Button viewBtn;

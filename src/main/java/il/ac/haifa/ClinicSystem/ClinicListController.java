@@ -58,7 +58,7 @@ public class ClinicListController {
 	private Alert notSelectedAlert = new Alert(Alert.AlertType.ERROR);
 
 	@FXML
-    void showChangeHours(ActionEvent event) throws InterruptedException, IOException { //change so that chosed day is displayed on changehours window, if there is any.
+    void showChangeHours(ActionEvent event) throws InterruptedException, IOException { //change so that chosen day is displayed on changeHours window, if there is any.
     	Clinic curClinic = clinicTable.getSelectionModel().getSelectedItem();
 
     	String chosenDay = curClinic.getDayOfWeek().getSelectionModel().getSelectedItem();
@@ -115,8 +115,13 @@ public class ClinicListController {
 
     	loadData();
     }
-  
-    public void loadData() throws InterruptedException {
+
+
+	/**
+	 * making a request to the server for the Clinic List and loading it into the program
+	 * @throws InterruptedException
+	 */
+	public void loadData() throws InterruptedException {
     	chatClient.setGotList(false);
 
 		 try {
@@ -138,6 +143,7 @@ public class ClinicListController {
 		for(Clinic c : clinics) {
 			ObservableList<String> data = FXCollections.observableArrayList();
 			data.addAll(days);
+			//adding the days of the week to the choice box
 			c.setDayOfWeek(new ChoiceBox<String>(data));
 			c.getDayOfWeek().getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
 				if (newSelection != null) {

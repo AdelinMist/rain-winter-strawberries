@@ -18,7 +18,7 @@ public class Corna_cheak_Appointment implements Serializable {
     private int id;
     @OneToOne
     private  Quiz quiz;
-    private LocalDate date;
+   private LocalDate date;
     @ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private Clinic clinic; // maybe need more
@@ -26,6 +26,27 @@ public class Corna_cheak_Appointment implements Serializable {
     @ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private User user;
+
+    private String username;
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
+    private boolean visited=false;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public User getUser(){
         return this.user;
     }

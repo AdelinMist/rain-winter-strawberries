@@ -21,7 +21,11 @@ public class Doctor extends User implements Serializable {
 
     @OneToMany(mappedBy = "doctor")
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<DoctorClinic> doctorClinics = null;
+    private List<DoctorClinic> doctorClinics = null; //each doctor may work in several clinic and for each clinic he needs info about work times and etc.
+    @OneToMany(mappedBy = "doctor")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ProDoctorAppointment> appointments;
+
 
     public Doctor() {
 
@@ -38,6 +42,7 @@ public class Doctor extends User implements Serializable {
         this.specialization = d.getSpecialization();
         this.doctorClinics = d.getDoctorClinics();
     }
+    private  Clinic clinic;
 
     public List<DoctorClinic> getDoctorClinics() {
         return doctorClinics;
@@ -47,13 +52,9 @@ public class Doctor extends User implements Serializable {
         this.doctorClinics = doctorClinics;
     }
 
-
-
     public int getId() {
         return this.id;
     }
-
-
 
     public String getSpecialization() {
         return specialization;
@@ -61,5 +62,24 @@ public class Doctor extends User implements Serializable {
 
     public void setSpecialization(String mailAdd) {
         this.specialization = mailAdd;
+    }
+
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
+    }
+
+    public Clinic getClinic() {
+        return clinic;
+    }
+
+    public List<ProDoctorAppointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<ProDoctorAppointment> appointments) {
+        this.appointments = appointments;
+    }
+    public void add(ProDoctorAppointment appointment){
+        this.appointments.add(appointment);
     }
 }

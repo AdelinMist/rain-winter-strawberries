@@ -79,11 +79,50 @@ public class Clinic implements Serializable{
 
 	@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
 	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<labAppointment> lab_appointments1;
+
+	@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<ProDoctorAppointment> pro_appointments1;
+
+	@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<FamilyDoctorAppointment> family_appointments1;
 
 	@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<WeeklyClinicReport> weeklyClinicReportList;
+	@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<FamilyDoctorAppointment> familyDoctorAppointments;
+
+	@OneToOne
+	private Secretary secretary;
+
+	//private  transient  ChoiceBox<String> family ;
+
+
+
+	public void add_pro_Appointment(ProDoctorAppointment appointment){
+		this.pro_appointments1.add(appointment);
+
+	}
+	public  List<ProDoctorAppointment> getProAppointments(){
+		return pro_appointments1;
+	}
+
+	public void add_Sister_Appointment(Sister_Appointment appointment){
+		this.sister_appointments1.add(appointment);
+
+	}
+
+	public void add_lab_Appointment(labAppointment appointment){
+		this.lab_appointments1.add(appointment);
+
+	}
+
+	public void add_Family_Appointment(FamilyDoctorAppointment appointment){
+		this.family_appointments1.add(appointment);
 
 	@OneToMany(mappedBy = "clinic")
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -91,6 +130,18 @@ public class Clinic implements Serializable{
 
 	private transient DatePicker dayPicker;
 	private transient ChoiceBox<String> timeOptions; // work like "12:10"
+
+	private transient ChoiceBox<String> timeOptions,family; // saved as "hh:mm", for example "12:10"
+	public void setFamily(ChoiceBox<String> fiamly) {
+		this.family = fiamly;
+	}
+	public  ChoiceBox<String> getFamily() {
+		return this.family;
+	}
+
+
+
+
 
 	private boolean hasCovidTests;
 	private boolean hasCovidVaccinations;
@@ -104,8 +155,9 @@ public class Clinic implements Serializable{
 	//private transient LocalTime curOpenHour;
 	//private transient LocalTime curCloseHour;
 	private transient ChoiceBox<String> dayOfWeek;
-	private transient ChoiceBox<String> weekofvacciene; // eliron add that
+	private transient ChoiceBox<String> weekofvacciene; //Eliron added that
 
+	//regular constructor
 	public Clinic(String name, String location, List<LocalTime> openHours, List<LocalTime> closeHours,
 				  List<LocalTime> covidTestOpenHours, List<LocalTime> covidTestCloseHours, List<LocalTime> covidVaccOpenHours, List<LocalTime> covidVaccCloseHours, boolean test, boolean vac) {
 		this.name = name;
@@ -122,7 +174,8 @@ public class Clinic implements Serializable{
 
 	public Clinic () {
 	 }
-	 
+
+	 //deep copy constructor
 	 public Clinic(Clinic m) {
 		this.name = m.getName();
 		this.location = m.getLocation();
@@ -165,8 +218,16 @@ public class Clinic implements Serializable{
 		 this.hasCovidVaccinations = m.getHasCovidVaccinations();
 		 this.hasCovidTests = m.getHasCovidTests();
 	 }
-	 
-	 @Override
+
+	public List<FamilyDoctorAppointment> getFamily_appointments1() {
+		return family_appointments1;
+	}
+
+	public void setFamily_appointments1(List<FamilyDoctorAppointment> family_appointments1) {
+		this.family_appointments1 = family_appointments1;
+	}
+
+	@Override
 	 public String toString() {
 	        return String.format(name + " | " + location + "\n");
 	 }
@@ -388,12 +449,12 @@ public class Clinic implements Serializable{
 		return this.sister_appointments1 ;
 	}
 
-	public List<FamilyDoctorAppointment> getFamily_appointments1() {
-		return family_appointments1;
+	public List<labAppointment> getLab_appointments1() {
+		return lab_appointments1;
 	}
 
-	public void setFamily_appointments1(List<FamilyDoctorAppointment> family_appointments1) {
-		this.family_appointments1 = family_appointments1;
+	public void setLab_appointments1(List<labAppointment> lab_appointments1) {
+		this.lab_appointments1 = lab_appointments1;
 	}
 
 	public ClinicManager getClinicManager() {

@@ -10,7 +10,7 @@
 
 <BorderPane fx:id="borderPane" prefHeight="703.0" prefWidth="1214.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <top>
-        <Label fx:id="listLbl" alignment="CENTER" prefHeight="24.0" prefWidth="1214.0" text="doctors" textAlignment="CENTER" BorderPane.alignment="CENTER">
+        <Label fx:id="listLbl" alignment="CENTER" prefHeight="24.0" prefWidth="1214.0" text="lab appointment" textAlignment="CENTER" BorderPane.alignment="CENTER">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font></Label>
@@ -18,7 +18,10 @@
     <center>
         <TableView fx:id="vaccineClinicTable" prefHeight="640.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="name" prefWidth="1213.5999939084054" text="doctor name" />
+                <TableColumn fx:id="name" prefWidth="300" text="Clinic Name" />
+                <TableColumn fx:id="place" prefWidth="400" text="Location" />
+                <TableColumn fx:id="dayPicker" prefWidth="150.0" text="date" />
+                <TableColumn fx:id="timeOptions" prefWidth="150.0" text="Hour" />
 
             </columns>
         </TableView>

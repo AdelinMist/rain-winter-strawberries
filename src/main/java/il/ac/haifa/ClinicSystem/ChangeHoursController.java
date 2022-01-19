@@ -52,6 +52,7 @@ public class ChangeHoursController {
     	    		}
     	    	});
     	    	newClinic =  new Clinic(curClinic);
+    	    	//if the user has chosen the desired time change and a day of the week we change the opening and closing hours as needed
 				if (dayChoice.getSelectionModel().getSelectedItem() != null && !openTime.getText().isEmpty()) {
 					switch (dayChoice.getSelectionModel().getSelectedItem()) {
 						case "Sunday":

@@ -21,7 +21,8 @@
                 <TableColumn fx:id="name" prefWidth="300" text="Clinic Name" />
                 <TableColumn fx:id="place" prefWidth="400" text="Location" />
                 <TableColumn fx:id="dayPicker" prefWidth="150.0" text="date" />
-                <TableColumn fx:id="timeOptions" prefWidth="150.0" text="Hour" />
+                <TableColumn fx:id="timeOptions" prefWidth="178.4000244140625" text="Hour" />
+            <TableColumn fx:id="family" prefWidth="183.9999755859376" text="family/children" />
 
             </columns>
         </TableView>

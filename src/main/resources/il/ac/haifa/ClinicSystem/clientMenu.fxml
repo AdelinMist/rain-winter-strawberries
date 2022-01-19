@@ -1,17 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="440.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER" layoutX="140.0" layoutY="67.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" layoutX="-6.0" layoutY="-105.0" prefHeight="626.0" prefWidth="702.0" style="-fx-border-color: #3D2956;" AnchorPane.bottomAnchor="-81.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="-6.0" AnchorPane.topAnchor="-105.0">
          <children>
             <Button fx:id="viewBtn" mnemonicParsing="false" onAction="#showViewMenu" text="view appointments" />
             <Button fx:id="orderBtn" mnemonicParsing="false" onAction="#showOrderMenu" text="order appointments" />
             <Button fx:id="greenBtn" mnemonicParsing="false" onAction="#makeGreenPass" text="green pass " />
             <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exit" text="exit" />
+            <AnchorPane fx:id="up" prefHeight="195.0" prefWidth="700.0" style="-fx-background-color: #3D4977;">
+               <children>
+                  <Text fx:id="txet" fontSmoothingType="LCD" layoutX="27.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome back!" textAlignment="JUSTIFY" wrappingWidth="322.13673400878906">
+                     <font>
+                        <Font name="System Italic" size="28.0" />
+                     </font>
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.9157894849777222" green="0.6995614171028137" blue="0.05087719112634659" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" green="1.0" blue="1.0" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </RadialGradient>
+                     </fill>
+                  </Text>
+                  <ImageView fx:id="picture" fitHeight="150.0" fitWidth="200.0" layoutX="487.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../../Downloads/kisspng-health-insurance-health-care-life-insurance-5b07d49d08d740.2474987915272398370362.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="midlle" prefHeight="179.0" prefWidth="700.0" style="-fx-background-color: #3D4956;">
+               <children>
+                  <Button fx:id="viewBtn" layoutX="495.0" layoutY="51.0" mnemonicParsing="false" onAction="#showViewMenu" prefHeight="38.0" prefWidth="204.0" style="-fx-background-color: #3D4970;" text="view appointments" textFill="#22b6d6" textOverrun="WORD_ELLIPSIS">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="NE_RESIZE" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="orderBtn" layoutX="494.0" layoutY="110.0" mnemonicParsing="false" onAction="#showOrderMenu" prefHeight="38.0" prefWidth="206.0" style="-fx-background-color: #3D4970;" text="order appointments" textFill="#41cdd1">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="dwon" prefHeight="90.0" prefWidth="701.0" style="-fx-background-color: #3D4956;">
+               <children>
+                  <Button fx:id="exitBtn" layoutX="495.0" layoutY="25.0" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="205.0" style="-fx-background-color: L96151;" text="exit" textFill="#d99723">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
          </children>
       </VBox>
    </children>

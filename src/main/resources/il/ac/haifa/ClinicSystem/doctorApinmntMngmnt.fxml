@@ -10,15 +10,16 @@
 
 <BorderPane fx:id="borderPane" prefHeight="703.0" prefWidth="1214.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <top>
-        <Label fx:id="listLbl" alignment="CENTER" prefHeight="24.0" prefWidth="1214.0" text="doctors" textAlignment="CENTER" BorderPane.alignment="CENTER">
+        <Label fx:id="listLbl" alignment="CENTER" prefHeight="24.0" prefWidth="1214.0" text="vaccine clinics List" textAlignment="CENTER" BorderPane.alignment="CENTER">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font></Label>
     </top>
     <center>
-        <TableView fx:id="vaccineClinicTable" prefHeight="640.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+        <TableView fx:id="apointmentsTable" prefHeight="640.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="name" prefWidth="1213.5999939084054" text="doctor name" />
+                <TableColumn fx:id="name" prefWidth="300" text="appointment type" />
+                <TableColumn fx:id="time" prefWidth="150.0" text="Hour" />
 
             </columns>
         </TableView>
@@ -27,7 +28,7 @@
         <AnchorPane prefHeight="39.0" prefWidth="1214.0" BorderPane.alignment="CENTER">
             <children>
                 <Button fx:id="returnBtn" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#returnToMenu" text="Return to Menu" />
-                <Button fx:id="addBtn" layoutX="1051.0" layoutY="8.0" mnemonicParsing="false" onAction="#nextPage" text="next" />
+
             </children>
         </AnchorPane>
     </bottom>

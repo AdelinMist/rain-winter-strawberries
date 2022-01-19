@@ -38,30 +38,44 @@ public class Patient extends User implements Serializable{
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Sister_Appointment> sister_appointments1;
 
+    @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<labAppointment> lab_appointments1;
+
     @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true )
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<FamilyDoctorAppointment> family_Appointments1;
 
+    @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true )
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ProDoctorAppointment> pro_Appointments1;
+
+    public void add_pro_Appointment(ProDoctorAppointment appointment){
+        this.pro_Appointments1.add(appointment);
+
+    }
 
 
     public void add_Sister_Appointment(Sister_Appointment appointment){
         this.sister_appointments1.add(appointment);
 
     }
+
+    public void add_lab_Appointment(labAppointment appointment){
+        this.lab_appointments1.add(appointment);
+
+    }
     public void add_Family_Appointment(FamilyDoctorAppointment appointment){
         this.family_Appointments1.add(appointment);
-
     }
 
     public void add_vaccine_appointment(Vaccine_Appointment vaccine_appointment){
         this.vaccine_appointments1.add(vaccine_appointment);
         System.out.println(vaccine_appointment.getTime() + "insert to the list!");
-
     }
 
-    public void add_coronaTest_appointment(Corna_cheak_Appointment corna_cheak_appointment){
+    public void add_coronaTest_appointment(Corna_cheak_Appointment corna_cheak_appointment){ //It hurts my soul
         this.Corna_cheak_Appointments1.add(corna_cheak_appointment);
-
     }
 
     public List<Vaccine_Appointment> getVaccine_appointments1() {
@@ -100,6 +114,14 @@ public class Patient extends User implements Serializable{
         this.clinic_name = clinic_name;
     }
 
+    public List<labAppointment> getLab_appointments1() {
+        return lab_appointments1;
+    }
+
+    public List<ProDoctorAppointment> getPro_Appointments1() {
+        return pro_Appointments1;
+    }
+
     public Patient(User u, String clinic_name) {
         super(u);
         this.clinic_name = clinic_name;
@@ -119,6 +141,22 @@ public class Patient extends User implements Serializable{
 
     public void setClinic_name(String clinic_name) {
         this.clinic_name = clinic_name;
+    }
+
+    public List<Vaccine_Appointment> getVaccine_appointments1() {
+        return vaccine_appointments1;
+    }
+
+    public List<Corna_cheak_Appointment> getCorna_cheak_Appointments1() {
+        return Corna_cheak_Appointments1;
+    }
+
+    public List<Sister_Appointment> getSister_appointments1() {
+        return sister_appointments1;
+    }
+
+    public List<FamilyDoctorAppointment> getFamily_Appointments1() {
+        return family_Appointments1;
     }
 
     public int getId() {

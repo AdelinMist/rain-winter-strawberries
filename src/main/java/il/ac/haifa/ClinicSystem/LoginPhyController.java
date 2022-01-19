@@ -1,9 +1,11 @@
 package il.ac.haifa.ClinicSystem;
 
-import il.ac.haifa.ClinicSystem.entities.*;
+import il.ac.haifa.ClinicSystem.entities.Doctor;
+import il.ac.haifa.ClinicSystem.entities.Patient;
+import il.ac.haifa.ClinicSystem.entities.Secretary;
+import il.ac.haifa.ClinicSystem.entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -17,10 +19,8 @@ import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.List;
 
-public class LoginController {
+public class LoginPhyController {
 
-    //flag is 0 when username or password are incorrect and 1 otherwise
-    int flag=0;
     private List<User> users;
     private SimpleClient chatClient;
 
@@ -38,8 +38,8 @@ public class LoginController {
 
     @FXML
     void CheckLogin(ActionEvent event) throws IOException{
-        LoginController c =new LoginController();
-        c.setClient(chatClient);
+        LoginController c =new LoginController();//why???????
+        c.setClient(chatClient); // why?????????/
         String username= userButton.getText();
         String password= PassButton.getText();
 
@@ -81,42 +81,24 @@ public class LoginController {
                 byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
 
                 if(Arrays.equals(hashedPassword, user.getPassword())){
-
-                    /*if(user instanceof Doctor){
-                        App.setRoot("DoctorClinic");
-                    }
-                    else{
-                        App.setRoot("clientMenu");
-                    }*/
-
                     chatClient.setUser(user);
-                    flag=1;
-                    if(user instanceof Patient){
-                        App.setRoot("clientMenu");
-                    }
-                    else if(user instanceof Doctor){
+
+                    if(user instanceof Doctor){
                         App.setRoot("doctorScreen");
                     }
-                    else if(user instanceof SystemManager){
-                        App.setRoot("systemManagerMenu");
+
+                    else if(user instanceof Patient){
+                        App.setRoot("ApinmntMngmnt");
                     }
-                    else if(user instanceof ClinicManager){
-                        App.setRoot("clinicManagerMenu");
+
+                    else if(user instanceof Secretary){
+                        App.setRoot("secretaryMngmnt");
                     }
 
                 }
 
             }
         }
-        if (flag==0){
-            //should get here only if user/password is incorrect
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Login denied");
-            alert.setHeaderText("Username or password is not correct");
-            alert.setContentText("Please try again");
-            alert.showAndWait();
-        }
-
 
 
     }

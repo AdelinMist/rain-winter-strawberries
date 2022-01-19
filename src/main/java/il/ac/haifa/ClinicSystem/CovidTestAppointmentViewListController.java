@@ -48,6 +48,12 @@ public class CovidTestAppointmentViewListController {
     private ObservableList<Corna_cheak_Appointment> cList = FXCollections.observableArrayList();
     private Alert notSelectedAlert = new Alert(Alert.AlertType.ERROR);
 
+    /**
+     * the function reads the selected appointment from the screen
+     * and proceeds to delete it by sending a request to the server
+     * @param event given to us by the button OnClick, is unnecessary
+     * @throws InterruptedException
+     */
     @FXML
     void cancelAppointment(ActionEvent event) throws InterruptedException {
         Corna_cheak_Appointment app = appointmentTable.getSelectionModel().getSelectedItem();
@@ -93,6 +99,13 @@ public class CovidTestAppointmentViewListController {
         loadData(null);
     }
 
+    /**
+     *
+     * making a request to the server for the Covid Test Appointments of the user List and loading it into the program
+     * @param apps
+     * @throws InterruptedException
+     * @see User
+     */
     public void loadData(List<Corna_cheak_Appointment> apps) throws InterruptedException {
         if(apps == null){
             User user = this.chatClient.getUser();

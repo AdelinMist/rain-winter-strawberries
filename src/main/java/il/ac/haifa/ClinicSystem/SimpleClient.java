@@ -1,11 +1,11 @@
 package il.ac.haifa.ClinicSystem;
 
+import il.ac.haifa.ClinicSystem.entities.*;
+import il.ac.haifa.ClinicSystem.ocsf.client.AbstractClient;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
-
-import il.ac.haifa.ClinicSystem.entities.*;
-import il.ac.haifa.ClinicSystem.ocsf.client.AbstractClient;
 
 public class SimpleClient extends AbstractClient{
 	private static final Logger LOGGER =
@@ -59,7 +59,7 @@ public class SimpleClient extends AbstractClient{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected void handleMessageFromServer(Object msg) {
+	protected void handleMessageFromServer(Object msg) { //in this function we should
 		if(msg instanceof List<?>) {
 			curList = (List<?>)msg;
 			gotList = true;
@@ -107,6 +107,9 @@ public class SimpleClient extends AbstractClient{
 	 public List<Clinic> getClinicList(){
 		 return (List<Clinic>)curList;
 	 }
+	public List<Doctor> getDoctorList(){
+		return (List<Doctor>)curList;
+	}
 
 	 public List<User> getUserList(){
 		return (List<User>)curList;

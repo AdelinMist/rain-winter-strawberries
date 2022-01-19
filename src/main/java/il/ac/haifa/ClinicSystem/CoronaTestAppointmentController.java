@@ -69,6 +69,8 @@ public class CoronaTestAppointmentController {
         //quiz.setAppointment(appointment);
         clinic.add_coronaTest_appointment(appointment);
         Patient user = (Patient)chatClient.getUser();// add the appointment to the clinic
+        appointment.setUser(user);
+        appointment.setUsername(user.getName());
         user.add_coronaTest_appointment(appointment);// add the appointment to the user
         appointment.setUser(user);
         try {
@@ -77,9 +79,11 @@ public class CoronaTestAppointmentController {
             e.printStackTrace();
         }
         loadData();
-       /* succsessAlert.setTitle("Appointment confirmed");
+        succsessAlert.setTitle("Appointment confirmed");
         succsessAlert.setHeaderText("You made an appointment to " + date + " at " + time);
-        succsessAlert.showAndWait();*/
+        succsessAlert.showAndWait();
+        SendMail mail = new SendMail();
+        mail.send_remainder_covidtest(chatClient.getUser(),appointment);
     }
 
     @FXML
@@ -100,6 +104,10 @@ public class CoronaTestAppointmentController {
         loadData();
     }
 
+    /**
+     * making a request to the server for the Clinic List and loading it into the program
+     * @throws InterruptedException
+     */
     private void loadData() throws InterruptedException {
         chatClient.setGotList(false);
 
@@ -169,12 +177,14 @@ public class CoronaTestAppointmentController {
                                     LocalDate date_app = corna_cheak_appointment.getDate();
                                     // System.out.println("time app: " + time_app+ "time: " + time +"1"+"\n"+ "date_app: "+ date_app + " date: "+ date);
                                     //System.out.println("time compare: " + (time_app == time) + " date compare " + date.isEqual(date_app) );
-                                    if (time_app.equals(time) && date.isEqual(date_app)) {// the appointment is token
+                                    if (time_app.equals(time) && date.isEqual(date_app)) {// the appointment is taken
 
                                         ok = false;
                                         break;
                                     }
                                 }
+
+                                //if appointment is not taken we add it
                                 if (ok) {
                                     hours.add(j.toString());
                                 }

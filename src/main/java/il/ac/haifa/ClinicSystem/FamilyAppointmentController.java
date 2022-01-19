@@ -2,7 +2,6 @@ package il.ac.haifa.ClinicSystem;
 import il.ac.haifa.ClinicSystem.entities.Clinic;
 import il.ac.haifa.ClinicSystem.entities.FamilyDoctorAppointment;
 import il.ac.haifa.ClinicSystem.entities.Patient;
-import il.ac.haifa.ClinicSystem.entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +15,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
     public class FamilyAppointmentController {
@@ -31,6 +31,9 @@ import java.util.List;
 
         @FXML
         private Label listLbl;
+
+        @FXML
+        private TableColumn<Clinic,ChoiceBox<String>> family;
 
         @FXML
         private TableColumn<Clinic, String> name;
@@ -56,6 +59,13 @@ import java.util.List;
         private ObservableList<Clinic> cList = FXCollections.observableArrayList();
         private Alert notSelectedAlert = new Alert(Alert.AlertType.ERROR);
         Alert succsessAlert = new Alert(Alert.AlertType.INFORMATION);
+
+        /**
+         * We add the selected appointment into our DB
+         * and proceed
+         * @param event passed by Button OnClick, we don't use it
+         * @throws InterruptedException
+         */
         @FXML
         void nextPage(ActionEvent event) throws InterruptedException {
             Clinic clinic = vaccineClinicTable.getSelectionModel().getSelectedItem();
@@ -68,16 +78,24 @@ import java.util.List;
             Patient user = (Patient) chatClient.getUser();// add the appointment to the clinic
             user.add_Family_Appointment(appointment);// add the appointment to the user
             appointment.setUser(user);
+            appointment.setUsername(user.getName());
+            boolean is_family = false;
+            if(clinic.getFamily().getValue().equals("family"))
+                is_family = true;
+            appointment.setIs_family(is_family);
             try {
                 chatClient.sendToServer(clinic);
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            loadData();
+
             succsessAlert.setTitle("Appointment confirmed");
             succsessAlert.setHeaderText("You made an appointment to " + date + " at " + time);
             succsessAlert.showAndWait();
+            SendMail mail = new SendMail();
+            mail.send_remainder_family(chatClient.getUser(),appointment);
+            loadData();
         }
 
         @FXML
@@ -91,6 +109,7 @@ import java.util.List;
             place.setCellValueFactory(new PropertyValueFactory<Clinic, String>("location"));
             dayPicker.setCellValueFactory(new PropertyValueFactory<Clinic, DatePicker>("dayPicker"));
             timeOptions.setCellValueFactory(new PropertyValueFactory<Clinic, ChoiceBox<String>>("timeOptions"));
+            family.setCellValueFactory(new PropertyValueFactory<Clinic, ChoiceBox<String>>("family"));
 
 
 
@@ -128,6 +147,10 @@ import java.util.List;
                     c.setClinic(curClinic.get(clinicIndex));
                     DatePicker d = new DatePicker();
                     // c.setDayPicker(d);
+                    List<String> days = Arrays.asList("family", "children");
+                    ObservableList<String> data1 = FXCollections.observableArrayList();
+                    data1.addAll(days);
+                    curClinic.get(clinicIndex).setFamily(new ChoiceBox<String>(data1));
                     curClinic.get(clinicIndex).setTimeOptions(new ChoiceBox<String>());
                     curClinic.get(clinicIndex).setDayPicker(d);
                     EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {

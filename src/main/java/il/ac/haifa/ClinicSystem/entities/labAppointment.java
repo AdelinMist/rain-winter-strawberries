@@ -5,17 +5,18 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "FamilyDoctor_appointments")
-public class FamilyDoctorAppointment implements Serializable {
+@Table(name = "lab_appointments")
+public class labAppointment   implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="FamilyDoctorAppointment_id")
+    @Column(name="Sister_Appointment_id")
     private int id;
     private  String day;
-    private  String time; // saved as "hh:mm" like "12:10"
-    public FamilyDoctorAppointment(LocalDate date, String time , Clinic clinic) {
+    private  String time; // work like "12:10"
+    //private String clinic_name; // for any user have own clinic
+    public labAppointment(LocalDate date, String time , Clinic clinic) {
         this.date = date;
         this.clinic = clinic;
         this.time = time;
@@ -41,14 +42,12 @@ public class FamilyDoctorAppointment implements Serializable {
         this.username = username;
     }
 
-    private boolean is_family;
     private LocalDate date;
     @ManyToOne
     private Clinic clinic; // maybe need more
     public Clinic getClinic() {
-        return this.clinic;
+        return clinic;
     }
-
     @ManyToOne
     User user;
     public User getUser(){
@@ -66,13 +65,13 @@ public class FamilyDoctorAppointment implements Serializable {
         return this.date;
     }
 
-    public FamilyDoctorAppointment( String time,LocalDate date , Clinic clinic) {
+    public labAppointment( String time,LocalDate date , Clinic clinic) {
         this.date = date;
         this.clinic = clinic;
         this.time = time;
     }
 
-    public FamilyDoctorAppointment(){}
+    public labAppointment(){}
 
     public String getDay() {
         return day;
@@ -88,13 +87,5 @@ public class FamilyDoctorAppointment implements Serializable {
 
     public void setTime(String time) {
         this.time = time;
-    }
-
-    public boolean isIs_family() {
-        return is_family;
-    }
-
-    public void setIs_family(boolean is_family) {
-        this.is_family = is_family;
     }
 }

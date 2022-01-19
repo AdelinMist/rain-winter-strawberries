@@ -25,17 +25,43 @@ public class User implements Serializable {
     @Column(name = "username")
     protected String username;
     private String name;
+    private String clinic_name; // for appointment 3.5 any user need own clinic (sister appointment)
     protected byte[] password;
     protected byte[] salt;
 
+    @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Vaccine_Appointment> vaccine_appointments1;
 
+    @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true )
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Corna_cheak_Appointment> Corna_cheak_Appointments1;
+
+
+    @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Sister_Appointment> sister_appointments1;
     private String email;
     public  String getEmail(){
         return this.email;
     }
 
 
+    public void add_Sister_Appointment(Sister_Appointment appointment){
+        this.sister_appointments1.add(appointment);
 
+    }
+
+    public void add_vaccine_appointment(Vaccine_Appointment vaccine_appointment){
+        this.vaccine_appointments1.add(vaccine_appointment);
+        System.out.println(vaccine_appointment.getTime() + "insert to the list!");
+
+    }
+
+    public void add_coronaTest_appointment(Corna_cheak_Appointment corna_cheak_appointment){
+        this.Corna_cheak_Appointments1.add(corna_cheak_appointment);
+
+    }
 
     public User() {
 
@@ -45,11 +71,14 @@ public class User implements Serializable {
         this.username = username;
         this.email = email;
         this.name = name;
+
+        //generating SecureRandom object in order to create salt for a good password hashing
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
         random.nextBytes(salt);
         this.salt = salt;
 
+        //using SHA-512 in order to hash the password
         MessageDigest md = null;
         try {
             md = MessageDigest.getInstance("SHA-512");
@@ -58,14 +87,22 @@ public class User implements Serializable {
         }
         md.update(salt);
 
+        //hashing the password and updating it
         byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
         this.password = hashedPassword;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public User(User u){
         this.username = u.getUsername();
         this.salt = u.getSalt().clone();
-        this.name = u.getName();
         this.password = u.getPassword().clone();
         this.id = u.getId();
     }
@@ -89,17 +126,9 @@ public class User implements Serializable {
     public byte[] getPassword() {
         return password;
     }
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
 
     public void setPassword(String password) {
+        //same as in constructor function
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
         random.nextBytes(salt);
