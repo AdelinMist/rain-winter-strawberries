@@ -19,6 +19,7 @@ import java.util.List;
 
 public class LoginController {
 
+    int flag=0;
     private List<User> users;
     private SimpleClient chatClient;
 
@@ -79,7 +80,7 @@ public class LoginController {
                 byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
 
                 if(Arrays.equals(hashedPassword, user.getPassword())){
-
+                    flag=1;
                     /*if(user instanceof Doctor){
                         App.setRoot("DoctorClinic");
                     }
@@ -94,13 +95,15 @@ public class LoginController {
 
             }
         }
+        if (flag==0){
+            //should get here only if user/password is incorrect
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Login denied");
+            alert.setHeaderText("Username or password is not correct");
+            alert.setContentText("Please try again");
+            alert.showAndWait();
+        }
 
-        //should get here only if user/password is incorrect
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Login denied");
-        alert.setHeaderText("Username or password is not correct");
-        alert.setContentText("Please try again");
-        alert.showAndWait();
 
 
     }
