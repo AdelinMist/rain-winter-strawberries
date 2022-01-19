@@ -129,11 +129,31 @@ public class App extends Application {
             fxmlLoader.setController(controller);
         }
 
+        else if(fxml.equals("ApinmntMngmnt")) {
+            ApinmntMngmntController controller = new ApinmntMngmntController();
+            controller.setClient(client);
+            fxmlLoader.setController(controller);
+        }
+
+        else if(fxml.equals("doctorScreen")) {
+            doctorScreenController controller = new doctorScreenController();
+            //controller.setClient(client);
+            fxmlLoader.setController(controller);
+        }
+
+        else if(fxml.equals("doctorApinmntMngmnt")) {
+            doctorApinmntMngmntController controller = new doctorApinmntMngmntController();
+            //controller.setClient(client);
+            fxmlLoader.setController(controller);
+        }
+
         else if(fxml.equals("choose")) {
             chooseController controller = new chooseController();
             fxmlLoader.setController(controller);
         }
 
+
+        //doctorApinmntMngmntController
         return fxmlLoader.load();
     }
     public static void setRoot1(String fxml, Quiz quiz) throws IOException { // for quiz
