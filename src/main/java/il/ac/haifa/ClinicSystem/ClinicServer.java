@@ -60,6 +60,7 @@ public class ClinicServer extends AbstractServer{
 		return configuration.buildSessionFactory(serviceRegistry);
 	}
 
+	//here we generate initial Clinics and and everything that's in them
 	private static void generateClinics() throws Exception {
 		List<String> days = Arrays.asList("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
 		List<LocalTime> open = new ArrayList<>(), close = new ArrayList<>(), testopen = new ArrayList<>(), testclose = new ArrayList<>(), vaccopen = new ArrayList<>(), vaccclose = new ArrayList<>();
@@ -79,14 +80,16 @@ public class ClinicServer extends AbstractServer{
 				workingHours.put(d, new Pair<>(LocalTime.of(10,0), LocalTime.of(16,0)));
 			}
 		}
-		Clinic c2 = new Clinic("The White Tower2", "narnia", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
-		Clinic c = new Clinic("The White Tower", "Tar Valon", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
+		Clinic c2 = new Clinic("Meuheded", "Jerusalem", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
+		Clinic c = new Clinic("Clalit", "Haifa", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
 		//session.saveOrUpdate(temp);
-		Doctor d = new Doctor("coolDoctor420", "password", "Mat Matthews", "Neurology","tkhruirjhnh@gmail.com");
-		Doctor d1 = new Doctor("coolDoctor421", "password", "Mat Matthews", "ENT","tkhruirjhnh@gmail.com");
-		Doctor d2 = new Doctor("coolDoctor422", "password", "Mat Matthews", "Neurology","tkhruirjhnh@gmail.com");
-
-		Patient u = new Patient("daniel","123","tkhruirjhnh@gmail.com","The White Tower", "daniel r");
+		//adding doctors like this is a security risk but for projects sake it's ok
+		Doctor d = new Doctor("Matt123", "123456789", "Matt Matthews", "Neurology","Matt@gmail.com");
+		Doctor d1 = new Doctor("Israel", "987654321", "Israel Israeli", "ENT","Israel@gmail.com");
+		// I didn't have the heart to change coolDoctor420
+		Doctor d2 = new Doctor("coolDoctor420", "password", "Jane Cohen", "Psychiatrist","Jane@gmail.com");
+		//!!!!!!!!!!!!!!!!! we should probably add a doctor user with one of our presenters email
+		Patient u = new Patient("daniel","123","daniel@gmail.com","Clalit", "Daniel D");
 		DoctorClinic dc = new DoctorClinic(c, d, workingHours);
 		DoctorClinic dc1 = new DoctorClinic(c, d1, workingHours);
 		DoctorClinic dc2 = new DoctorClinic(c2, d1, workingHours);
@@ -137,6 +140,7 @@ public class ClinicServer extends AbstractServer{
 		session.flush();
 	}
 
+	//this function gives us all instances of a certain class, useful when we need all objects of some entity type
 	private static <T> List<T> getAll(Class<T> object) {
 		CriteriaBuilder builder = session.getCriteriaBuilder();
 		CriteriaQuery<T> criteriaQuery = builder.createQuery(object);
@@ -153,6 +157,7 @@ public class ClinicServer extends AbstractServer{
 
 	@Override
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
+		//handling massages from client that ask to add objects to the DB
 		if(msg instanceof Clinic)  {
 			try {
 				session = sessionFactory.openSession();
@@ -267,6 +272,8 @@ public class ClinicServer extends AbstractServer{
 					session.close();
 			}
 		}
+
+		//handling requests from client to get certain parts of the database
 		else if(((String) msg).equals("#ClinicList")) {
 			try {
 				session = sessionFactory.openSession();

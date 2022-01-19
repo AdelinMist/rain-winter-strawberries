@@ -57,7 +57,7 @@ public class SimpleClient extends AbstractClient{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected void handleMessageFromServer(Object msg) {
+	protected void handleMessageFromServer(Object msg) { //in this function we should
 		if(msg instanceof List<?>) {
 			curList = (List<?>)msg;
 			gotList = true;

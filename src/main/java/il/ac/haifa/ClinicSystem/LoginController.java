@@ -19,6 +19,7 @@ import java.util.List;
 
 public class LoginController {
 
+    //flag is 0 when username or password are incorrect and 1 otherwise
     int flag=0;
     private List<User> users;
     private SimpleClient chatClient;
@@ -37,9 +38,9 @@ public class LoginController {
 
     @FXML
     void CheckLogin(ActionEvent event) throws IOException{
-        LoginController c =new LoginController();//why???????
-        c.setClient(chatClient); // why?????????/
-        String usermane= userButton.getText();
+        LoginController c =new LoginController();
+        c.setClient(chatClient);
+        String username= userButton.getText();
         String password= PassButton.getText();
 
         chatClient.setGotList(false);
@@ -62,7 +63,7 @@ public class LoginController {
         }
         users = chatClient.getUserList();
         for(User user:users){
-            if(user.getUsername().equals(usermane)){
+            if(user.getUsername().equals(username)){
 
                 SecureRandom random = new SecureRandom();
                 byte[] salt = new byte[16];

@@ -45,7 +45,7 @@ public class clinics_of_doctor_typeController {
     private TableView<Clinic> vaccineClinicTable;
 
     private SimpleClient chatClient;
-    private Doctor doctor =DoctorAppointmentController.doctornext;
+    private Doctor doctor = DoctorAppointmentController.doctornext;
 
 
     private List<Clinic> curClinic = new ArrayList<>();

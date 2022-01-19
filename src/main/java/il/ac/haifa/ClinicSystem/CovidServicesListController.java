@@ -67,7 +67,7 @@ public class CovidServicesListController {
     }
 
     @FXML
-    void showChangeHours(ActionEvent event) throws InterruptedException, IOException { //change so that chosed day is displayed on changehours window, if there is any.
+    void showChangeHours(ActionEvent event) throws InterruptedException, IOException { //change so that choseמ day is displayed on changeHours window, if there is any.
         Clinic curClinic = clinicTable.getSelectionModel().getSelectedItem();
         String chosenDay = curClinic.getDayOfWeek().getSelectionModel().getSelectedItem();
         if(curClinic == null){

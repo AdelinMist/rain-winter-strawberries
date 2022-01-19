@@ -26,6 +26,7 @@ public class App extends Application {
 		System.exit(0);
 	}
 
+	//here we are loading the first screen the program shows
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("choose"), 1214, 703);
@@ -38,7 +39,10 @@ public class App extends Application {
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
+        //we are loading the necessary fxml file with FXML loader
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+
+        //we are loading the appropriate controller for each fxml page
         if(fxml.equals("clinics_of_doctor_type")) {
             clinics_of_doctor_typeController controller = new clinics_of_doctor_typeController();
             controller.setClient(client);
@@ -156,7 +160,7 @@ public class App extends Application {
         //doctorApinmntMngmntController
         return fxmlLoader.load();
     }
-    public static void setRoot1(String fxml, Quiz quiz) throws IOException { // for quiz
+    public static void setRoot1(String fxml, Quiz quiz) throws IOException { // we need a different function for quiz because we require more parameters
         scene.setRoot(loadFXML1(fxml , quiz));
     }
 
