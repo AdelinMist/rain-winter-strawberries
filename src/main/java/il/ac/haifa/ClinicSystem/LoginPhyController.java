@@ -16,7 +16,7 @@ import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.List;
 
-public class LoginController {
+public class LoginPhyController {
 
     private List<User> users;
     private SimpleClient chatClient;
@@ -87,7 +87,7 @@ public class LoginController {
                     }*/
 
                     chatClient.setUser(user);
-                    App.setRoot("clientMenu");
+                    App.setRoot("ApinmntMngmnt");
 
                 }
 
