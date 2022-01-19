@@ -1,5 +1,6 @@
 package il.ac.haifa.ClinicSystem;
 
+import il.ac.haifa.ClinicSystem.entities.ClinicManager;
 import il.ac.haifa.ClinicSystem.entities.Quiz;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +29,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("clientMenu"), 1214, 703);
+        scene = new Scene(loadFXML("Login"), 1214, 703);
         stage.setScene(scene);
         stage.show();
     }
@@ -116,6 +117,16 @@ public class App extends Application {
         else if(fxml.equals("appointmentsMenu")) {
             AppointmentsMenuController controller = new AppointmentsMenuController();
             controller.setClient(client);
+            fxmlLoader.setController(controller);
+        }
+        else if(fxml.equals("systemManagerMenu")) {
+            SystemManagerMenuController controller = new SystemManagerMenuController();
+            controller.setClient(client);
+            fxmlLoader.setController(controller);
+        }
+        else if(fxml.equals("clinicManagerMenu")) {
+            ClinicManagerMenuController controller = new ClinicManagerMenuController();
+            controller.setParams(client, ((ClinicManager)client.getUser()).getClinic());
             fxmlLoader.setController(controller);
         }
 

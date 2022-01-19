@@ -101,6 +101,7 @@ public class ChangeHoursController {
 					}
 				}
 				chatClient.sendToServer(newClinic);
+				curClinic = newClinic;
 
     }
     
@@ -116,7 +117,42 @@ public class ChangeHoursController {
 		ObservableList<String> data = FXCollections.observableArrayList();
 		data.addAll(days);
 		dayChoice.setItems(data);
-		dayChoice.setValue(chosenDay);
+		if(chosenDay != null){
+			dayChoice.setValue(chosenDay);
+		}
+
+		dayChoice.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+			if (newSelection != null) {
+				switch (newSelection) {
+					case "Sunday":
+						openTime.setText(curClinic.getOpenHours().get(0).toString());
+						closeTime.setText(curClinic.getCloseHours().get(0).toString());
+						break;
+					case "Monday":
+						openTime.setText(curClinic.getOpenHours().get(1).toString());
+						closeTime.setText(curClinic.getCloseHours().get(1).toString());
+						break;
+					case "Tuesday":
+						openTime.setText(curClinic.getOpenHours().get(2).toString());
+						closeTime.setText(curClinic.getCloseHours().get(2).toString());
+						break;
+					case "Wednesday":
+						openTime.setText(curClinic.getOpenHours().get(3).toString());
+						closeTime.setText(curClinic.getCloseHours().get(3).toString());
+						break;
+					case "Thursday":
+						openTime.setText(curClinic.getOpenHours().get(4).toString());
+						closeTime.setText(curClinic.getCloseHours().get(4).toString());
+						break;
+					case "Friday":
+						openTime.setText(curClinic.getOpenHours().get(5).toString());
+						closeTime.setText(curClinic.getCloseHours().get(5).toString());
+						break;
+					default:
+
+				}
+			}
+		});
     }
 
     public void setParams(SimpleClient sc, Clinic c, String chosenDay) {

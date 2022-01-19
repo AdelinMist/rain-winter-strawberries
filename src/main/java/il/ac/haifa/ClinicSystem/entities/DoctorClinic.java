@@ -43,7 +43,7 @@ public class DoctorClinic implements Serializable {
             joinColumns = {@JoinColumn(name = "doctor_clinic_id", referencedColumnName = "id")})
     @MapKeyColumn(name = "working_day")
     @Column(name = "working_hours")
-    private Map<String, Pair<LocalTime, LocalTime>> workingHours = null;
+    private Map<String, Pair<LocalTime, LocalTime>> workingHours;
 
     private transient ChoiceBox<String> dayOfWeek;
     private transient StringProperty curStartTime;

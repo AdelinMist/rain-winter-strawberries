@@ -159,7 +159,7 @@ public class ChangeHoursCovidController {
         }
 
         chatClient.sendToServer(newClinic);
-
+        curClinic = newClinic;
     }
 
     @FXML
@@ -174,7 +174,54 @@ public class ChangeHoursCovidController {
         ObservableList<String> data = FXCollections.observableArrayList();
         data.addAll(days);
         dayChoice.setItems(data);
-        dayChoice.setValue(chosenDay);
+        if(chosenDay != null){
+            dayChoice.setValue(chosenDay);
+        }
+
+        dayChoice.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                switch (newSelection) {
+                    case "Sunday":
+                        vaccStartText.setText(curClinic.getCovidVaccOpenHours().get(0).toString());
+                        vaccEndTest.setText(curClinic.getCovidVaccCloseHours().get(0).toString());
+                        testStartText.setText(curClinic.getCovidTestOpenHours().get(0).toString());
+                        testEndText.setText(curClinic.getCovidTestCloseHours().get(0).toString());
+                        break;
+                    case "Monday":
+                        vaccStartText.setText(curClinic.getCovidVaccOpenHours().get(1).toString());
+                        vaccEndTest.setText(curClinic.getCovidVaccCloseHours().get(1).toString());
+                        testStartText.setText(curClinic.getCovidTestOpenHours().get(1).toString());
+                        testEndText.setText(curClinic.getCovidTestCloseHours().get(1).toString());
+                        break;
+                    case "Tuesday":
+                        vaccStartText.setText(curClinic.getCovidVaccOpenHours().get(2).toString());
+                        vaccEndTest.setText(curClinic.getCovidVaccCloseHours().get(2).toString());
+                        testStartText.setText(curClinic.getCovidTestOpenHours().get(2).toString());
+                        testEndText.setText(curClinic.getCovidTestCloseHours().get(2).toString());
+                        break;
+                    case "Wednesday":
+                        vaccStartText.setText(curClinic.getCovidVaccOpenHours().get(3).toString());
+                        vaccEndTest.setText(curClinic.getCovidVaccCloseHours().get(3).toString());
+                        testStartText.setText(curClinic.getCovidTestOpenHours().get(3).toString());
+                        testEndText.setText(curClinic.getCovidTestCloseHours().get(3).toString());
+                        break;
+                    case "Thursday":
+                        vaccStartText.setText(curClinic.getCovidVaccOpenHours().get(4).toString());
+                        vaccEndTest.setText(curClinic.getCovidVaccCloseHours().get(4).toString());
+                        testStartText.setText(curClinic.getCovidTestOpenHours().get(4).toString());
+                        testEndText.setText(curClinic.getCovidTestCloseHours().get(4).toString());
+                        break;
+                    case "Friday":
+                        vaccStartText.setText(curClinic.getCovidVaccOpenHours().get(5).toString());
+                        vaccEndTest.setText(curClinic.getCovidVaccCloseHours().get(5).toString());
+                        testStartText.setText(curClinic.getCovidTestOpenHours().get(5).toString());
+                        testEndText.setText(curClinic.getCovidTestCloseHours().get(5).toString());
+                        break;
+                    default:
+
+                }
+            }
+        });
     }
 
     public void setParams(SimpleClient sc, Clinic c, String chosenDay) {

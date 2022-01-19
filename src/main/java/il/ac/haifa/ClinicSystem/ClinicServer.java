@@ -21,16 +21,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.time.temporal.WeekFields;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class ClinicServer extends AbstractServer{
 
 	private static Session session;
 	private static SessionFactory sessionFactory;
+	private static Map<Integer, Integer> daily_sum_wait_days= new HashMap<>(), daily_num_of_appointments= new HashMap<>();
+	private static Map<Integer, Integer> clinicReportMap= new HashMap<>(); //mapping of clinic to current week report id
 
 	private static SessionFactory getSessionFactory() throws HibernateException {
 		Configuration configuration = new Configuration();
@@ -48,10 +49,9 @@ public class ClinicServer extends AbstractServer{
 		configuration.addAnnotatedClass(Quiz.class);
 		configuration.addAnnotatedClass(Sister_Appointment.class);
 
-
-
-
-
+		configuration.addAnnotatedClass(ClinicManager.class);
+		configuration.addAnnotatedClass(SystemManager.class);
+		configuration.addAnnotatedClass(WeeklyClinicReport.class);
 
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties())
@@ -96,12 +96,19 @@ public class ClinicServer extends AbstractServer{
 		c.setDoctorClinics(dcList);
 		d.setDoctorClinics(dcList);
 
+		SystemManager sm = SystemManager.getInstance("manager", "aSecret", "Min Farshaw", "manager@gmail.com");
+		ClinicManager cm1 = new ClinicManager("clinic1", "first", "Adam Bashere", "clinic1@gmail.com", c),
+		cm2 = new ClinicManager("clinic2", "second", "Ilan Ituralde", "clinic2@gmail.com", c2);
+
 
 		session.saveOrUpdate(u);
 		session.saveOrUpdate(c);
 		session.saveOrUpdate(c2);
 		session.saveOrUpdate(d);
 		session.saveOrUpdate(dc);
+		session.saveOrUpdate(cm1);
+		session.saveOrUpdate(cm2);
+		session.saveOrUpdate(sm);
 
 		 /*
 		 * The call to session.flush() updates the DB immediately without ending the transaction.
@@ -183,21 +190,25 @@ public class ClinicServer extends AbstractServer{
 				session = sessionFactory.openSession();
 				session.beginTransaction();
 
-				User u = ((Vaccine_Appointment)msg).getUser();
 				//int user_id = u.getId();
+				session.saveOrUpdate((Vaccine_Appointment)msg);
 
-				session.delete((Vaccine_Appointment)msg);
+				LocalDate d = ((Vaccine_Appointment)msg).getDate();
+				if(d.get(WeekFields.of(Locale.ITALY).weekOfYear()) == LocalDate.now().get(WeekFields.of(Locale.ITALY).weekOfYear())){ //appointment for this week
+					int clinic_id = ((Vaccine_Appointment)msg).getClinic().getId();
+					WeeklyClinicReport thisReport = session.get(WeeklyClinicReport.class, clinicReportMap.get(clinic_id));
+					thisReport.getVaccineVisits().put(d.getDayOfWeek().toString(),
+							thisReport.getVaccineVisits().get(d.getDayOfWeek().toString())+1);
+
+					session.update(thisReport);
+				}
 				session.flush();
 
-				//u = session.get(User.class, user_id);
-				String hql = "FROM Vaccine_Appointment VA WHERE VA.user = :user";
+				//int user_id = ((Vaccine_Appointment)msg).getUser().getId();
+				//User u = session.get(User.class, user_id);
 
-				@SuppressWarnings("unchecked")
-				Query q = session.createQuery(hql);
-				q.setParameter("user", u);
-
-				List<Vaccine_Appointment> vaccineAppointments = (List<Vaccine_Appointment>) q.list();
-				client.sendToClient(vaccineAppointments);
+				//List<Vaccine_Appointment> vaccineAppointments = ((Patient)u).getVaccine_appointments1();
+				//client.sendToClient(vaccineAppointments);
 
 				session.getTransaction().commit();
 			}catch (Exception exception) {
@@ -216,19 +227,46 @@ public class ClinicServer extends AbstractServer{
 				session = sessionFactory.openSession();
 				session.beginTransaction();
 
-				User u = ((Corna_cheak_Appointment)msg).getUser();
+				//int user_id = u.getId();
+				session.saveOrUpdate((Corna_cheak_Appointment)msg);
 
-				session.delete((Vaccine_Appointment)msg);
+				LocalDate d = ((Corna_cheak_Appointment)msg).getDate();
+
+				if(d.get(WeekFields.of(Locale.ITALY).weekOfYear()) == LocalDate.now().get(WeekFields.of(Locale.ITALY).weekOfYear())){ //appointment for this week
+					int clinic_id = ((Corna_cheak_Appointment)msg).getClinic().getId();
+					WeeklyClinicReport thisReport = session.get(WeeklyClinicReport.class, clinicReportMap.get(clinic_id));
+					thisReport.getCovidTestVisits().put(d.getDayOfWeek().toString(),
+							thisReport.getCovidTestVisits().get(d.getDayOfWeek().toString())+1);
+
+					session.update(thisReport);
+				}
 				session.flush();
 
-				String hql = "FROM Corna_cheak_Appointment CA WHERE CA.user = :user";
+				//int user_id = ((Corna_cheak_Appointment)msg).getUser().getId();
+				//User u = session.get(User.class, user_id);
 
-				@SuppressWarnings("unchecked")
-				Query q = session.createQuery(hql);
-				q.setParameter("user", u);
+				//List<Corna_cheak_Appointment> covidTestAppointments = ((Patient)u).getCorna_cheak_Appointments1();
+				//client.sendToClient(covidTestAppointments);
 
-				List<Corna_cheak_Appointment> covidTestAppointments = (List<Corna_cheak_Appointment>) q.list();
-				client.sendToClient(covidTestAppointments);
+				session.getTransaction().commit();
+			}catch (Exception exception) {
+				if (session != null) {
+					session.getTransaction().rollback();
+				}
+				System.err.println("An error occured, changes have been rolled back.");
+				exception.printStackTrace();
+			} finally {
+				if(session != null)
+					session.close();
+			}
+		}
+		else if(msg instanceof Patient) {
+			try {
+				session = sessionFactory.openSession();
+				session.beginTransaction();
+
+				session.saveOrUpdate(((Patient)msg));
+				session.flush();
 
 				session.getTransaction().commit();
 			}catch (Exception exception) {
@@ -382,6 +420,107 @@ public class ClinicServer extends AbstractServer{
 					session.close();
 			}
 		}
+		else if(((String) msg).split("\\|")[0].equals("#Delete_Vaccine_Appointment")) {
+			try {
+				session = sessionFactory.openSession();
+				session.beginTransaction();
+
+				int app_id = Integer.parseInt(((String) msg).split("\\|")[1]);
+				Vaccine_Appointment app = session.get(Vaccine_Appointment.class, app_id);
+				Patient p = (Patient) (app.getUser());
+				Clinic c = app.getClinic();
+				p.getVaccine_appointments1().remove(app);
+				c.getVaccine_appointments().remove(app);
+				session.flush();
+
+				List<Vaccine_Appointment> vaccineAppointments = p.getVaccine_appointments1();
+				client.sendToClient(vaccineAppointments);
+
+				session.getTransaction().commit();
+			}catch (Exception exception) {
+				if (session != null) {
+					session.getTransaction().rollback();
+				}
+				System.err.println("An error occured, changes have been rolled back.");
+				exception.printStackTrace();
+			} finally {
+				if(session != null)
+					session.close();
+			}
+		}
+		else if(((String) msg).split("\\|")[0].equals("#Delete_Covid_Test_Appointment")) {
+			try {
+				session = sessionFactory.openSession();
+				session.beginTransaction();
+
+				int app_id = Integer.parseInt(((String) msg).split("\\|")[1]);
+				Corna_cheak_Appointment app = session.get(Corna_cheak_Appointment.class, app_id);
+				Patient p = (Patient) (app.getUser());
+				Clinic c = app.getClinic();
+				p.getCorna_cheak_Appointments1().remove(app);
+				c.getCorna_cheak_Appointments1().remove(app);
+				session.flush();
+
+				List<Corna_cheak_Appointment> covidTestAppointments = p.getCorna_cheak_Appointments1();
+				client.sendToClient(covidTestAppointments);
+
+				session.getTransaction().commit();
+			}catch (Exception exception) {
+				if (session != null) {
+					session.getTransaction().rollback();
+				}
+				System.err.println("An error occured, changes have been rolled back.");
+				exception.printStackTrace();
+			} finally {
+				if(session != null)
+					session.close();
+			}
+		}
+		else if(((String) msg).split("\\|")[0].equals("#Clinic")) {
+			try {
+				session = sessionFactory.openSession();
+				session.beginTransaction();
+
+				int clinic_id = Integer.parseInt(((String) msg).split("\\|")[1]);
+				Clinic c = session.get(Clinic.class, clinic_id);
+
+				client.sendToClient(c);
+
+				session.getTransaction().commit();
+			}catch (Exception exception) {
+				if (session != null) {
+					session.getTransaction().rollback();
+				}
+				System.err.println("An error occured, changes have been rolled back.");
+				exception.printStackTrace();
+			} finally {
+				if(session != null)
+					session.close();
+			}
+		}
+		else if(((String) msg).split("\\|")[0].equals("#WeeklyReports")) {
+			try {
+				session = sessionFactory.openSession();
+				session.beginTransaction();
+
+				int clinic_id = Integer.parseInt(((String) msg).split("\\|")[1]);
+				Clinic c = session.get(Clinic.class, clinic_id);
+				List<WeeklyClinicReport> reports = c.getWeeklyClinicReportList();
+
+				client.sendToClient(reports);
+
+				session.getTransaction().commit();
+			}catch (Exception exception) {
+				if (session != null) {
+					session.getTransaction().rollback();
+				}
+				System.err.println("An error occured, changes have been rolled back.");
+				exception.printStackTrace();
+			} finally {
+				if(session != null)
+					session.close();
+			}
+		}
 	}
 
 
@@ -436,6 +575,59 @@ public class ClinicServer extends AbstractServer{
 					String now = LocalTime.now().truncatedTo(ChronoUnit.SECONDS).format(DateTimeFormatter.ISO_LOCAL_TIME);
 					int value = ("15:14:00").compareTo(now);
 
+					if((LocalDate.now().getDayOfWeek().equals("SUNDAY") && LocalTime.now().equals(LocalTime.of(0,0))) || clinicReportMap.isEmpty()){ //initializing reports each week
+						//System.out.println("In Create Report!!!!!!!!!!!!!!!!");
+						List<Clinic> clinicsInDB = new ArrayList<>();
+						List<Vaccine_Appointment> vacAppInDB = new ArrayList<>();
+						List<Corna_cheak_Appointment> covidTestAppInDB = new ArrayList<>();
+						List<DoctorClinic> doctorClinicsInDB = new ArrayList<>();
+						try {
+							session = sessionFactory.openSession();
+							session.beginTransaction();
+
+							clinicsInDB = getAll(Clinic.class);
+							vacAppInDB = getAll(Vaccine_Appointment.class);
+							covidTestAppInDB = getAll(Corna_cheak_Appointment.class);
+							doctorClinicsInDB = getAll(DoctorClinic.class);
+
+							for(Clinic c: clinicsInDB){ //initializing the reports for each clinic
+								Integer clinic_id = Integer.valueOf(c.getId());
+								List<Vaccine_Appointment> thisVacApps = vacAppInDB.stream().filter(app -> c.equals(app.getClinic())).collect(Collectors.toList());//lists of relevant
+								List<Corna_cheak_Appointment> thisCovidTestApps = covidTestAppInDB.stream().filter(app -> c.equals(app.getClinic())).collect(Collectors.toList());
+								List<DoctorClinic> thisDoctorClinics = doctorClinicsInDB.stream().filter(dc -> c.equals(dc.getClinic())).collect(Collectors.toList());
+								WeeklyClinicReport newReport = new WeeklyClinicReport(LocalDate.now(), c, thisDoctorClinics);
+								c.getWeeklyClinicReportList().add(newReport);
+
+								for(Vaccine_Appointment app: thisVacApps){
+									if(app.getDate().get(WeekFields.of(Locale.ITALY).weekOfYear()) == LocalDate.now().get(WeekFields.of(Locale.ITALY).weekOfYear())) { //Locale.italy for proximity to israel.
+										String dayOfWeek = app.getDate().getDayOfWeek().toString();
+										newReport.getVaccineVisits().put(dayOfWeek, newReport.getVaccineVisits().get(dayOfWeek)+1);
+									}
+								}
+
+								for(Corna_cheak_Appointment app: thisCovidTestApps){
+									if(app.getDate().get(WeekFields.of(Locale.ITALY).weekOfYear()) == LocalDate.now().get(WeekFields.of(Locale.ITALY).weekOfYear())) { //Locale.italy for proximity to israel.
+										String dayOfWeek = app.getDate().getDayOfWeek().toString();
+										newReport.getVaccineVisits().put(dayOfWeek, newReport.getVaccineVisits().get(dayOfWeek)+1);
+									}
+								}
+								session.saveOrUpdate(newReport);
+								clinicReportMap.put(clinic_id, newReport.getId());
+								session.saveOrUpdate(c);
+							}
+							List<WeeklyClinicReport> reps = getAll(WeeklyClinicReport.class);
+							session.getTransaction().commit();
+						}catch (Exception exception) {
+							if (session != null) {
+								session.getTransaction().rollback();
+							}
+							System.err.println("An error occurred, changes have been rolled back.");
+							exception.printStackTrace();
+						} finally {
+							if(session != null)
+								session.close();
+						}
+					}
 
 					if (value==0) {//value == 0
 						System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");

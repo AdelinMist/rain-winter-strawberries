@@ -24,7 +24,9 @@ public class SimpleClient extends AbstractClient{
 	private  User user;
     
     private List<?> curList;
+    private Clinic curClinic;
     private boolean gotList = false;
+	private boolean gotClinic = false;
 	private Thread loopThread;
 	private String userType;
 	public SimpleClient(String host, int port, String userType) {
@@ -65,6 +67,13 @@ public class SimpleClient extends AbstractClient{
 				lock.notifyAll();
 			}
 		}
+		else if(msg instanceof Clinic){
+			curClinic = (Clinic)msg;
+			gotClinic = true;
+			synchronized (lock) {
+				lock.notifyAll();
+			}
+		}
 	}
 	
 	@Override
@@ -74,9 +83,17 @@ public class SimpleClient extends AbstractClient{
 		System.out.println("Connection closed.");
 		System.exit(0);
 	}
-	 
-	 public void setGotList(boolean g) {
-		 gotList=g;
+
+	public boolean getGotClinic() {
+		return gotClinic;
+	}
+
+	public void setGotClinic(boolean gotClinic) {
+		this.gotClinic = gotClinic;
+	}
+
+	public void setGotList(boolean g) {
+		 this.gotList=g;
 	 }
 	 
 	 public boolean getGotList() {
@@ -95,6 +112,10 @@ public class SimpleClient extends AbstractClient{
 		return (List<User>)curList;
 	}
 
+	public List<WeeklyClinicReport> getWeeklyClinicReportList(){
+		return (List<WeeklyClinicReport>)curList;
+	}
+
 	 public List<Vaccine_Appointment> getVacList(){
 		return (List<Vaccine_Appointment>)curList;
 	}
@@ -104,6 +125,10 @@ public class SimpleClient extends AbstractClient{
 	//public List<VaccineClinic> getVaccineClinicList(){return (List<VaccineClinic>)curList; }
 	public List<Corna_cheak_Appointment> getCovidTestAppList(){
 		return (List<Corna_cheak_Appointment>)curList;
+	}
+
+	public Clinic getClinic() {
+		return curClinic;
 	}
 
 	public static void main(String[] args) throws IOException {

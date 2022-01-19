@@ -9,19 +9,21 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.time.LocalDate;
 import java.util.List;
 @Entity
 @Table(name = "patients")
-public class Patient extends User{
+public class Patient extends User implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="user_id")
+    @Column(name="patient_id")
     private int id;
 
     private String clinic_name; // for appointment 3.5 any user need own clinic (sister appointment)
 
+    private LocalDate green_pass = null;
 
     @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -62,6 +64,30 @@ public class Patient extends User{
 
     }
 
+    public List<Vaccine_Appointment> getVaccine_appointments1() {
+        return vaccine_appointments1;
+    }
+
+    public void setVaccine_appointments1(List<Vaccine_Appointment> vaccine_appointments1) {
+        this.vaccine_appointments1 = vaccine_appointments1;
+    }
+
+    public List<Corna_cheak_Appointment> getCorna_cheak_Appointments1() {
+        return Corna_cheak_Appointments1;
+    }
+
+    public void setCorna_cheak_Appointments1(List<Corna_cheak_Appointment> corna_cheak_Appointments1) {
+        Corna_cheak_Appointments1 = corna_cheak_Appointments1;
+    }
+
+    public List<FamilyDoctorAppointment> getFamily_Appointments1() {
+        return family_Appointments1;
+    }
+
+    public void setFamily_Appointments1(List<FamilyDoctorAppointment> family_Appointments1) {
+        this.family_Appointments1 = family_Appointments1;
+    }
+
     public Patient(String clinic_name) {
         this.clinic_name = clinic_name;
     }
@@ -79,11 +105,23 @@ public class Patient extends User{
         this.clinic_name = clinic_name;
     }
 
+    public LocalDate getGreen_pass() {
+        return green_pass;
+    }
+
+    public void setGreen_pass(LocalDate green_pass) {
+        this.green_pass = green_pass;
+    }
+
     public String getClinic_name() {
         return clinic_name;
     }
 
     public void setClinic_name(String clinic_name) {
         this.clinic_name = clinic_name;
+    }
+
+    public int getId() {
+        return this.id;
     }
 }

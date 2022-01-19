@@ -56,11 +56,11 @@ public class CovidTestAppointmentViewListController {
             notSelectedAlert.showAndWait();
             return;
         }
-
+        int app_id = app.getId();
         chatClient.setGotList(false);
 
         try {
-            chatClient.sendToServer(app);
+            chatClient.sendToServer("#Delete_Covid_Test_Appointment|"+app_id);
         } catch (IOException e) {
             e.printStackTrace();
         }

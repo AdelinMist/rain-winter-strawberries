@@ -1,5 +1,7 @@
 package il.ac.haifa.ClinicSystem.entities;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -16,11 +18,14 @@ public class Corna_cheak_Appointment implements Serializable {
     private int id;
     @OneToOne
     private  Quiz quiz;
-   private LocalDate date;
+    private LocalDate date;
     @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private Clinic clinic; // maybe need more
+
     @ManyToOne
-    User user;
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    private User user;
     public User getUser(){
         return this.user;
     }
@@ -62,6 +67,10 @@ public class Corna_cheak_Appointment implements Serializable {
 
     public Corna_cheak_Appointment() {
 
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTime() {

@@ -8,9 +8,10 @@
    <children>
       <VBox alignment="CENTER" layoutX="140.0" layoutY="67.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="viewBtn" mnemonicParsing="false" onAction="#showViewMenu" prefHeight="26.0" prefWidth="205.0" text="view appointments" />
-            <Button fx:id="orderBtn" mnemonicParsing="false" onAction="#showOrderMenu" prefHeight="26.0" prefWidth="205.0" text="order appointments" />
-            <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="205.0" text="exit" />
+            <Button fx:id="viewBtn" mnemonicParsing="false" onAction="#showViewMenu" text="view appointments" />
+            <Button fx:id="orderBtn" mnemonicParsing="false" onAction="#showOrderMenu" text="order appointments" />
+            <Button fx:id="greenBtn" mnemonicParsing="false" onAction="#makeGreenPass" text="green pass " />
+            <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exit" text="exit" />
          </children>
       </VBox>
    </children>

@@ -22,8 +22,6 @@ public class User implements Serializable {
     @Column(name="user_id")
     private int id;
 
-    private String name;
-
     @Column(name = "username")
     protected String username;
     private String name;
@@ -70,15 +68,6 @@ public class User implements Serializable {
         this.name = u.getName();
         this.password = u.getPassword().clone();
         this.id = u.getId();
-        this.name = u.getName();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getUsername() {

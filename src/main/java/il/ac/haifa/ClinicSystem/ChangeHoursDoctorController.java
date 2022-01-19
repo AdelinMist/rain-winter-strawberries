@@ -65,6 +65,7 @@ public class ChangeHoursDoctorController {
             }
         }
         chatClient.sendToServer(newDoctorClinic);
+        curDoctorClinic = newDoctorClinic;
 
     }
 
@@ -81,6 +82,20 @@ public class ChangeHoursDoctorController {
         data.addAll(days);
         dayChoice.setItems(data);
         dayChoice.setValue(chosenDay);
+
+        dayChoice.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                if(curDoctorClinic.getWorkingHours().get(newSelection) != null){
+                    startTime.setText(curDoctorClinic.getWorkingHours().get(newSelection).getKey().toString());
+                    stopTime.setText(curDoctorClinic.getWorkingHours().get(newSelection).getValue().toString());
+                }
+                else{
+                    startTime.setText("");
+                    stopTime.setText("");
+                }
+
+            }
+        });
     }
 
     public void setParams(SimpleClient sc, DoctorClinic dc, String chosenDay) {

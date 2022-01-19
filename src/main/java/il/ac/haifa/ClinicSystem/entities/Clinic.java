@@ -30,6 +30,9 @@ public class Clinic implements Serializable{
 
 	@Column(name = "location")
 	 private String location;
+
+	@OneToOne(mappedBy = "clinic")
+	private ClinicManager clinicManager;
 	 
 	 @Column(name = "openHours")
 	 @LazyCollection(LazyCollectionOption.FALSE)
@@ -78,45 +81,19 @@ public class Clinic implements Serializable{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<FamilyDoctorAppointment> family_appointments1;
 
-	public void add_Sister_Appointment(Sister_Appointment appointment){
-		this.sister_appointments1.add(appointment);
-
-	}
-	public void add_Family_Appointment(FamilyDoctorAppointment appointment){
-		this.family_appointments1.add(appointment);
-
-	}
-
-
-
-
-	public void add_vaccine_appointment(Vaccine_Appointment vaccine_appointment){
-		this.vaccine_appointments1.add(vaccine_appointment);
-		System.out.println(vaccine_appointment.getTime() + "insert to the list!");
-
-	}
-
-
-
-	public void add_coronaTest_appointment(Corna_cheak_Appointment corna_cheak_appointment){
-		this.Corna_cheak_Appointments1.add(corna_cheak_appointment);
-
-	}
-	private transient DatePicker dayPicker;
-	private transient ChoiceBox<String> timeOptions; // work like "12:10"
-
-
-
-
-
-
-	private boolean hasCovidTests;
-	private boolean hasCovidVaccinations;
+	@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<WeeklyClinicReport> weeklyClinicReportList;
 
 	@OneToMany(mappedBy = "clinic")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<DoctorClinic> doctorClinics = null;
 
+	private transient DatePicker dayPicker;
+	private transient ChoiceBox<String> timeOptions; // work like "12:10"
+
+	private boolean hasCovidTests;
+	private boolean hasCovidVaccinations;
 
 	private transient StringProperty curOpenHour;
 	private transient StringProperty curCloseHour;
@@ -182,7 +159,7 @@ public class Clinic implements Serializable{
 		 	this.doctorClinics.add(dc);
 		 }
 
-
+		 this.clinicManager = m.getClinicManager();
 
 		 this.id = m.getId();
 		 this.hasCovidVaccinations = m.getHasCovidVaccinations();
@@ -192,9 +169,37 @@ public class Clinic implements Serializable{
 	 @Override
 	 public String toString() {
 	        return String.format(name + " | " + location + "\n");
-	    }
+	 }
 
-	 public int getId(){
+	public void add_Sister_Appointment(Sister_Appointment appointment){
+		this.sister_appointments1.add(appointment);
+
+	}
+	public void add_Family_Appointment(FamilyDoctorAppointment appointment){
+		this.family_appointments1.add(appointment);
+
+	}
+
+	public void add_vaccine_appointment(Vaccine_Appointment vaccine_appointment){
+		this.vaccine_appointments1.add(vaccine_appointment);
+		System.out.println(vaccine_appointment.getTime() + "insert to the list!");
+
+	}
+
+	public void add_coronaTest_appointment(Corna_cheak_Appointment corna_cheak_appointment){
+		this.Corna_cheak_Appointments1.add(corna_cheak_appointment);
+
+	}
+
+	public List<WeeklyClinicReport> getWeeklyClinicReportList() {
+		return weeklyClinicReportList;
+	}
+
+	public void setWeeklyClinicReportList(List<WeeklyClinicReport> weeklyClinicReportList) {
+		this.weeklyClinicReportList = weeklyClinicReportList;
+	}
+
+	public int getId(){
 		 return this.id;
 	 }
 
@@ -330,8 +335,7 @@ public class Clinic implements Serializable{
 
 	@Override
 	 public boolean equals(Object obj) {
-		 if(this.name.equals(((Clinic)obj).getName()) && this.location.equals(((Clinic)obj).getLocation())
-				 && this.openHours.equals(((Clinic)obj).getOpenHours())) {
+		 if(this.id == ((Clinic)obj).getId()) {
 			 return true;
 		 }
 		 return false;
@@ -388,5 +392,13 @@ public class Clinic implements Serializable{
 
 	public void setFamily_appointments1(List<FamilyDoctorAppointment> family_appointments1) {
 		this.family_appointments1 = family_appointments1;
+	}
+
+	public ClinicManager getClinicManager() {
+		return clinicManager;
+	}
+
+	public void setClinicManager(ClinicManager clinicManager) {
+		this.clinicManager = clinicManager;
 	}
 }

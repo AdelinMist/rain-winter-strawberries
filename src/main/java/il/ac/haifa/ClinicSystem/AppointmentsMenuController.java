@@ -43,7 +43,7 @@ public class AppointmentsMenuController {
     void showDoctorAppointments(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         Scene scene;
-        FXMLLoader fxmlLoader = new FXMLLoader(ClinicListController.class.getResource("doctorAppointmentViewList.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ClinicListController.class.getResource("proDocAppointmentViewList.fxml"));
         DoctorAppointmentViewListController controller = new DoctorAppointmentViewListController();
         //controller.setClient(chatClient);
         fxmlLoader.setController(controller);

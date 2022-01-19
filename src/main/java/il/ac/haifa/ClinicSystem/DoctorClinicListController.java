@@ -77,8 +77,11 @@ public class DoctorClinicListController {
         fxmlLoader.setController(controller);
         scene = new Scene(fxmlLoader.load(), 1031, 419);
         stage.setScene(scene);
-        chatClient.setGotList(false);
         stage.showAndWait();
+
+        chatClient.setGotList(false);
+
+        chatClient.sendToServer("#DoctorClinicList");
 
         synchronized(chatClient.getLock()) {
             while(!chatClient.getGotList()) {

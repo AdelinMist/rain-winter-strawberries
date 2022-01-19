@@ -1,5 +1,7 @@
 package il.ac.haifa.ClinicSystem.entities;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -18,12 +20,16 @@ public class Vaccine_Appointment implements Serializable {
     private  String day;
     private  String time; // work like "12:10"
     private LocalDate date;
+
     @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private Clinic clinic; // maybe need more
     public Clinic getClinic() {
         return clinic;
     }
+
     @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private User user;
     public User getUser(){
         return this.user;
@@ -40,12 +46,7 @@ public class Vaccine_Appointment implements Serializable {
         return this.date;
     }
 
-
     //private transient ChoiceBox<String> timeOptions; // work like "12:10"
-
-
-
-
     public Vaccine_Appointment(LocalDate date, String time , Clinic clinic){
         this.date = date;
         this.clinic = clinic;
@@ -120,6 +121,7 @@ public class Vaccine_Appointment implements Serializable {
      //   this.taken = taken;
     //}
 
-
-
+    public int getId() {
+        return id;
+    }
 }

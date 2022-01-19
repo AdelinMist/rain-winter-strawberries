@@ -60,11 +60,11 @@ public class VaccineAppointmentViewListController {
             notSelectedAlert.showAndWait();
             return;
         }
-
+        int app_id = app.getId();
         chatClient.setGotList(false);
 
         try {
-            chatClient.sendToServer(app);
+            chatClient.sendToServer("#Delete_Vaccine_Appointment|"+app_id);
         } catch (IOException e) {
             e.printStackTrace();
         }

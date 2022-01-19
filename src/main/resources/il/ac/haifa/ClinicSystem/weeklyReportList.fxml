@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox alignment="CENTER" layoutX="140.0" layoutY="67.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Button fx:id="visitBtn" mnemonicParsing="false" onAction="#showVisitsReportMenu" prefHeight="26.0" prefWidth="205.0" text="Visit Counts" />
+                <Button fx:id="notArrivedBtn" mnemonicParsing="false" onAction="#showNotArrivedReport" prefHeight="26.0" prefWidth="205.0" text="Not Arrived Counts" />
+            <Button fx:id="doctorWaitTimesBtn" layoutX="10.0" layoutY="36.0" mnemonicParsing="false" onAction="#showDoctorWaitTimesReport" prefHeight="26.0" prefWidth="205.0" text="Doctor Average Wait Times" />
+                <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exit" prefHeight="26.0" prefWidth="205.0" text="Exit" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
