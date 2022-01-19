@@ -52,6 +52,7 @@ public class ChangeHoursDoctorController {
                 return;
             }
         });
+        //works similarly to ChangeHoursController
         newDoctorClinic =  new DoctorClinic(curDoctorClinic);
         if (selectedDay != null){
             if(!startTime.getText().isEmpty() && !stopTime.getText().isEmpty()){

@@ -58,6 +58,7 @@ public class ChangeHoursCovidController {
                 return;
             }
         });
+        //works similarly to ChangeHoursController
         newClinic =  new Clinic(curClinic);
         if(selectedDay != null){
             if (!testStartText.getText().isEmpty()) {

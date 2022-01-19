@@ -60,6 +60,7 @@ public class ClinicServer extends AbstractServer{
 		return configuration.buildSessionFactory(serviceRegistry);
 	}
 
+	//here we generate initial Clinics and and everything that's in them
 	private static void generateClinics() throws Exception {
 		List<String> days = Arrays.asList("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
 		List<LocalTime> open = new ArrayList<>(), close = new ArrayList<>(), testopen = new ArrayList<>(), testclose = new ArrayList<>(), vaccopen = new ArrayList<>(), vaccclose = new ArrayList<>();
@@ -79,8 +80,8 @@ public class ClinicServer extends AbstractServer{
 				workingHours.put(d, new Pair<>(LocalTime.of(10,0), LocalTime.of(16,0)));
 			}
 		}
-		Clinic c2 = new Clinic("The White Tower2", "narnia", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
-		Clinic c = new Clinic("The White Tower", "Tar Valon", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
+		Clinic c2 = new Clinic("Meuheded", "Jerusalem", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
+		Clinic c = new Clinic("Clalit", "Haifa", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
 		//session.saveOrUpdate(temp);
 		Doctor d = new Doctor("coolDoctor420", "password", "Mat Matthews", "Neurology","tkhruirjhnh@gmail.com");
 		Doctor d1 = new Doctor("coolDoctor421", "password", "Mat Matthews", "ENT","tkhruirjhnh@gmail.com");

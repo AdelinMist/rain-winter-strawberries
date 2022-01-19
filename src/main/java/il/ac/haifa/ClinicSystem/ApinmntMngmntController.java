@@ -72,6 +72,7 @@ public class ApinmntMngmntController {
             e.printStackTrace();
         }
 
+        //making sure we are concurrency safe
         synchronized(chatClient.getLock()) {
             while(!chatClient.getGotList()) {
 
@@ -84,11 +85,12 @@ public class ApinmntMngmntController {
         List<String> days = Arrays.asList("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
         for(Clinic c : clinics) {
             ObservableList<String> data = FXCollections.observableArrayList();
+            //we are loading a list of the days in the week in order to load them for the choice box
             data.addAll(days);
             c.setDayOfWeek(new ChoiceBox<String>(data));
             c.getDayOfWeek().getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                 if (newSelection != null) {
-                    switch (newSelection) {
+                    switch (newSelection) { //for each clinic, we need to choose the appropriate opening and closing time depending on the day of the week
                         case "Sunday":
                             c.setCurOpenHour(c.getOpenHours().get(0).toString());
                             c.setCurCloseHour(c.getCloseHours().get(0).toString());
@@ -141,7 +143,7 @@ public class ApinmntMngmntController {
         LocalDate date = LocalDate.now();
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
-
+        //going over all the the Sister Appointments in the selected date
         List<Sister_Appointment> list=curClinic.getSister_appointments1();
         for(Sister_Appointment i: list){
 
@@ -160,7 +162,7 @@ public class ApinmntMngmntController {
 
         }
 
-
+        //going over all the the Vaccine Appointments in the selected date
         List<Vaccine_Appointment> list1=curClinic.getVaccine_appointments();
         for(Vaccine_Appointment i: list1){
 
@@ -179,7 +181,7 @@ public class ApinmntMngmntController {
 
         }
 
-
+        //going over all the the Corona Test Appointments in the selected date
         List<Corna_cheak_Appointment> list2=curClinic.getCorna_cheak_Appointments1();
         for(Corna_cheak_Appointment i: list2){
 
@@ -198,6 +200,7 @@ public class ApinmntMngmntController {
             }
         }
 
+        //going over all the the Family Doctor Appointments in the selected date
         List<FamilyDoctorAppointment> list3=curClinic.getFamily_appointments1();
         for(FamilyDoctorAppointment i: list3){
 
