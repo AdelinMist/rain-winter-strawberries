@@ -30,6 +30,10 @@ public class Patient extends User{
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Sister_Appointment> sister_appointments1;
 
+    @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<labAppointment> lab_appointments1;
+
     @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true )
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<FamilyDoctorAppointment> family_Appointments1;
@@ -46,6 +50,11 @@ public class Patient extends User{
 
     public void add_Sister_Appointment(Sister_Appointment appointment){
         this.sister_appointments1.add(appointment);
+
+    }
+
+    public void add_lab_Appointment(labAppointment appointment){
+        this.lab_appointments1.add(appointment);
 
     }
     public void add_Family_Appointment(FamilyDoctorAppointment appointment){

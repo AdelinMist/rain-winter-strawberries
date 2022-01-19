@@ -76,6 +76,10 @@ public class Clinic implements Serializable{
 
 	@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
 	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<labAppointment> lab_appointments1;
+
+	@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<ProDoctorAppointment> pro_appointments1;
 
 	@OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -101,6 +105,11 @@ public class Clinic implements Serializable{
 
 	public void add_Sister_Appointment(Sister_Appointment appointment){
 		this.sister_appointments1.add(appointment);
+
+	}
+
+	public void add_lab_Appointment(labAppointment appointment){
+		this.lab_appointments1.add(appointment);
 
 	}
 
@@ -419,5 +428,11 @@ public class Clinic implements Serializable{
 		return this.sister_appointments1 ;
 	}
 
+	public List<labAppointment> getLab_appointments1() {
+		return lab_appointments1;
+	}
 
+	public void setLab_appointments1(List<labAppointment> lab_appointments1) {
+		this.lab_appointments1 = lab_appointments1;
+	}
 }

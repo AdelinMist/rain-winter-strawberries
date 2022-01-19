@@ -11,6 +11,10 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 
+/**
+ * JavaDoc comment
+ */
+
 public class QuizController {
 
 
@@ -35,6 +39,7 @@ public class QuizController {
     public void setClient(SimpleClient c) {
         this.chatClient = c;
     }
+
 
     @FXML
     void gonext(ActionEvent event) throws IOException {

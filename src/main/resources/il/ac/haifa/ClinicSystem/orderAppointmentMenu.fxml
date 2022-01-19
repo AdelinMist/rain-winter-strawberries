@@ -11,6 +11,7 @@
               <Button fx:id="doctorBTN" mnemonicParsing="false" onAction="#clickDoctor" prefHeight="26.0" prefWidth="205.0" text="doctor appointments" />
               <Button fx:id="vaccine" mnemonicParsing="false" onAction="#gotovac" prefHeight="26.0" prefWidth="205.0" text="vaccine appointments" />
              <Button fx:id="covid_test" mnemonicParsing="false" onAction="#gotoQuiz" prefHeight="26.0" prefWidth="205.0" text="covid test appointments" />
+             <Button fx:id="lab" mnemonicParsing="false" onAction="#goLab" prefHeight="26.0" prefWidth="205.0" text="lab appointments" />
              <Button fx:id="family" mnemonicParsing="false" onAction="#goFamily" prefHeight="26.0" prefWidth="205.0" text="family/children appointments" />
              <Button fx:id="sister" mnemonicParsing="false" onAction="#goSister" prefHeight="26.0" prefWidth="205.0" text="sister appointments" />
               <Button fx:id="returnBtn" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="26.0" prefWidth="205.0" text="return to menu" />
