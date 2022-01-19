@@ -79,13 +79,6 @@ public class LoginPhyController {
 
                 if(Arrays.equals(hashedPassword, user.getPassword())){
 
-                    /*if(user instanceof Doctor){
-                        App.setRoot("DoctorClinic");
-                    }
-                    else{
-                        App.setRoot("clientMenu");
-                    }*/
-
                     chatClient.setUser(user);
                     App.setRoot("ApinmntMngmnt");
 

@@ -3,6 +3,7 @@ package il.ac.haifa.ClinicSystem;
 import il.ac.haifa.ClinicSystem.entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -94,6 +95,12 @@ public class LoginController {
             }
         }
 
+        //should get here only if user/password is incorrect
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Login denied");
+        alert.setHeaderText("Username or password is not correct");
+        alert.setContentText("Please try again");
+        alert.showAndWait();
 
 
     }
