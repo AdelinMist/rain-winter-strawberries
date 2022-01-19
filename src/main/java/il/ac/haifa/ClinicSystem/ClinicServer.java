@@ -83,11 +83,13 @@ public class ClinicServer extends AbstractServer{
 		Clinic c2 = new Clinic("Meuheded", "Jerusalem", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
 		Clinic c = new Clinic("Clalit", "Haifa", open, close, testopen, testclose, vaccopen, vaccclose, true, true);
 		//session.saveOrUpdate(temp);
-		Doctor d = new Doctor("coolDoctor420", "password", "Mat Matthews", "Neurology","tkhruirjhnh@gmail.com");
-		Doctor d1 = new Doctor("coolDoctor421", "password", "Mat Matthews", "ENT","tkhruirjhnh@gmail.com");
-		Doctor d2 = new Doctor("coolDoctor422", "password", "Mat Matthews", "Neurology","tkhruirjhnh@gmail.com");
+		//adding doctors like this is a security risk but for projects sake it's ok
+		Doctor d = new Doctor("Matt123", "123456789", "Matt Matthews", "Neurology","Matt@gmail.com");
+		Doctor d1 = new Doctor("Israel", "987654321", "Israel Israeli", "ENT","Israel@gmail.com");
+		// I didn't have the heart to change coolDoctor420
+		Doctor d2 = new Doctor("coolDoctor420", "password", "Jane Cohen", "Psychiatrist","Jane@walla.com");
 
-		Patient u = new Patient("daniel","123","tkhruirjhnh@gmail.com","The White Tower", "daniel r");
+		Patient u = new Patient("daniel","123","daniel@gmail.com","Clalit", "Daniel D");
 		DoctorClinic dc = new DoctorClinic(c, d, workingHours);
 		DoctorClinic dc1 = new DoctorClinic(c, d1, workingHours);
 		DoctorClinic dc2 = new DoctorClinic(c2, d1, workingHours);
