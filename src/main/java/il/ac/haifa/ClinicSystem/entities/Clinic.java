@@ -264,7 +264,7 @@ public class Clinic implements Serializable{
 		 return this.id;
 	 }
 
-	public List<DoctorClinic> getDoctorClinics() {
+	public List<DoctorClinic> getDoctorClinics(){
 		return doctorClinics;
 	}
 
