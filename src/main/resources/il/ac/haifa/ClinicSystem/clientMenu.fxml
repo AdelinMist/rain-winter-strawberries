@@ -16,10 +16,6 @@
    <children>
       <VBox alignment="CENTER" layoutX="-6.0" layoutY="-105.0" prefHeight="626.0" prefWidth="702.0" style="-fx-border-color: #3D2956;" AnchorPane.bottomAnchor="-81.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="-6.0" AnchorPane.topAnchor="-105.0">
          <children>
-            <Button fx:id="viewBtn" mnemonicParsing="false" onAction="#showViewMenu" text="view appointments" />
-            <Button fx:id="orderBtn" mnemonicParsing="false" onAction="#showOrderMenu" text="order appointments" />
-            <Button fx:id="greenBtn" mnemonicParsing="false" onAction="#makeGreenPass" text="green pass " />
-            <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#exit" text="exit" />
             <AnchorPane fx:id="up" prefHeight="195.0" prefWidth="700.0" style="-fx-background-color: #3D4977;">
                <children>
                   <Text fx:id="txet" fontSmoothingType="LCD" layoutX="27.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome back!" textAlignment="JUSTIFY" wrappingWidth="322.13673400878906">
@@ -61,6 +57,11 @@
                      </cursor>
                   </Button>
                   <Button fx:id="orderBtn" layoutX="494.0" layoutY="110.0" mnemonicParsing="false" onAction="#showOrderMenu" prefHeight="38.0" prefWidth="206.0" style="-fx-background-color: #3D4970;" text="order appointments" textFill="#41cdd1">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="greenBtn" layoutX="271.0" layoutY="52.0" mnemonicParsing="false" onAction="#makeGreenPass" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: #3D4970;" text="green pass " textFill="#22b6d6">
                      <font>
                         <Font size="15.0" />
                      </font>

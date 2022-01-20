@@ -2,6 +2,7 @@ package il.ac.haifa.ClinicSystem;
 
 import il.ac.haifa.ClinicSystem.entities.Clinic;
 import il.ac.haifa.ClinicSystem.entities.Patient;
+import il.ac.haifa.ClinicSystem.entities.User;
 import il.ac.haifa.ClinicSystem.entities.Vaccine_Appointment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -80,17 +81,15 @@ public class VaccineClinicController {
             e.printStackTrace();
         }
         loadData();
+        SendMail mail = new SendMail();
+        mail.send(chatClient.getUser());
 
-
-       // HttpApiTester sms = new HttpApiTester();
+        // HttpApiTester sms = new HttpApiTester();
         //sms.sms();
 
         succsessAlert.setTitle("Appointment confirmed");
         succsessAlert.setHeaderText("You made an appointment to " + date + " at " + time);
         succsessAlert.showAndWait();
-        SendMail mail = new SendMail();
-        mail.send_remainder_vaccine(chatClient.getUser(),appointment);
-
     }
 
     @FXML
@@ -137,7 +136,7 @@ public class VaccineClinicController {
                 Vaccine_Appointment c = new Vaccine_Appointment();
                 c.setClinic(clinic);
                 DatePicker d = new DatePicker();
-               // c.setDayPicker(d);
+                // c.setDayPicker(d);
                 clinic.setTimeOptions(new ChoiceBox<String>());
                 clinic.setDayPicker(d);
                 EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
@@ -231,4 +230,3 @@ public class VaccineClinicController {
     }
 
 }
-

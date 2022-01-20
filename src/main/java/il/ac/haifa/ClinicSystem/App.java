@@ -1,6 +1,6 @@
 package il.ac.haifa.ClinicSystem;
 
-import il.ac.haifa.ClinicSystem.entities.Quiz;
+import il.ac.haifa.ClinicSystem.entities.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

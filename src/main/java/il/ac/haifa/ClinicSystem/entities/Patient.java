@@ -78,25 +78,18 @@ public class Patient extends User implements Serializable{
         this.Corna_cheak_Appointments1.add(corna_cheak_appointment);
     }
 
-    public List<Vaccine_Appointment> getVaccine_appointments1() {
-        return vaccine_appointments1;
-    }
+
 
     public void setVaccine_appointments1(List<Vaccine_Appointment> vaccine_appointments1) {
         this.vaccine_appointments1 = vaccine_appointments1;
     }
 
-    public List<Corna_cheak_Appointment> getCorna_cheak_Appointments1() {
-        return Corna_cheak_Appointments1;
-    }
+
 
     public void setCorna_cheak_Appointments1(List<Corna_cheak_Appointment> corna_cheak_Appointments1) {
         Corna_cheak_Appointments1 = corna_cheak_Appointments1;
     }
 
-    public List<FamilyDoctorAppointment> getFamily_Appointments1() {
-        return family_Appointments1;
-    }
 
     public void setFamily_Appointments1(List<FamilyDoctorAppointment> family_Appointments1) {
         this.family_Appointments1 = family_Appointments1;

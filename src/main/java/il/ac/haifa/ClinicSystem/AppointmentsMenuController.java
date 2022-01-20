@@ -26,7 +26,6 @@ public class AppointmentsMenuController {
 
     private SimpleClient chatClient;
 
-    //buttons that proceed to the next needed screen
     @FXML
     void showCovidTestAppointments(ActionEvent event) throws IOException {
         Stage stage = new Stage();

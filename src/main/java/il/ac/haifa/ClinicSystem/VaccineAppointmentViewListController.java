@@ -97,11 +97,6 @@ public class VaccineAppointmentViewListController {
         loadData(null);
     }
 
-    /**
-     *
-     * making a request to the server for the Vaccine Appointments of the user and loading it into the program
-     * @throws InterruptedException
-     */
     public void loadData(List<Vaccine_Appointment> apps) throws InterruptedException {
         if(apps == null){
             User user = this.chatClient.getUser();

@@ -134,6 +134,10 @@ public class Vaccine_Appointment implements Serializable {
         this.time = time;
     }
 
+    public int getId() {
+        return id;
+    }
+
     //public boolean isTaken() {
        // return taken;
     //}
@@ -142,7 +146,5 @@ public class Vaccine_Appointment implements Serializable {
      //   this.taken = taken;
     //}
 
-    public int getId() {
-        return id;
-    }
+
 }

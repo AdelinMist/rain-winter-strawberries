@@ -586,6 +586,84 @@ public class ClinicServer extends AbstractServer{
 					session.close();
 			}
 		}
+		else if(((String) msg).split("\\|")[0].equals("#Delete_Vaccine_Appointment")) {
+			try {
+				session = sessionFactory.openSession();
+				session.beginTransaction();
+
+				int app_id = Integer.parseInt(((String) msg).split("\\|")[1]);
+				Vaccine_Appointment app = session.get(Vaccine_Appointment.class, app_id);
+				Patient p = (Patient) (app.getUser());
+				Clinic c = app.getClinic();
+				p.getVaccine_appointments1().remove(app);
+				c.getVaccine_appointments().remove(app);
+				session.flush();
+
+				List<Vaccine_Appointment> vaccineAppointments = p.getVaccine_appointments1();
+				client.sendToClient(vaccineAppointments);
+
+				session.getTransaction().commit();
+			}catch (Exception exception) {
+				if (session != null) {
+					session.getTransaction().rollback();
+				}
+				System.err.println("An error occured, changes have been rolled back.");
+				exception.printStackTrace();
+			} finally {
+				if(session != null)
+					session.close();
+			}
+		}
+		else if(((String) msg).split("\\|")[0].equals("#Delete_Covid_Test_Appointment")) {
+			try {
+				session = sessionFactory.openSession();
+				session.beginTransaction();
+
+				int app_id = Integer.parseInt(((String) msg).split("\\|")[1]);
+				Corna_cheak_Appointment app = session.get(Corna_cheak_Appointment.class, app_id);
+				Patient p = (Patient) (app.getUser());
+				Clinic c = app.getClinic();
+				p.getCorna_cheak_Appointments1().remove(app);
+				c.getCorna_cheak_Appointments1().remove(app);
+				session.flush();
+
+				List<Corna_cheak_Appointment> covidTestAppointments = p.getCorna_cheak_Appointments1();
+				client.sendToClient(covidTestAppointments);
+
+				session.getTransaction().commit();
+			}catch (Exception exception) {
+				if (session != null) {
+					session.getTransaction().rollback();
+				}
+				System.err.println("An error occured, changes have been rolled back.");
+				exception.printStackTrace();
+			} finally {
+				if(session != null)
+					session.close();
+			}
+		}
+		else if(((String) msg).split("\\|")[0].equals("#Clinic")) {
+			try {
+				session = sessionFactory.openSession();
+				session.beginTransaction();
+
+				int clinic_id = Integer.parseInt(((String) msg).split("\\|")[1]);
+				Clinic c = session.get(Clinic.class, clinic_id);
+
+				client.sendToClient(c);
+
+				session.getTransaction().commit();
+			}catch (Exception exception) {
+				if (session != null) {
+					session.getTransaction().rollback();
+				}
+				System.err.println("An error occured, changes have been rolled back.");
+				exception.printStackTrace();
+			} finally {
+				if(session != null)
+					session.close();
+			}
+		}
 	}
 
 
