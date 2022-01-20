@@ -20,11 +20,9 @@ public class Corna_cheak_Appointment implements Serializable {
     private  Quiz quiz;
    private LocalDate date;
     @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private Clinic clinic; // maybe need more
 
     @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private User user;
 
     private String username;

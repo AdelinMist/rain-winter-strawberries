@@ -98,7 +98,7 @@ public class ClinicServer extends AbstractServer{
 		// I didn't have the heart to change coolDoctor420
 		Doctor d2 = new Doctor("coolDoctor420", "password", "Jane Cohen", "Psychiatrist","Jane@gmail.com");
 		//!!!!!!!!!!!!!!!!! we should probably add a doctor user with one of our presenters email
-		Patient u = new Patient("daniel","123","daniel@gmail.com","Clalit", "Daniel D");
+		Patient u = new Patient("daniel","123","tkhruirjhnh@gmail.com","Clalit", "Daniel D");
 
 		Secretary s = new Secretary("lina", "123","daniel@gmail.com", "Clalit", "lina", c );
 
@@ -233,8 +233,11 @@ public class ClinicServer extends AbstractServer{
 				session = sessionFactory.openSession();
 				session.beginTransaction();
 
+
 				//int user_id = u.getId();
 				session.saveOrUpdate((Vaccine_Appointment)msg);
+				session.saveOrUpdate(((Vaccine_Appointment) msg).getClinic());
+				session.saveOrUpdate(((Vaccine_Appointment) msg).getUser());
 
 				LocalDate d = ((Vaccine_Appointment)msg).getDate();
 				if(d.get(WeekFields.of(Locale.ITALY).weekOfYear()) == LocalDate.now().get(WeekFields.of(Locale.ITALY).weekOfYear())){ //appointment for this week
@@ -877,6 +880,66 @@ public class ClinicServer extends AbstractServer{
 					// the time for sends remainder mails
 					String now = LocalTime.now().truncatedTo(ChronoUnit.SECONDS).format(DateTimeFormatter.ISO_LOCAL_TIME);
 					int value = ("00:00:00").compareTo(now);
+					int value1 = ("05:05:30").compareTo(now);
+
+					if (value1==0) {//value == 0
+						System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+						LocalDate tomorrow = LocalDate.now().plusDays(1);
+						System.out.println(tomorrow);
+
+
+						List<Corna_cheak_Appointment> covidTestAppointments = new ArrayList<>();
+						List<Vaccine_Appointment> vaccine_appointments =  new ArrayList<>();
+						List<ProDoctorAppointment> proDoctorAppointments = new ArrayList<>();
+						List<FamilyDoctorAppointment> familyDoctorAppointments = new ArrayList<>();
+
+						try {
+							session = sessionFactory.openSession();
+							session.beginTransaction();
+							covidTestAppointments = getAll(Corna_cheak_Appointment.class);
+							vaccine_appointments = getAll(Vaccine_Appointment.class);
+							proDoctorAppointments = getAll(ProDoctorAppointment.class);
+							familyDoctorAppointments = getAll(FamilyDoctorAppointment.class);
+							session.getTransaction().commit();
+						} catch (Exception exception) {
+							if (session != null) {
+								session.getTransaction().rollback();
+							}
+							System.err.println("An error occured, changes have been rolled back.");
+							exception.printStackTrace();
+						} finally {
+							if (session != null)
+								session.close();
+						}
+						System.out.println(" after get list");
+						System.out.println(covidTestAppointments.size());
+						for (int i = 0; i < covidTestAppointments.size(); i++) {
+
+							if (covidTestAppointments.get(i).getDate().isEqual(tomorrow)) {
+								SendMail mail = new SendMail();
+								mail.send_remainder_covidtest(covidTestAppointments.get(i).getUser(), covidTestAppointments.get(i));
+							}
+						}
+						System.out.println(vaccine_appointments.size());
+						for(int i = 0 ; i<vaccine_appointments.size() ; i++){
+							if (vaccine_appointments.get(i).getDate().isEqual(tomorrow)) {
+								SendMail mail = new SendMail();
+								mail.send_remainder_vaccine(vaccine_appointments.get(i).getUser(), vaccine_appointments.get(i));
+							}
+						}
+						for(int i = 0 ; i<proDoctorAppointments.size() ; i++){
+							if (proDoctorAppointments.get(i).getDate().isEqual(tomorrow)) {
+								SendMail mail = new SendMail();
+								mail.send_remainder_pro(proDoctorAppointments.get(i).getUser(), proDoctorAppointments.get(i));
+							}
+						}
+						for(int i = 0 ; i<familyDoctorAppointments.size() ; i++){
+							if (familyDoctorAppointments.get(i).getDate().isEqual(tomorrow)) {
+								SendMail mail = new SendMail();
+								mail.send_remainder_family(familyDoctorAppointments.get(i).getUser(), familyDoctorAppointments.get(i));
+							}
+						}
+					}
 
 					if((LocalDate.now().getDayOfWeek().equals("SUNDAY") && value == 0) || clinicReportMap.isEmpty()){ //initializing reports each week
 						//System.out.println("In Create Report!!!!!!!!!!!!!!!!");
@@ -931,63 +994,7 @@ public class ClinicServer extends AbstractServer{
 						}
 					}
 
-					if (value==0) {//value == 0
-						System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-						LocalDate tomorrow = LocalDate.now().plusDays(1);
-						System.out.println(tomorrow);
 
-
-						List<Corna_cheak_Appointment> covidTestAppointments = new ArrayList<>();
-						List<Vaccine_Appointment> vaccine_appointments =  new ArrayList<>();
-						List<ProDoctorAppointment> proDoctorAppointments = new ArrayList<>();
-						List<FamilyDoctorAppointment> familyDoctorAppointments = new ArrayList<>();
-						System.out.println(" after get list");
-						try {
-							session = sessionFactory.openSession();
-							session.beginTransaction();
-							covidTestAppointments = getAll(Corna_cheak_Appointment.class);
-							vaccine_appointments = getAll(Vaccine_Appointment.class);
-							proDoctorAppointments = getAll(ProDoctorAppointment.class);
-							familyDoctorAppointments = getAll(FamilyDoctorAppointment.class);
-							session.getTransaction().commit();
-						} catch (Exception exception) {
-							if (session != null) {
-								session.getTransaction().rollback();
-							}
-							System.err.println("An error occured, changes have been rolled back.");
-							exception.printStackTrace();
-						} finally {
-							if (session != null)
-								session.close();
-						}
-						System.out.println(covidTestAppointments.size());
-						for (int i = 0; i < covidTestAppointments.size(); i++) {
-
-							if (covidTestAppointments.get(i).getDate().isEqual(tomorrow)) {
-								SendMail mail = new SendMail();
-								mail.send_remainder_covidtest(covidTestAppointments.get(i).getUser(), covidTestAppointments.get(i));
-							}
-						}
-						System.out.println(vaccine_appointments.size());
-						for(int i = 0 ; i<vaccine_appointments.size() ; i++){
-							if (vaccine_appointments.get(i).getDate().isEqual(tomorrow)) {
-								SendMail mail = new SendMail();
-								mail.send_remainder_vaccine(covidTestAppointments.get(i).getUser(), vaccine_appointments.get(i));
-							}
-						}
-						for(int i = 0 ; i<proDoctorAppointments.size() ; i++){
-							if (proDoctorAppointments.get(i).getDate().isEqual(tomorrow)) {
-								SendMail mail = new SendMail();
-								mail.send_remainder_pro(proDoctorAppointments.get(i).getUser(), proDoctorAppointments.get(i));
-							}
-						}
-						for(int i = 0 ; i<familyDoctorAppointments.size() ; i++){
-							if (familyDoctorAppointments.get(i).getDate().isEqual(tomorrow)) {
-								SendMail mail = new SendMail();
-								mail.send_remainder_family(familyDoctorAppointments.get(i).getUser(), familyDoctorAppointments.get(i));
-							}
-						}
-					}
 
 				}
 			}

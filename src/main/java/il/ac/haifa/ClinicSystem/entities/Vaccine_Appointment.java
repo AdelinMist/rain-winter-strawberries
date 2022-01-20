@@ -22,14 +22,12 @@ public class Vaccine_Appointment implements Serializable {
     private LocalDate date;
 
     @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private Clinic clinic; // maybe need more
     public Clinic getClinic() {
         return clinic;
     }
 
     @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private User user;
 
     private String username;
