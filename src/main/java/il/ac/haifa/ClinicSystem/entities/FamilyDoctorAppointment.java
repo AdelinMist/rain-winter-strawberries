@@ -49,6 +49,7 @@ public class FamilyDoctorAppointment implements Serializable {
         return this.clinic;
     }
 
+
     @ManyToOne
     User user;
     public User getUser(){
@@ -96,5 +97,9 @@ public class FamilyDoctorAppointment implements Serializable {
 
     public void setIs_family(boolean is_family) {
         this.is_family = is_family;
+    }
+
+    public int getId() {
+        return id;
     }
 }

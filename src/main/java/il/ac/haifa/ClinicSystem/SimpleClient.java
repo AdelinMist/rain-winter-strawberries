@@ -129,6 +129,13 @@ public class SimpleClient extends AbstractClient{
 	public List<Corna_cheak_Appointment> getCovidTestAppList(){
 		return (List<Corna_cheak_Appointment>)curList;
 	}
+	public List<ProDoctorAppointment> getProDoctorAppList(){
+		return (List<ProDoctorAppointment>)curList;
+	}
+	public List<FamilyDoctorAppointment> getFamilyDoctorAppList(){
+		return (List<FamilyDoctorAppointment>)curList;
+	}
+
 
 	public Clinic getClinic() {
 		return curClinic;

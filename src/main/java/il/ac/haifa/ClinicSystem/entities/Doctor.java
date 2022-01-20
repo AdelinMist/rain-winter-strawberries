@@ -82,4 +82,5 @@ public class Doctor extends User implements Serializable {
     public void add(ProDoctorAppointment appointment){
         this.appointments.add(appointment);
     }
+
 }

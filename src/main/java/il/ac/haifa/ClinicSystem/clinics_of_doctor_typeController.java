@@ -69,7 +69,7 @@ public class clinics_of_doctor_typeController {
         appointment.setName(doctor.getSpecialization());
         appointment.setDoctor(doctor);
         try {
-            chatClient.sendToServer(clinic);
+            chatClient.sendToServer(appointment);
         } catch (IOException e) {
             e.printStackTrace();
         }

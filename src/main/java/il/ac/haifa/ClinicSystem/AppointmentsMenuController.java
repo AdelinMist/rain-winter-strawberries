@@ -1,6 +1,5 @@
 package il.ac.haifa.ClinicSystem;
 
-import il.ac.haifa.ClinicSystem.entities.Clinic;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,8 +43,21 @@ public class AppointmentsMenuController {
         Stage stage = new Stage();
         Scene scene;
         FXMLLoader fxmlLoader = new FXMLLoader(ClinicListController.class.getResource("proDocAppointmentViewList.fxml"));
-        DoctorAppointmentViewListController controller = new DoctorAppointmentViewListController();
-        //controller.setClient(chatClient);
+        ProDoctorAppointmentViewListController controller = new ProDoctorAppointmentViewListController();
+        controller.setClient(chatClient);
+        fxmlLoader.setController(controller);
+        scene = new Scene(fxmlLoader.load(), 773, 445);
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+
+    @FXML
+    void showFamilyAppointments(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        Scene scene;
+        FXMLLoader fxmlLoader = new FXMLLoader(ClinicListController.class.getResource("FamilyDocAppointmentViewList.fxml"));
+        FamilyDoctorAppointmentViewListController controller = new FamilyDoctorAppointmentViewListController();
+        controller.setClient(chatClient);
         fxmlLoader.setController(controller);
         scene = new Scene(fxmlLoader.load(), 773, 445);
         stage.setScene(scene);

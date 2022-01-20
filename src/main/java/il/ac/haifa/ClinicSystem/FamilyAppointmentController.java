@@ -84,7 +84,7 @@ import java.util.List;
                 is_family = true;
             appointment.setIs_family(is_family);
             try {
-                chatClient.sendToServer(clinic);
+                chatClient.sendToServer(appointment);
             } catch (IOException e) {
                 e.printStackTrace();
             }

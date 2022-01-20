@@ -99,4 +99,8 @@ public class ProDoctorAppointment implements Serializable {
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }
+
+    public int getId() {
+        return id;
+    }
 }

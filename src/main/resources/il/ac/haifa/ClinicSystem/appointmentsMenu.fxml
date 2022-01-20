@@ -8,10 +8,11 @@
     <children>
       <VBox alignment="CENTER" layoutX="14.0" layoutY="-13.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-              <Button fx:id="doctorAppointmentBtn" mnemonicParsing="false" onAction="#showDoctorAppointments" prefHeight="26.0" prefWidth="205.0" text="doctor appointments" />
-              <Button fx:id="vaccineAppointmentBtn" mnemonicParsing="false" onAction="#showVaccineAppointments" prefHeight="26.0" prefWidth="205.0" text="vaccine appointments" />
+              <Button fx:id="doctorAppointmentBtn" mnemonicParsing="false" onAction="#showDoctorAppointments" prefHeight="26.0" prefWidth="205.0" text="pro doctor appointments" />
+             <Button fx:id="familyAppointmentBtn" mnemonicParsing="false" onAction="#showFamilyAppointments" prefHeight="26.0" prefWidth="205.0" text="family doctor appointments" />
+             <Button fx:id="vaccineAppointmentBtn" mnemonicParsing="false" onAction="#showVaccineAppointments" prefHeight="26.0" prefWidth="205.0" text="vaccine appointments" />
               <Button fx:id="covidTestAppointmentBtn" mnemonicParsing="false" onAction="#showCovidTestAppointments" prefHeight="26.0" prefWidth="205.0" text="covid test appointments" />
-            <Button fx:id="returnBtn" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="26.0" prefWidth="205.0" text="return to menu" />
+             <Button fx:id="returnBtn" mnemonicParsing="false" onAction="#returnToMenu" prefHeight="26.0" prefWidth="205.0" text="return to menu" />
          </children>
       </VBox>
     </children>

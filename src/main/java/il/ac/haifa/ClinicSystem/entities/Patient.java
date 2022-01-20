@@ -140,7 +140,17 @@ public class Patient extends User implements Serializable{
         return sister_appointments1;
     }
 
+    public List<Vaccine_Appointment> getVaccine_appointments1() {
+        return vaccine_appointments1;
+    }
 
+    public List<Corna_cheak_Appointment> getCorna_cheak_Appointments1() {
+        return Corna_cheak_Appointments1;
+    }
+
+    public List<FamilyDoctorAppointment> getFamily_Appointments1() {
+        return family_Appointments1;
+    }
 
     public int getId() {
         return this.id;
